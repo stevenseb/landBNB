@@ -39,7 +39,7 @@ const setTokenCookie = (res, user) => {
   
     return jwt.verify(token, secret, null, async (err, jwtPayload) => {
       if (err) {
-        return next();
+        return next(); 
       }
   
       try {
