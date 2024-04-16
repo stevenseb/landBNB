@@ -45,7 +45,7 @@ if (!isProduction) {
 
 // MUST COME AFTER SECURITY MIDDLEWARE
 
-  app.use(routes); // Connect all the routes
+app.use(routes); // Connect all the routes
   
 // Root route - DO NOT MODIFY
 app.get('/', (req, res) => {

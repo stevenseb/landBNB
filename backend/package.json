@@ -1,5 +1,5 @@
 {
-  "name": "backend",
+  "name": "landbnb",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -16,7 +16,11 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "ISC",   
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stevenseb/landBNB.git"
+  },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.6",
