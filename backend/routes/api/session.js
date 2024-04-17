@@ -10,6 +10,7 @@ const { User } = require('../../db/models');
 const { validateLogin } = require('../../utils/validation');
 
  
+
 // LOG IN
 router.post('/', validateLogin, async (req, res, next) => {
     const { credential, password } = req.body;
@@ -22,6 +23,7 @@ router.post('/', validateLogin, async (req, res, next) => {
         }
       }
     });
+    
 
     if (!user || !bcrypt.compareSync(password, user.hashedPassword.toString())) {
       const err = new Error('Login failed');

@@ -9,6 +9,7 @@ const { User } = require('../../db/models/index.js');
 const { requireAuth } = require('../../utils/auth.js');
 
 
+
 // test route for api router
 router.post('/test', function(req, res) {
     res.json({ requestBody: req.body });
