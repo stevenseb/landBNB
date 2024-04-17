@@ -5,17 +5,18 @@ const cors = require('cors');
 const csurf = require('csurf');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
-
 const { environment } = require('./config');
 const isProduction = environment === 'production';
 const { ValidationError } = require('sequelize'); 
+const routes = require('./routes');
+
 
 const app = express();
+// Express using json
 app.use(morgan('dev'));
-app.use(cookieParser());
 app.use(express.json());
+app.use(cookieParser());
 
-const routes = require('./routes');
 
 // Middleware
 // Security Middleware
