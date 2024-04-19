@@ -8,50 +8,26 @@ if (process.env.NODE_ENV === 'production') {
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Spots', {
+    await queryInterface.createTable('Reviews', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      ownerId: {
+      spotId: {
         allowNull: false,
         type: Sequelize.INTEGER
       },
-      address: {
+      userId: {
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
+      review: {
         allowNull: false,
         type: Sequelize.STRING
       },
-      city: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      state: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      country: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      lat: {
-        allowNull: false,
-        type: Sequelize.FLOAT
-      },
-      lng: {
-        allowNull: false,
-        type: Sequelize.FLOAT
-      },
-      name: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      description: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      price: {
+      stars: {
         allowNull: false,
         type: Sequelize.INTEGER
       },
@@ -68,6 +44,6 @@ module.exports = {
     }, options);
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Spots', options);
+    await queryInterface.dropTable('Reviews', options);
   }
 };
