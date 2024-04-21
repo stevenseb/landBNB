@@ -10,7 +10,16 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Spot.belongsToOne(models.User, { foreginKey: 'spotId'});
+      Spot.belongsToMany(models.Review, { foreignKey: 'spotId'});
+      Spot.belongsToMany(
+        models.User,
+        {
+          through: models.Booking,
+            foreignKey: 'spotId',
+            otherKey: 'userId'
+        }
+      );
     }
   }
   Spot.init({
