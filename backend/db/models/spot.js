@@ -80,6 +80,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Spot',
+    tableName: 'Spots'
   });
   return Spot;
 };
