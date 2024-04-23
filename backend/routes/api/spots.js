@@ -10,7 +10,10 @@ const { User, Spot, Booking, Review, ReviewImage, SpotImage } = require('../../d
 
 // GET ALL SPOTS
 router.get('/', async (req, res) => {
-    const spots = await Spot.findAll();
+    const spots = await Spot.findAll({
+        
+        attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'description', 'price', 'createdAt', 'updatedAt'],
+      });
 
     res.json(spots);
 });
