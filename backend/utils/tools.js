@@ -19,5 +19,26 @@ function formatDate(dateString) {
     return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 };
 
+function formatSpots(spots) {
+    return spots.map(spot => ({
+        id: spot.id,
+        ownerId: spot.ownerId,
+        address: spot.address,
+        city: spot.city,
+        state: spot.state,
+        country: spot.country,
+        lat: spot.lat,
+        lng: spot.lng,
+        name: spot.name,
+        description: spot.description,
+        price: spot.price,
+        createdAt: formatDate(spot.createdAt),
+        updatedAt: formatDate(spot.updatedAt),
+        avgRating: calculateAverageRating(spot.Reviews),
+        previewImage: spot.SpotImages.length > 0 ? spot.SpotImages[0].url : null
+    }));
+}
 
-module.exports = { formatDate, calculateAverageRating };
+
+
+module.exports = { formatDate, calculateAverageRating, formatSpots };
