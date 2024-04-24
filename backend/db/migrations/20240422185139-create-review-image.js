@@ -21,7 +21,11 @@ module.exports = {
       },
       reviewId: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        // references: {
+        //   model: Review,
+        //   key: 'id',
+        // },
       },
       createdAt: {
         allowNull: false,

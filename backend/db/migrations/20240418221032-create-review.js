@@ -17,11 +17,19 @@ module.exports = {
       },
       spotId: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        // references: {
+        //   model: Spot,
+        //   key: 'id',
+        // },
       },
       userId: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        // references: {
+        //   model: User,
+        //   key: 'id',
+        // },
       },
       review: {
         allowNull: false,
