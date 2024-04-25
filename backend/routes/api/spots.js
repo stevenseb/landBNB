@@ -36,7 +36,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.get('/session', async (req, res) => { 
+router.get('/current', async (req, res) => { 
     requireAuth; 
     const { user } = req;
     try {
