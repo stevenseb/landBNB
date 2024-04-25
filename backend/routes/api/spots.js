@@ -6,7 +6,7 @@ const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { handleValidationErrors } = require('../../utils/validation');
 const { check } = require('express-validator');
 const { User, Spot, Booking, Review, ReviewImage, SpotImage } = require('../../db/models');
-const { formatDate, calculateAverageRating, formatSpots } = require('../../utils/tools');
+const { formatDate, calculateAverageRating, formatSpots, formatSpotById } = require('../../utils/tools');
 
 
 // GET ALL SPOTS
@@ -66,6 +66,34 @@ router.get('/session', async (req, res) => {
     }
 });
 
-
+router.get('/:id', async (req, res) => { 
+    const id = req.params.id;
+    try {
+        const spot = await Spot.findByPk(id, {
+            include: [
+                {
+                    model: Review,
+                    attributes: ['stars']
+                },
+                {
+                    model: SpotImage,
+                    attributes: ['id', 'url', 'preview'],
+                },
+            ],
+            attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'description', 'price', 'createdAt', 'updatedAt'],
+            order: [[SpotImage, 'id', 'ASC']],
+        });
+        
+        const owner = await User.findByPk(spot.ownerId, {
+            attributes: ['id', 'firstName', 'lastName'],
+        });
+        const response = await formatSpotById(spot, owner);
+        
+        res.json(response);
+    } catch (error) {
+        console.error(error);
+        res.status(404).json({ message: "Spot Couldn't be found" });
+    }
+});
 
 module.exports = router;
