@@ -39,6 +39,26 @@ function formatSpots(spots) {
     }));
 }
 
+function formatSpotById(spot, owner) {
+    return {
+        id: spot.id,
+        ownerId: spot.ownerId,
+        address: spot.address,
+        city: spot.city,
+        state: spot.state,
+        country: spot.country,
+        lat: spot.lat,
+        lng: spot.lng,
+        name: spot.name,
+        description: spot.description,
+        price: spot.price,
+        createdAt: formatDate(spot.createdAt),
+        updatedAt: formatDate(spot.updatedAt),
+        numReviews: spot.Reviews.length,
+        avgStarRating: calculateAverageRating(spot.Reviews),
+        spotImages: spot.SpotImages,
+        owner: owner
+    };
+}
 
-
-module.exports = { formatDate, calculateAverageRating, formatSpots };
+module.exports = { formatDate, calculateAverageRating, formatSpots, formatSpotById };
