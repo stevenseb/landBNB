@@ -8,6 +8,13 @@ async function getAllReviewsBySpotId(req, res) {
   const { spotId } = req.params;
 
   try {
+    const spot = await Spot.findByPk(spotId);
+    if (!spot) {
+      const error = new Error("Spot couldn't be found");
+      error.status = 404;
+      throw error;
+    }
+
     const reviews = await Review.findAll({
       where: { spotId },
       include: [
@@ -38,8 +45,7 @@ async function getAllReviewsBySpotId(req, res) {
     return formattedReviews;
     
   } catch (error) {
-    console.error('Error fetching reviews:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    throw error;
   }
 };
 
