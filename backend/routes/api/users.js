@@ -3,7 +3,6 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { checkExistingEmail, checkExistingUsername } = require('../../utils/tools');
 const { handleValidationErrors } = require('../../utils/validation');
 const { check } = require('express-validator');
 const { validateSignup } = require('../../utils/validation');
@@ -14,9 +13,6 @@ const { User } = require('../../db/models');
 router.post('/', validateSignup, async (req, res) => {
   const { firstName, lastName, email, password, username } = req.body;
   try {
-    //await checkExistingEmail(email);
-    //await checkExistingUsername(username);
-    //await Promise.all(validateSignup.map(validation => validation(req, res)));
 
     const hashedPassword = bcrypt.hashSync(password);
     const user = await User.create({ firstName, lastName, email, username, hashedPassword });

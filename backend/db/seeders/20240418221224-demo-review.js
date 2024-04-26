@@ -18,6 +18,18 @@ const demoReviews = [
     "stars": 5,
   },
   {
+    "userId": 3,
+    "spotId": 1,
+    "review": "The location is perfect!",
+    "stars": 5,
+  },
+  {
+    "userId": 3,
+    "spotId": 4,
+    "review": "A little bit noisy but still a nice stay.",
+    "stars": 4,
+  },
+  {
     "userId": 2,
     "spotId": 4,
     "review": "We really enjoyed the view and our stay!",
