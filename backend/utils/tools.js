@@ -36,10 +36,32 @@ function formatSpots(spots) {
         updatedAt: formatDate(spot.updatedAt),
         avgRating: calculateAverageRating(spot.Reviews),
         previewImage: spot.SpotImages.length > 0 ? spot.SpotImages[0].url : null
-    }));
-}
+    }));  
+};
 
 function formatSpotById(spot, owner) {
+    {
+        return spots.map(spot => ({
+            id: spot.id,
+            ownerId: spot.ownerId,
+            address: spot.address,
+            city: spot.city,
+            state: spot.state,
+            country: spot.country,
+            lat: spot.lat,
+            lng: spot.lng,
+            name: spot.name,
+            description: spot.description,
+            price: spot.price,
+            createdAt: formatDate(spot.createdAt),
+            updatedAt: formatDate(spot.updatedAt),
+            avgRating: calculateAverageRating(spot.Reviews),
+            previewImage: spot.SpotImages.length > 0 ? spot.SpotImages[0].url : null
+        }));  
+    };
+};
+
+function formatReview(review) {
     return {
         id: spot.id,
         ownerId: spot.ownerId,
@@ -59,30 +81,10 @@ function formatSpotById(spot, owner) {
         spotImages: spot.SpotImages,
         owner: owner
     };
-}
-
-async function checkExistingEmail(email) {
-    try {
-        const existingUser = await User.findOne({ where: { email: email } });
-        if (existingUser) {
-            throw new Error("User with that email already exists");
-        }
-    } catch (error) {
-        throw error;
-    }
-}
-
-async function checkExistingUsername(username) {
-    try {
-        const existingUser = await User.findOne({ where: { username: username } });
-        if (existingUser) {
-            throw new Error("User with that username already exists");
-        }
-    } catch (error) {
-        throw error;
-    }
-}
+};
 
 
-module.exports = { formatDate, calculateAverageRating, formatSpots, formatSpotById, checkExistingEmail, 
-    checkExistingUsername };
+
+
+
+module.exports = { formatDate, calculateAverageRating, formatSpots, formatSpotById };

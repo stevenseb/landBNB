@@ -35,7 +35,7 @@ router.get('/', async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 });
-
+// get spots of current user
 router.get('/current', async (req, res) => { 
     requireAuth; 
     const { user } = req;
@@ -65,7 +65,7 @@ router.get('/current', async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 });
-
+// GET spot by id
 router.get('/:id', async (req, res) => { 
     const id = req.params.id;
     try {
