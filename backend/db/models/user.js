@@ -34,8 +34,13 @@ module.exports = (sequelize, DataTypes) => {
           if (Validator.isEmail(value)) {
             throw new Error('Username can not be an email address.');
           }
-          
-        }
+        },
+        async isUnique(username) {
+          const user = await User.findOne({ where: { username: username } });
+          if (user) {
+              throw new Error('Username already exists');
+          }
+      },
       },
     },
     email: {
@@ -45,6 +50,12 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         len: [3, 256],
         isEmail: true,
+        async isUnique(email) {
+            const user = await User.findOne({ where: { email: email } });
+            if (user) {
+                throw new Error('Email already exists');
+            }
+        },
       },
     },
     hashedPassword: {

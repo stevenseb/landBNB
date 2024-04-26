@@ -61,4 +61,28 @@ function formatSpotById(spot, owner) {
     };
 }
 
-module.exports = { formatDate, calculateAverageRating, formatSpots, formatSpotById };
+async function checkExistingEmail(email) {
+    try {
+        const existingUser = await User.findOne({ where: { email: email } });
+        if (existingUser) {
+            throw new Error("User with that email already exists");
+        }
+    } catch (error) {
+        throw error;
+    }
+}
+
+async function checkExistingUsername(username) {
+    try {
+        const existingUser = await User.findOne({ where: { username: username } });
+        if (existingUser) {
+            throw new Error("User with that username already exists");
+        }
+    } catch (error) {
+        throw error;
+    }
+}
+
+
+module.exports = { formatDate, calculateAverageRating, formatSpots, formatSpotById, checkExistingEmail, 
+    checkExistingUsername };

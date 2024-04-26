@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
+const { checkExistingEmail, checkExistingUsername } = require('../../utils/tools');
 const { handleValidationErrors } = require('../../utils/validation');
 const { check } = require('express-validator');
 const { validateSignup } = require('../../utils/validation');
@@ -11,7 +12,12 @@ const { User } = require('../../db/models');
 
 // USER SIGN UP
 router.post('/', validateSignup, async (req, res) => {
-    const { firstName, lastName, email, password, username } = req.body;
+  const { firstName, lastName, email, password, username } = req.body;
+  try {
+    //await checkExistingEmail(email);
+    //await checkExistingUsername(username);
+    //await Promise.all(validateSignup.map(validation => validation(req, res)));
+
     const hashedPassword = bcrypt.hashSync(password);
     const user = await User.create({ firstName, lastName, email, username, hashedPassword });
 
@@ -28,7 +34,26 @@ router.post('/', validateSignup, async (req, res) => {
     return res.json({
       user: safeUser
     });
-  }
+  } catch (error) {
+    if (error.message.includes('Email already exists')) {
+      return res.status(500).json({
+          message: "User already exists",
+          errors: {
+              email: "User with that email already exists"
+          }
+      });
+  } else if (error.message.includes('Username already exists')) {
+    return res.status(500).json({
+        message: "User already exists",
+        errors: {
+            username: "User with that username already exists"
+        }
+    });
+}
+
+    //return res.status(400).json({ message: "Internal server error" });
+}
+  } 
 );
 
 
