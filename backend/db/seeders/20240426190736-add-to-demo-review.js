@@ -1,5 +1,4 @@
 'use strict';
-
 const { Review } = require('../models');
 
 let options = {};
@@ -13,36 +12,29 @@ options.validate = true;
 const demoReviews = [
   {
     "userId": 1,
-    "spotId": 1,
-    "review": "This was an awesome spot!",
+    "spotId": 5,
+    "review": "Enjoyed our stay!",
     "stars": 5,
   },
   {
-    "userId": 2,
-    "spotId": 4,
-    "review": "We really enjoyed the view and our stay!",
-    "stars": 4,
+    "userId": 3,
+    "spotId": 1,
+    "review": "The location is perfect!",
+    "stars": 5,
   },
   {
     "userId": 3,
-    "spotId": 2,
-    "review": "Highly recommended for families!",
+    "spotId": 4,
+    "review": "A little bit noisy but still a nice stay.",
     "stars": 4,
   },
   {
-    "userId": 5,
-    "spotId": 2,
-    "review": "Unfortunately our stay did not meet expectations.",
-    "stars": 3,
-  },
-  {
-    "userId": 4,
-    "spotId": 1,
-    "review": "Thanks for the wonderful stay!",
+    "userId": 2,
+    "spotId": 3,
+    "review": "We really enjoyed the view and our stay!",
     "stars": 4,
   },
 ]
-
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
