@@ -1,6 +1,6 @@
 // backend/utils/validation.js
 const { validationResult, check } = require('express-validator');
-
+process.env.NODE_ENV = 'production';
 // middleware for formatting errors from express-validator middleware
 // (to customize, see express-validator's documentation)
 const handleValidationErrors = (req, _res, next) => {
@@ -16,6 +16,7 @@ const handleValidationErrors = (req, _res, next) => {
     err.errors = errors;
     err.status = 400;
     err.title = "Bad request.";
+   
     next(err);
   }
   next();
@@ -33,7 +34,7 @@ const validateSignup = [
   check('email')
     .exists({ checkFalsy: true })
     .isEmail()
-    .withMessage('Please provide a valid email.'),
+    .withMessage('Invalid email.'),
   check('username')
     .exists({ checkFalsy: true })
     .isLength({ min: 4 })
