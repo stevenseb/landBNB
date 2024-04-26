@@ -103,7 +103,7 @@ router.get('/:spotId/reviews', async (req, res) => {
         const reviews = await getAllReviewsBySpotId(req);
         res.json({ Reviews: reviews });
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(404).json({ message: error.message });
     }
 }); 
 
