@@ -7,6 +7,7 @@ const { handleValidationErrors } = require('../../utils/validation');
 const { check } = require('express-validator');
 const { User, Spot, Booking, Review, ReviewImage, SpotImage } = require('../../db/models');
 const { formatDate, calculateAverageRating, formatSpots, formatSpotById } = require('../../utils/tools');
+const { getAllReviewsBySpotId } = require('../../utils/spotsController');
 
 
 // GET ALL SPOTS
@@ -95,5 +96,15 @@ router.get('/:id', async (req, res) => {
         res.status(404).json({ message: "Spot Couldn't be found" });
     }
 });
+
+//GET reviews for a spot by spot id
+router.get('/:spotId/reviews', async (req, res) => { 
+    try {
+        const reviews = await getAllReviewsBySpotId(req);
+        res.json({ Reviews: reviews });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}); 
 
 module.exports = router;
