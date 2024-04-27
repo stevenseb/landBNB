@@ -52,7 +52,29 @@ router.post('/:reviewId/images', async (req, res) => {
   });
 
  
+// DELETE a review by its id
+router.delete('/:reviewId', async (req, res) => {
+    requireAuth; 
+    const { reviewId } = req.params;
+    const user = req.user.id;
+    try {
+      const review = await Review.findByPk(reviewId);
+  
+      if (!review) {
+        return res.status(404).json({ message: "Review couldn't be found" });
+      }
+      if (review.userId !== user) {
+        return res.status(403).json({ message: "You are not authorized to delete this review" });
+      }
 
+      await review.destroy();
+  
+      res.status(200).json({ message: "Successfully deleted" });
+    } catch (error) {
+      console.error('Error deleting review:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  })
 
 
 module.exports = router;
