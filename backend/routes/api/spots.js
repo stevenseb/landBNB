@@ -8,7 +8,7 @@ const { check } = require('express-validator');
 const { User, Spot, Booking, Review, ReviewImage, SpotImage } = require('../../db/models');
 const { formatDate, calculateAverageRating, formatSpots, formatSpotById } = require('../../utils/tools');
 const { getAllReviewsBySpotId } = require('../../utils/spotsController');
-
+const { Op } = require('sequelize');
 
 // GET ALL SPOTS
 router.get('/', async (req, res) => {        
@@ -140,7 +140,77 @@ router.post('/:spotId/images', async (req, res) => {
     }
   });
 
+// POST create a new booking by spot id
+router.post('/:spotId/bookings', async (req, res) => {
+    requireAuth;
+    const { spotId } = req.params;
+    const { startDate, endDate } = req.body;
+    const userId = req.user.id;
 
+    try {
+        const now = new Date();
+        if (new Date(startDate) <= now) {
+            return res.status(400).json({
+                message: "Bad Request",
+                errors: {
+                    startDate: "startDate must be in the future"
+                }
+            });
+        } else if (new Date(endDate) <= new Date(startDate)) {
+            return res.status(400).json({
+                message: "Bad Request",
+                errors: {
+                    endDate: "endDate cannot be on or before startDate"
+                }
+            });
+        }
+        const spot = await Spot.findByPk(spotId);
+        if (!spot) {
+            return res.status(404).json({ message: "Spot couldn't be found" });
+        }
+        if (spot.ownerId === userId) {
+            return res.status(403).json({ message: "You are the owner of this spot, booking not allowed." });
+        }
+        const overlappingBookings = await Booking.findAll({
+            where: {
+                spotId: spotId,
+                startDate: {
+                    [Op.lt]: new Date(endDate)
+                },
+                endDate: {
+                    [Op.gt]: new Date(startDate)
+                }
+            }
+        });
+        if (overlappingBookings.length > 0) {
+            return res.status(400).json({
+                message: "Bad Request",
+                errors: {
+                    startDate: "Booking conflicts with existing bookings for this spot"
+                }
+            });
+        }
+        const booking = await Booking.create({
+            spotId: spotId,
+            userId: userId,
+            startDate: startDate,
+            endDate: endDate
+        });
+
+        res.status(201).json({
+            id: booking.id,
+            spotId: parseInt(booking.spotId),
+            userId: booking.userId,
+            startDate: formatDate(booking.startDate, true),
+            endDate: formatDate(booking.endDate, true),
+            createdAt: formatDate(booking.createdAt),
+            updatedAt: formatDate(booking.updatedAt)
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
 
 // DELETE a spot by its id
 router.delete('/:spotId', async (req, res) => {
