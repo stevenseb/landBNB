@@ -107,4 +107,34 @@ router.get('/:spotId/reviews', async (req, res) => {
     }
 }); 
 
+
+
+
+
+// DELETE a spot by its id
+router.delete('/:spotId', async (req, res) => {
+    requireAuth; 
+    const { spotId } = req.params;
+    const user = req.user.id;
+    try {
+      const spot = await Spot.findByPk(spotId);
+  
+      if (!spot) {
+        return res.status(404).json({ message: "Spot couldn't be found" });
+      }
+      if (spot.ownerId !== user) {
+        return res.status(403).json({ message: "You are not authorized to delete this spot" });
+      }
+
+      await spot.destroy();
+  
+      res.status(200).json({ message: "Successfully deleted" });
+    } catch (error) {
+      console.error('Error deleting spot:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+  
+  module.exports = router;
+
 module.exports = router;
