@@ -85,19 +85,36 @@ const validateSpot = [
     .withMessage('Longitute is not valid.'),
   check('name')
     .exists({ checkFalsy: true })
-    .withMessage('Name is required.'),
+    .withMessage('Name is required.')
+    .isLength({ min: 1, max: 50 })
+    .withMessage('Name must be less than 50 characters.'),
   check('description')
     .exists({ checkFalsy: true })
     .withMessage('Description is required.'),
   check('price')
     .exists({ checkFalsy: true })
-    .withMessage('Price is required.'),
+    .isFloat({ min:0 })
+    .withMessage('Price pre day is required.'),
   handleValidationErrors
 ];
+
+//VALIDATE CREATE NEW REVIEW INPUT
+const validateReview = [
+check('review')
+  .exists({ checkFalsy: true })
+  .withMessage('Review text is required.'),
+check('stars')
+  .exists({ checkFalsy: true, checkNull: true })
+  .isInt({ min: 1, max: 5 })
+  .withMessage('Stars must be an integer from 1 to 5.'),
+  handleValidationErrors
+];
+
 
 module.exports = {
   handleValidationErrors,
   validateLogin,
   validateSignup,
-  validateSpot
+  validateSpot,
+  validateReview
 };

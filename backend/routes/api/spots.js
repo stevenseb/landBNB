@@ -3,11 +3,11 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { validateSpot } = require('../../utils/validation');
+const { validateSpot, validateReview } = require('../../utils/validation');
 const { check } = require('express-validator');
 const { User, Spot, Booking, Review, ReviewImage, SpotImage } = require('../../db/models');
 const { formatDate, calculateAverageRating, formatSpots, formatSpotById } = require('../../utils/tools');
-const { getAllReviewsBySpotId } = require('../../utils/spotsController');
+const { getAllReviewsBySpotId, getAllBookingsBySpotId } = require('../../utils/spotsController');
 const { Op } = require('sequelize');
 
 // GET all spots
@@ -107,6 +107,21 @@ router.get('/:spotId/reviews', async (req, res) => {
     }
 }); 
 
+//GET all bookings by spot id
+router.get('/:spotId/bookings', async (req, res) => { 
+    const { spotId } = req.params;
+    try {
+        const bookings = await getAllBookingsBySpotId(req, spotId);
+        res.json({ Bookings: bookings });
+    } catch (error) {
+        if (error.status === 404) {
+            return res.status(404).json({ message: "Spot couldn't be found" });
+        }
+        console.error(error);
+        res.status(500).json({ message: error.message });
+    }
+});
+
 // POST create a new spot
 router.post('/', validateSpot, async (req, res) => {
     requireAuth;
@@ -139,7 +154,7 @@ router.post('/', validateSpot, async (req, res) => {
             price: price
         });
 
-        res.status(201).json({
+        res.status(200).json({
             id: spot.id,
             ownerId: spot.ownerId,
             address: spot.address,
@@ -198,7 +213,7 @@ router.post('/:spotId/bookings', async (req, res) => {
     requireAuth;
     const { spotId } = req.params;
     const { startDate, endDate } = req.body;
-    const userId = req.user.id;
+    const user = req.user.id;
 
     try {
         const now = new Date();
@@ -221,7 +236,7 @@ router.post('/:spotId/bookings', async (req, res) => {
         if (!spot) {
             return res.status(404).json({ message: "Spot couldn't be found" });
         }
-        if (spot.ownerId === userId) {
+        if (spot.ownerId === user) {
             return res.status(403).json({ message: "You are the owner of this spot, booking not allowed." });
         }
         const overlappingBookings = await Booking.findAll({
@@ -245,7 +260,7 @@ router.post('/:spotId/bookings', async (req, res) => {
         }
         const booking = await Booking.create({
             spotId: spotId,
-            userId: userId,
+            userId: user,
             startDate: startDate,
             endDate: endDate
         });
@@ -258,6 +273,94 @@ router.post('/:spotId/bookings', async (req, res) => {
             endDate: formatDate(booking.endDate, true),
             createdAt: formatDate(booking.createdAt),
             updatedAt: formatDate(booking.updatedAt)
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+// POST create a new review by spot id
+router.post('/:spotId/reviews', validateReview, async (req, res) => {
+    requireAuth;
+    const { spotId } = req.params;
+    const { review, stars } = req.body;
+    const userId = req.user.id;
+
+    try {
+        let spot = await Spot.findByPk(spotId);
+        if (!spot) {
+            return res.status(404).json({ message: "Spot couldn't be found" });
+        }
+        const existingReview = await Review.findOne({
+            where: {
+                userId: userId,
+                spotId: spotId
+            }
+        });
+
+        if (existingReview) {
+            return res.status(500).json({ message: "User already has a review for this spot" });
+        }
+
+        const createdReview = await Review.create({
+            userId: userId,
+            spotId: spotId,
+            review: review,
+            stars: stars
+        });
+
+        res.status(201).json({
+            id: createdReview.id,
+            userId: createdReview.userId,
+            spotId: parseInt(createdReview.spotId),
+            review: createdReview.review,
+            stars: createdReview.stars,
+            createdAt: formatDate(createdReview.createdAt),
+            updatedAt: formatDate(createdReview.updatedAt)
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+// PUT update/edit a spot
+router.put('/:spotId', validateSpot, async (req, res) => {
+    requireAuth;
+    const { spotId } = req.params;
+    const user = req.user.id;
+
+    try {
+        let spot = await Spot.findByPk(spotId);
+        if (!spot) {
+            return res.status(404).json({ message: "Spot couldn't be found" });
+        }
+        if (spot.ownerId !== user) {
+            return res.status(403).json({ message: "You are not authorized to edit this spot" });
+          }
+        for (const key in req.body) {
+            if (Object.hasOwnProperty.call(req.body, key)) {
+                spot[key] = req.body[key];
+            }
+        }
+
+        spot = await spot.save();
+
+        res.status(200).json({
+            id: spot.id,
+            ownerId: spot.ownerId,
+            address: spot.address,
+            city: spot.city,
+            state: spot.state,
+            country: spot.country,
+            lat: spot.lat,
+            lng: spot.lng,
+            name: spot.name,
+            description: spot.description,
+            price: spot.price,
+            createdAt: formatDate(spot.createdAt),
+            updatedAt: formatDate(spot.updatedAt)            
         });
     } catch (error) {
         console.error(error);
