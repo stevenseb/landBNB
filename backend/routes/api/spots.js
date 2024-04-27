@@ -3,14 +3,14 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { handleValidationErrors } = require('../../utils/validation');
+const { validateSpot } = require('../../utils/validation');
 const { check } = require('express-validator');
 const { User, Spot, Booking, Review, ReviewImage, SpotImage } = require('../../db/models');
 const { formatDate, calculateAverageRating, formatSpots, formatSpotById } = require('../../utils/tools');
 const { getAllReviewsBySpotId } = require('../../utils/spotsController');
 const { Op } = require('sequelize');
 
-// GET ALL SPOTS
+// GET all spots
 router.get('/', async (req, res) => {        
     try {
         const spots = await Spot.findAll({
@@ -36,7 +36,7 @@ router.get('/', async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 });
-// get spots of current user
+// GET spots of current user
 router.get('/current', async (req, res) => { 
     requireAuth; 
     const { user } = req;
@@ -106,6 +106,59 @@ router.get('/:spotId/reviews', async (req, res) => {
         res.status(404).json({ message: error.message });
     }
 }); 
+
+// POST create a new spot
+router.post('/', validateSpot, async (req, res) => {
+    requireAuth;
+    const { address, city, state, country, lat, lng, name, description, price } = req.body;
+    const id = req.user.id;
+    try {
+        const existingSpot = await Spot.findOne({
+            where: {
+                address: address,
+                city: city,
+                state: state,
+                country: country
+            }
+        });
+
+        if (existingSpot) {
+            return res.status(400).json({ message: "Spot with the same address already exists" });
+        }
+
+        const spot = await Spot.create({
+            ownerId: id,
+            address: address,
+            city: city,
+            state: state,
+            country: country,
+            lat: lat,
+            lng: lng,
+            name: name,
+            description: description,
+            price: price
+        });
+
+        res.status(201).json({
+            id: spot.id,
+            ownerId: spot.ownerId,
+            address: spot.address,
+            city: spot.city,
+            state: spot.state,
+            country: spot.country,
+            lat: spot.lat,
+            lng: spot.lng,
+            name: spot.name,
+            description: spot.description,
+            price: spot.price,
+            createdAt: formatDate(spot.createdAt),
+            updatedAt: formatDate(spot.updatedAt)
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
 
 // POST an image by spot id
 router.post('/:spotId/images', async (req, res) => {

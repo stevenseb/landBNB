@@ -61,9 +61,43 @@ const validateLogin = [
     .withMessage('Please provide a password.'),
   handleValidationErrors
 ];
+//VALIDATE SPOT INPUT FOR CREATE NEW SPOT
+const validateSpot = [
+  check('address')
+    .exists({ checkFalsy: true })
+    .withMessage('Address is required.'),
+  check('city')
+    .exists({ checkFalsy: true })
+    .withMessage('City is required.'),
+  check('state')
+    .exists({checkFalsy: true})
+    .withMessage('State is requried.'),
+  check('country')
+    .exists({ checkFalsy: true })
+    .withMessage('Country is required.'),
+  check('lat')
+    .exists({ checkFalsy: true })
+    .isFloat({ min: -90, max: 90 })
+    .withMessage('Lattitude is not valid.'),
+  check('lng')
+    .exists({checkFalsy: true})
+    .isFloat({ min: -180, max: 180 })
+    .withMessage('Longitute is not valid.'),
+  check('name')
+    .exists({ checkFalsy: true })
+    .withMessage('Name is required.'),
+  check('description')
+    .exists({ checkFalsy: true })
+    .withMessage('Description is required.'),
+  check('price')
+    .exists({ checkFalsy: true })
+    .withMessage('Price is required.'),
+  handleValidationErrors
+];
 
 module.exports = {
   handleValidationErrors,
   validateLogin,
-  validateSignup
+  validateSignup,
+  validateSpot
 };
