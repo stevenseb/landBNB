@@ -18,7 +18,38 @@ router.get('/current', async (req, res) => {
     }
 });
 
-
+// POST image to a review by review id
+router.post('/:reviewId/images', async (req, res) => {
+    requireAuth; 
+    const { reviewId } = req.params;
+    const { url } = req.body;
+    const user = req.user.id;
+  
+    try {
+      const review = await Review.findByPk(reviewId);
+      if (!review) {
+        return res.status(404).json({ message: "Review couldn't be found" });
+      }
+      if (review.userId !== user) {
+        return res.status(403).json({ message: "You are not authorized to edit this review" });
+      }
+      const imageCount = await ReviewImage.count({ where: { reviewId: reviewId } });
+      if (imageCount >= 10) {
+        return res.status(403).json({ message: "Maximum number of images for this resource was reached" });
+    }
+      const reviewImage = await ReviewImage.create({
+        reviewId: reviewId,
+        url: url
+      });
+      res.status(200).json({
+        id: reviewImage.id,
+        url: reviewImage.url
+      });
+    } catch (error) {
+      console.error('Error adding review image:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
 
  
 
