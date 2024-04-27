@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { handleValidationErrors } = require('../../utils/validation');
+const { validateSpot, validateReview } = require('../../utils/validation');
 const { check } = require('express-validator');
 const { User, Spot, Booking, Review, ReviewImage, SpotImage } = require('../../db/models');
 const { formatDate, calculateAverageRating, formatSpots, formatSpotById } = require('../../utils/tools');
@@ -51,7 +51,42 @@ router.post('/:reviewId/images', async (req, res) => {
     }
   });
 
- 
+ //PUT edit a review by its id
+ router.put('/:reviewId', validateReview, async (req, res) => {
+  requireAuth;
+  const { reviewId } = req.params;
+  const { review, stars } = req.body;
+  const userId = req.user.id;
+
+  try {
+      let existingReview = await Review.findByPk(reviewId);
+      if (!existingReview) {
+          return res.status(404).json({ message: "Review couldn't be found" });
+      }
+      if (existingReview.userId !== userId) {
+          return res.status(403).json({ message: "You are not authorized to edit this review" });
+      }
+
+      existingReview.review = review;
+      existingReview.stars = stars;
+      existingReview.updatedAt = new Date();
+      existingReview = await existingReview.save();
+
+      res.status(200).json({
+          id: existingReview.id,
+          userId: existingReview.userId,
+          spotId: existingReview.spotId,
+          review: existingReview.review,
+          stars: existingReview.stars,
+          createdAt: formatDate(existingReview.createdAt),
+          updatedAt:formatDate(existingReview.updatedAt)
+      });
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
 // DELETE a review by its id
 router.delete('/:reviewId', async (req, res) => {
     requireAuth; 
