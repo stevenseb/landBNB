@@ -7,7 +7,7 @@ const { validateSpot, validateReview } = require('../../utils/validation');
 const { check } = require('express-validator');
 const { User, Spot, Booking, Review, ReviewImage, SpotImage } = require('../../db/models');
 const { formatDate, calculateAverageRating, formatSpots, formatSpotById } = require('../../utils/tools');
-const { getAllReviewsBySpotId } = require('../../utils/spotsController');
+const { getAllReviewsBySpotId, getAllBookingsBySpotId } = require('../../utils/spotsController');
 const { Op } = require('sequelize');
 
 // GET all spots
@@ -106,6 +106,21 @@ router.get('/:spotId/reviews', async (req, res) => {
         res.status(404).json({ message: error.message });
     }
 }); 
+
+//GET all bookings by spot id
+router.get('/:spotId/bookings', async (req, res) => { 
+    const { spotId } = req.params;
+    try {
+        const bookings = await getAllBookingsBySpotId(req, spotId);
+        res.json({ Bookings: bookings });
+    } catch (error) {
+        if (error.status === 404) {
+            return res.status(404).json({ message: "Spot couldn't be found" });
+        }
+        console.error(error);
+        res.status(500).json({ message: error.message });
+    }
+});
 
 // POST create a new spot
 router.post('/', validateSpot, async (req, res) => {
