@@ -11,8 +11,7 @@ const { getAllReviewsBySpotId } = require('../../utils/spotsController');
 
 
 //GET bookings of current user
-router.get('/current', async (req, res) => {
-    requireAuth;
+router.get('/current', requireAuth, async (req, res) => {
     const { user } = req;
 
     try {
@@ -48,8 +47,8 @@ router.get('/current', async (req, res) => {
     }
 });
 
-router.delete('/:bookingId', async (req, res) => {
-    requireAuth;
+router.delete('/:bookingId', requireAuth, async (req, res) => {
+    
     const { bookingId } = req.params;
     const userId = req.user.id;
 
@@ -76,9 +75,7 @@ router.delete('/:bookingId', async (req, res) => {
     }
 });
 
-router.put('/:bookingId', async (req, res) => {
-    // Assuming you have authentication middleware similar to requireAuth
-    requireAuth;
+router.put('/:bookingId', requireAuth, async (req, res) => {
 
     const { bookingId } = req.params;
     const { startDate, endDate } = req.body;

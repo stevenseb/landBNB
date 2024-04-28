@@ -19,8 +19,7 @@ router.get('/current', async (req, res) => {
 });
 
 // POST image to a review by review id
-router.post('/:reviewId/images', async (req, res) => {
-    requireAuth; 
+router.post('/:reviewId/images', requireAuth, async (req, res) => {
     const { reviewId } = req.params;
     const { url } = req.body;
     const user = req.user.id;
@@ -52,8 +51,7 @@ router.post('/:reviewId/images', async (req, res) => {
   });
 
  //PUT edit a review by its id
- router.put('/:reviewId', validateReview, async (req, res) => {
-  requireAuth;
+ router.put('/:reviewId', requireAuth, validateReview, async (req, res) => {
   const { reviewId } = req.params;
   const { review, stars } = req.body;
   const userId = req.user.id;
@@ -88,8 +86,7 @@ router.post('/:reviewId/images', async (req, res) => {
 });
 
 // DELETE a review by its id
-router.delete('/:reviewId', async (req, res) => {
-    requireAuth; 
+router.delete('/:reviewId', requireAuth, async (req, res) => { 
     const { reviewId } = req.params;
     const user = req.user.id;
     try {

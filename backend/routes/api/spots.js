@@ -37,9 +37,7 @@ router.get('/', async (req, res) => {
     }
 });
 // GET spots of current user
-router.get('/current', async (req, res) => { 
-    requireAuth; 
-
+router.get('/current', requireAuth, async (req, res) => { 
     const { user } = req;
     try {
         const spots = await Spot.findAll({
@@ -124,8 +122,7 @@ router.get('/:spotId/bookings', async (req, res) => {
 });
 
 // POST create a new spot
-router.post('/', validateSpot, async (req, res) => {
-    requireAuth;
+router.post('/', requireAuth, validateSpot, async (req, res) => {
     const { address, city, state, country, lat, lng, name, description, price } = req.body;
     const id = req.user.id;
     try {
@@ -177,8 +174,7 @@ router.post('/', validateSpot, async (req, res) => {
 });
 
 // POST an image by spot id
-router.post('/:spotId/images', async (req, res) => {
-    requireAuth; 
+router.post('/:spotId/images', requireAuth, async (req, res) => {
     const { spotId } = req.params;
     const { url, preview } = req.body;
     const user = req.user.id;
@@ -210,8 +206,7 @@ router.post('/:spotId/images', async (req, res) => {
   });
 
 // POST create a new booking by spot id
-router.post('/:spotId/bookings', async (req, res) => {
-    requireAuth;
+router.post('/:spotId/bookings', requireAuth, async (req, res) => {
     const { spotId } = req.params;
     const { startDate, endDate } = req.body;
     const user = req.user.id;
@@ -282,8 +277,7 @@ router.post('/:spotId/bookings', async (req, res) => {
 });
 
 // POST create a new review by spot id
-router.post('/:spotId/reviews', validateReview, async (req, res) => {
-    requireAuth;
+router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) => {
     const { spotId } = req.params;
     const { review, stars } = req.body;
     const userId = req.user.id;
@@ -327,8 +321,7 @@ router.post('/:spotId/reviews', validateReview, async (req, res) => {
 });
 
 // PUT update/edit a spot
-router.put('/:spotId', validateSpot, async (req, res) => {
-    requireAuth;
+router.put('/:spotId', requireAuth, validateSpot, async (req, res) => {
     const { spotId } = req.params;
     const user = req.user.id;
 
@@ -370,8 +363,7 @@ router.put('/:spotId', validateSpot, async (req, res) => {
 });
 
 // DELETE a spot by its id
-router.delete('/:spotId', async (req, res) => {
-    requireAuth; 
+router.delete('/:spotId', requireAuth, async (req, res) => {
     const { spotId } = req.params;
     const user = req.user.id;
     try {
