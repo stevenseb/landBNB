@@ -26,7 +26,7 @@ router.get('/', async (req, res) => {
                 }
             ],
             attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'description', 'price', 'createdAt', 'updatedAt'],
-            group: ['Spot.id'],
+            //group: ['Spot.id'],
         });
 
         const response = await formatSpots(spots);
@@ -56,7 +56,7 @@ router.get('/current', requireAuth, async (req, res) => {
                 }
             ],
             attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'description', 'price', 'createdAt', 'updatedAt'],
-            group: ['Spot.id'],
+            //group: ['Spot.id'],
         });
 
         const response = await formatSpots(spots);
