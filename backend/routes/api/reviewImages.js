@@ -7,9 +7,7 @@ const { handleValidationErrors } = require('../../utils/validation');
 const { check } = require('express-validator');
 const { User, Spot, Booking, Review, ReviewImage, SpotImage } = require('../../db/models');
 
-router.delete('/:imageId', async (req, res) => {
-    requireAuth;
-
+router.delete('/:imageId', requireAuth, async (req, res) => {
     const { imageId } = req.params;
     const { user } = req;
 
