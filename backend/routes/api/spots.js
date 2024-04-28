@@ -39,6 +39,7 @@ router.get('/', async (req, res) => {
 // GET spots of current user
 router.get('/current', async (req, res) => { 
     requireAuth; 
+
     const { user } = req;
     try {
         const spots = await Spot.findAll({

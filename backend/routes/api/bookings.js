@@ -10,7 +10,7 @@ const { formatDate, calculateAverageRating, formatSpots, formatSpotById, formatB
 const { getAllReviewsBySpotId } = require('../../utils/spotsController');
 
 
-// get bookings of current user
+//GET bookings of current user
 router.get('/current', async (req, res) => {
     requireAuth;
     const { user } = req;
@@ -76,6 +76,73 @@ router.delete('/:bookingId', async (req, res) => {
     }
 });
 
+router.put('/:bookingId', async (req, res) => {
+    // Assuming you have authentication middleware similar to requireAuth
+    requireAuth;
+
+    const { bookingId } = req.params;
+    const { startDate, endDate } = req.body;
+    const userId = req.user.id;
+
+    try {
+   
+        const booking = await Booking.findByPk(bookingId);
+        if (!booking) {
+            return res.status(404).json({ message: "Booking couldn't be found" });
+        }
+        if (booking.userId !== userId) {
+            return res.status(403).json({ message: "You are not authorized to edit this booking" });
+        }
+        const now = new Date();
+        if (new Date(startDate) <= now) {
+            return res.status(400).json({
+                message: "Bad Request",
+                errors: {
+                    startDate: "startDate must be in the future"
+                }
+            });
+        } else if (new Date(endDate) <= new Date(startDate)) {
+            return res.status(400).json({
+                message: "Bad Request",
+                errors: {
+                    endDate: "endDate cannot be on or before startDate"
+                }
+            });
+        }
+
+        const overlappingBookings = await Booking.findAll({
+            where: {
+                spotId: booking.spotId,
+                id: {
+                    [Op.ne]: booking.id 
+                },
+                startDate: {
+                    [Op.lt]: new Date(endDate)
+                },
+                endDate: {
+                    [Op.gt]: new Date(startDate)
+                }
+            }
+        });
+        if (overlappingBookings.length > 0) {
+            return res.status(400).json({
+                message: "Bad Request",
+                errors: {
+                    startDate: "Booking conflicts with existing bookings for this spot"
+                }
+            });
+        }
+        await booking.update({
+            startDate: startDate,
+            endDate: endDate
+        });
+
+        res.status(200).json(booking);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
 
 
 module.exports = router;
