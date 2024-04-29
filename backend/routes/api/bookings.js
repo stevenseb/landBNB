@@ -47,6 +47,7 @@ router.get('/current', requireAuth, async (req, res) => {
     }
 });
 
+//DELETE a booking
 router.delete('/:bookingId', requireAuth, async (req, res) => {
     
     const { bookingId } = req.params;
@@ -75,6 +76,7 @@ router.delete('/:bookingId', requireAuth, async (req, res) => {
     }
 });
 
+//PUT edit a booking
 router.put('/:bookingId', requireAuth, async (req, res) => {
 
     const { bookingId } = req.params;
@@ -140,6 +142,7 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 });
+
 
 
 module.exports = router;
