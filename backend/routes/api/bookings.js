@@ -135,7 +135,9 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
             startDate: startDate,
             endDate: endDate
         });
-        const updated = Booking.findByPk(bookingId);
+        const updated = await Booking.findByPk(bookingId, {
+            attributes: ['id', 'spotId', 'userId', 'startDate', 'endDate', 'createdAt', 'updatedAt']
+        });
 
         res.status(200).json({
             id: updated.id,
