@@ -131,11 +131,11 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
                 }
             });
         }
-        await booking.update({
+        const response = await booking.update({
             startDate: startDate,
             endDate: endDate
         });
-        const formatted = formatBookings(bookings);
+        const formatted = formatBookings(response);
 
         
         res.json({ Bookings: formatted });
