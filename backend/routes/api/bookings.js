@@ -135,8 +135,10 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
             startDate: startDate,
             endDate: endDate
         });
+        const formatted = formatBookings(bookings);
 
-        res.status(200).json(booking);
+        
+        res.json({ Bookings: formatted });
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Internal server error' });
