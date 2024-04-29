@@ -6,7 +6,7 @@ const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { handleValidationErrors } = require('../../utils/validation');
 const { check } = require('express-validator');
 const { User, Spot, Booking, Review, ReviewImage, SpotImage } = require('../../db/models');
-const { formatDate, calculateAverageRating, formatSpots, formatSpotById, formatBookings } = require('../../utils/tools');
+const { formatDate, calculateAverageRating, formatSpots, formatSpotById, formatBookings, formatBookingById } = require('../../utils/tools');
 const { getAllReviewsBySpotId } = require('../../utils/spotsController');
 const { Op } = require('sequelize');
 
@@ -135,7 +135,7 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
             startDate: startDate,
             endDate: endDate
         });
-        const formatted = formatBookings(response);
+        const formatted = formatBookingById(response);
 
         
         res.json({ Bookings: formatted });
