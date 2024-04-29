@@ -8,7 +8,7 @@ const { check } = require('express-validator');
 const { User, Spot, Booking, Review, ReviewImage, SpotImage } = require('../../db/models');
 const { formatDate, calculateAverageRating, formatSpots, formatSpotById, formatBookings } = require('../../utils/tools');
 const { getAllReviewsBySpotId } = require('../../utils/spotsController');
-
+const { Op } = require('sequelize');
 
 //GET bookings of current user
 router.get('/current', requireAuth, async (req, res) => {
