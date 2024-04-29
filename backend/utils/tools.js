@@ -93,29 +93,34 @@ function formatBookings(bookings) {
 };
 
 function formatBookingById(booking) {
-    return {
-    id: booking.id,
-    spotId: booking.spotId,
-    Spot: {
-        id: booking.Spot.id,
-        ownerId: booking.Spot.ownerId,
-        address: booking.Spot.address,
-        city: booking.Spot.city,
-        state: booking.Spot.state,
-        country: booking.Spot.country,
-        lat: booking.Spot.lat,
-        lng: booking.Spot.lng,
-        name: booking.Spot.name,
-        price: booking.Spot.price,
-        previewImage: booking.Spot.SpotImages.length > 0 ? booking.Spot.SpotImages[0].url : null
-    },
-    userId: booking.userId,
-    startDate: formatDate(booking.startDate, true),
-    endDate: formatDate(booking.endDate, true),
-    createdAt: formatDate(booking.createdAt),
-    updatedAt: formatDate(booking.updatedAt),
-};
-};
+    if (booking.Spot) {
+        return {
+            id: booking.id,
+            spotId: booking.spotId,
+            Spot: {
+                id: booking.Spot.id,
+                ownerId: booking.Spot.ownerId,
+                address: booking.Spot.address,
+                city: booking.Spot.city,
+                state: booking.Spot.state,
+                country: booking.Spot.country,
+                lat: booking.Spot.lat,
+                lng: booking.Spot.lng,
+                name: booking.Spot.name,
+                price: booking.Spot.price,
+                previewImage: booking.Spot.SpotImages.length > 0 ? booking.Spot.SpotImages[0].url : null
+            },
+            userId: booking.userId,
+            startDate: formatDate(booking.startDate, true),
+            endDate: formatDate(booking.endDate, true),
+            createdAt: formatDate(booking.createdAt),
+            updatedAt: formatDate(booking.updatedAt),
+        };
+    } else {
+        return null;
+    }
+}
+
 
 
 
