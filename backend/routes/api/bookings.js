@@ -131,14 +131,22 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
                 }
             });
         }
-        const response = await booking.update({
+        await booking.update({
             startDate: startDate,
             endDate: endDate
         });
-        const formatted = formatBookingById(response);
+        const updated = Booking.findByPk(bookingId);
 
-        
-        res.json({ Bookings: formatted });
+        res.status(200).json({
+            id: updated.id,
+            spotId: updated.spotId,
+            userId: updated.userId,
+            startDate: formatDate(updated.startDate, true),
+            endDate: formatDate(updated.endDate, true),
+            createdAt: formatDate(updated.createdAt),
+            updatedAt: formatDate(updated.updatedAt)
+        });
+
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Internal server error' });
