@@ -154,7 +154,7 @@ router.post('/', requireAuth, validateSpot, async (req, res) => {
             price: price
         });
 
-        res.status(200).json({
+        res.status(201).json({
             id: spot.id,
             ownerId: spot.ownerId,
             address: spot.address,
