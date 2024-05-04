@@ -68,7 +68,7 @@ async function validateAndUpdateBooking(bookingId, startDate, endDate, userId) {
             }
         });
         if (overlappingBookings.length > 0) {
-            throw new Error("Booking conflicts with existing bookings for this spot");
+            throw new Error("Sorry, this spot is already booked for the specified dates.");
         }
         
         return booking;
@@ -78,13 +78,6 @@ async function validateAndUpdateBooking(bookingId, startDate, endDate, userId) {
 }
 
 //POST create a new booking from spot id
-
-        // const now = new Date();
-        // if (new Date(startDate) <= now) {
-        //     throw new Error("startDate must be in the future");
-        // } else if (new Date(endDate) <= new Date(startDate)) {
-        //     throw new Error("endDate cannot be on or before startDate");
-        // }
 async function validateAndCreateBooking(spotId, startDate, endDate, userId) {
     try {
          //await checkBookingDates(startDate, endDate);
@@ -109,7 +102,7 @@ async function validateAndCreateBooking(spotId, startDate, endDate, userId) {
                 }
             });
          if (overlappingBookings.length > 0) {
-              throw new Error("Booking conflicts with existing bookings for this spot");
+              throw new Error("Sorry, this spot is already booked for the specified dates.");
          }
         
          const booking = await Booking.create({

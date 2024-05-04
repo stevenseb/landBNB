@@ -221,9 +221,11 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
             updatedAt: formatDate(booking.updatedAt)
         });
     } catch (error) {
-        if (error.message === "Spot couldn't be found" || error.message === "You are the owner of this spot, booking not allowed.") {
+        if (error.message === "Spot couldn't be found") {
             return res.status(404).json({ message: error.message });
-        } else if (error.message === "Booking conflicts with existing bookings for this spot") {
+        } else if (error.message === "You are the owner of this spot, booking not allowed.") {
+            return res.status(403).json({ message: error.message });
+        } else if (error.message === "Sorry, this spot is already booked for the specified dates.") {
             return res.status(400).json({ message: error.message });
         } else if (error.message === "startDate must be in the future" || error.message === "endDate cannot be on or before startDate") {
             return res.status(400).json({ message: error.message });
@@ -272,7 +274,7 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) =>
         });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Internal server error' });
+        res.status(error.status || 500).json({ error: error.message || 'Internal Server Error' });
     }
 });
 

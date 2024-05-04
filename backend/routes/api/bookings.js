@@ -19,7 +19,7 @@ router.get('/current', requireAuth, async (req, res) => {
         res.json({ Bookings: formattedBookings });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Internal server error' });
+        res.status(error.status || 500).json({ error: error.message || 'Internal Server Error' });
     }
 });
 
@@ -45,7 +45,7 @@ router.delete('/:bookingId', requireAuth, async (req, res) => {
         res.json({ message: "Successfully deleted" });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Internal server error' });
+        res.status(error.status || 500).json({ error: error.message || 'Internal Server Error' });
     }
 });
 
@@ -79,7 +79,7 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
 
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Internal server error' });
+        res.status(error.status || 500).json({ error: error.message || 'Internal Server Error' });
     }
 });
 
