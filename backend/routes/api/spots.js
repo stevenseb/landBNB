@@ -1,8 +1,9 @@
 // backend/routes/api/users.js
 const express = require('express');
 const router = express.Router();
+const { validationResult, check } = require('express-validator');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { validateSpot, validateReview } = require('../../utils/validation');
+const { validateSpot, validateReview, validatePriceQuery, validateLatQuery, validateLngQuery } = require('../../utils/validation');
 const { User, Spot, Booking, Review, ReviewImage, SpotImage } = require('../../db/models');
 const { formatDate, calculateAverageRating, formatSpots, formatSpotById, checkExistsAndAuthorized, checkBookingDates } = require('../../utils/tools');
 const { getAllReviewsBySpotId, getAllBookingsBySpotId, getAllSpots } = require('../../utils/spotsController');
@@ -10,8 +11,8 @@ const { validateAndCreateBooking } = require('../../utils/bookingsController');
 const { Op } = require('sequelize');
 
 // GET all spots
-router.get('/', async (req, res) => {
-    try {
+router.get('/', validatePriceQuery, validateLatQuery, validateLngQuery, async (req, res) => {
+        try {
         const Spots = await getAllSpots(req);
         res.json(Spots);
     } catch (error) {

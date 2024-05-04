@@ -110,11 +110,56 @@ check('stars')
   handleValidationErrors
 ];
 
+// VALIDATE MIN MAX PRICE QUERY
+const validatePriceQuery = [
+    check('minPrice').optional().isInt({ min: 0 }).withMessage('Minimum price must be a number greater than or equal to 0'),
+    check('maxPrice').optional().isInt({ min: 0 }).withMessage('Maximum price must be a number greater than or equal to 0'),
+    handleValidationErrors
+  ];
+
+// VALIDATE MIN MAX LAT QUERY
+const validateLatQuery = [
+    check('minLat')
+        .optional()
+        .isFloat({ min: -90, max: 90 })
+        .withMessage('Latitude is not valid.')
+        .custom((value) => {
+            if (!/^-?\d{1,3}\.\d{6}$/.test(value)) {
+                throw new Error('Latitude is not valid.');
+            }
+            return true;
+        }),
+    check('maxLat')
+        .optional()
+        .isFloat({ min: -90, max: 90 })
+        .withMessage('Latitude is not valid.')
+        .custom((value) => {
+            if (!/^-?\d{1,3}\.\d{6}$/.test(value)) {
+                throw new Error('Latitude is not valid.');
+            }
+            return true;
+        })
+];
+
+
+// VALIDATE MIN MAX LNG QUERY
+const validateLngQuery = [
+  check('minLng').optional().isFloat({ min: -180, max: 180 }).withMessage('Minimum longitude is not valid.'),
+  check('maxLng').optional().isFloat({ min: -180, max: 180 }).withMessage('Maximum longitude is not valid.'),
+  handleValidationErrors
+];
+
+
+
+
 
 module.exports = {
   handleValidationErrors,
   validateLogin,
   validateSignup,
   validateSpot,
-  validateReview
+  validateReview,
+  validatePriceQuery,
+  validateLatQuery,
+  validateLngQuery
 };

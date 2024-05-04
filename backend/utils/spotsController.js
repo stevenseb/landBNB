@@ -1,7 +1,9 @@
 const { requireAuth } = require('./auth');
 const { User, Spot, Booking, Review, ReviewImage, SpotImage } = require('../db/models');
 const { formatDate, formatSpots } = require('./tools');
-
+const { validationResult, check } = require('express-validator');
+const { validatePriceQuery } = require('./validation');
+const { Op } = require('sequelize');
 
 
 //GET query for get all spots
@@ -14,15 +16,45 @@ async function getAllSpots(req) {
         page = 1;
     }
     if (size === undefined || size === null || isNaN(size)) {
-      size = 20;
+        size = 20;
     }
 
-    const pagination = {};
-    // Calculate offset based on page and size
-        pagination.limit = size;
-        pagination.offset = size * (page - 1);
+    const pagination = {
+        limit: size,
+        offset: size * (page - 1)
+    };
+
+    // Define where object for query filtering
+    const { minPrice, maxPrice, minLat, maxLat, minLng, maxLng } = req.query;
+    const where = {};
+    // create price search parameter in where obj
+    if (minPrice !== undefined || maxPrice !== undefined) {
+        if (minPrice !== undefined) {
+            where.price = { [Op.gte]: parseFloat(minPrice) };
+        }
+        if (maxPrice !== undefined) {
+            where.price = { ...where.price, [Op.lte]: parseFloat(maxPrice) };
+        }
+    }
+    // create lat search parameter in where obj
+    if (minLat !== undefined || maxLat !== undefined) {
+      if (minLat !== undefined) {
+        where.lat = { [Op.gte]: parseFloat(minLat) };
+    }
+      if (maxLat !== undefined) {
+          where.lat = { ...where.lat, [Op.lte]: parseFloat(maxLat) };
+      }
+    }
+    // create lng search parameter in where obj
+    if (minLng !== undefined || maxLng !== undefined) {
+      if (minLng !== undefined) {
+        where.lng = { [Op.gte]: parseFloat(minLng) };
+    }
+    if (maxLng !== undefined) {
+        where.lng = { ...where.lng, [Op.lte]: parseFloat(maxLng) };
+    }
+  }
   try {
-    console.log(typeof(size), typeof(page));
     if (page == 0 || page < 1) {
       const error = new Error("Bad Request");
       error.status = 400;
@@ -32,7 +64,6 @@ async function getAllSpots(req) {
       };
       throw error;
     }
-    console.log(size);
     if (size < 1 || size > 20) {
       const error = new Error("Bad Request");
       error.status = 400;
@@ -56,6 +87,7 @@ async function getAllSpots(req) {
           ],
           attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'description', 'price', 'createdAt', 'updatedAt'],
           order: ['id'],
+          where,
           ...pagination
       });
 
