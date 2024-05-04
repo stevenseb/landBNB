@@ -52,10 +52,11 @@ async function getAllSpots(req) {
       const Spots = formatSpots(spots, pagination);
       
       return {
-        ...Spots,
-        page: page,
-        size: size
+        Spots,
+        page,
+        size
       }
+
   } catch (error) {
       throw error;
   }

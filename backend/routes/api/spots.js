@@ -13,7 +13,7 @@ const { Op } = require('sequelize');
 router.get('/', async (req, res) => {
     try {
         const Spots = await getAllSpots(req);
-        res.json({ /*Spots:*/ Spots });
+        res.json(Spots);
     } catch (error) {
         console.log(error.status);
         console.error(error);
