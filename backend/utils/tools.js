@@ -1,4 +1,6 @@
 
+const { User, Spot, Booking, Review, ReviewImage, SpotImage } = require('../db/models');
+const { Op } = require('sequelize');
 
 
 function calculateAverageRating(reviews) {
@@ -22,8 +24,10 @@ function formatDate(dateString, dateOnly) {
     return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 };
 
-function formatSpots(spots) {
-    return spots.map(spot => ({
+function formatSpots(spots, pagination) {
+    // const page = pagination.offset + 1;
+    // const size = pagination.limit;
+    const formattedSpots = spots.map(spot => ({
         id: spot.id,
         ownerId: spot.ownerId,
         address: spot.address,
@@ -39,8 +43,16 @@ function formatSpots(spots) {
         updatedAt: formatDate(spot.updatedAt),
         avgRating: calculateAverageRating(spot.Reviews),
         previewImage: spot.SpotImages.length > 0 ? spot.SpotImages[0].url : null
-    }));  
+    }));
+    // formattedSpots.page = page;
+    // formattedSpots.size = size;
+    return {
+        formattedSpots
+    }
 };
+
+
+
 
 function formatSpotById(spot, owner) {
     {
@@ -119,9 +131,90 @@ function formatBookingById(booking) {
     } else {
         return null;
     }
+};
+
+async function bookingConflictCheck(req, booking) {
+    const { bookingId } = req.params;
+    const { startDate, endDate } = req.body;
+    const bookings = await Booking.findAll({
+    where: {
+        spotId: booking.spotId,
+        id: {
+            [Op.ne]: booking.id 
+        },
+        startDate: {
+            [Op.lt]: new Date(endDate)
+        },
+        endDate: {
+            [Op.gt]: new Date(startDate)
+        }
+    }
+});
+return bookings;
+};
+
+function checkBookingDates(startDate, endDate) {
+    const now = new Date();
+    if (new Date(startDate) <= now) {
+        throw new Error("startDate must be in the future");
+    } else if (new Date(endDate) <= new Date(startDate)) {
+        throw new Error("endDate cannot be on or before startDate");
+    }
 }
 
+    
+async function checkExistsAndAuthorized(objId, userId, flag, op) {
+    if (flag == 'spot') {
+        const spot = await Spot.findByPk(objId);
+        if (!spot) {
+            const error = new Error("Spot couldn't be found");
+            error.status = 404;
+            throw error;
+        } 
+        if (spot.ownerId !== userId) {
+            const error = new Error(`You are not authorized to ${op} this spot`);
+            error.status = 403;
+            throw error;
+        }
+    }
+    else if (flag == 'booking') {
+        const booking = await Booking.findByPk(objId);
+        if (!booking) {
+            const error = new Error("Booking couldn't be found");
+            error.status = 404;
+            throw error;
+        } 
+        if (booking.ownerId !== userId) {
+            const error = new Error(`You are not authorized to ${op} this booking`);
+            error.status = 403;
+            throw error;
+        }
+    }
+    else if (flag == 'review') {
+        const review = await Review.findByPk(objId);
+        if (!review) {
+            const error = new Error("Review couldn't be found");
+            error.status = 404;
+            throw error;
+        } 
+        if (booking.ownerId !== userId) {
+            const error = new Error(`You are not authorized to ${op} this review`);
+            error.status = 403;
+            throw error;
+        }
+    }
+};
 
+    
 
-
-module.exports = { formatDate, calculateAverageRating, formatSpots, formatSpotById, formatBookings, formatBookingById };
+module.exports = { 
+    formatDate, 
+    calculateAverageRating, 
+    formatSpots, 
+    formatSpotById, 
+    formatBookings, 
+    formatBookingById,
+    bookingConflictCheck,
+    checkBookingDates,
+    checkExistsAndAuthorized,
+};
