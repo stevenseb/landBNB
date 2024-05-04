@@ -27,7 +27,7 @@ function formatDate(dateString, dateOnly) {
 function formatSpots(spots, pagination) {
     // const page = pagination.offset + 1;
     // const size = pagination.limit;
-    const formattedSpots = spots.map(spot => ({
+    const Spots = spots.map(spot => ({
         id: spot.id,
         ownerId: spot.ownerId,
         address: spot.address,
@@ -46,9 +46,7 @@ function formatSpots(spots, pagination) {
     }));
     // formattedSpots.page = page;
     // formattedSpots.size = size;
-    return {
-        formattedSpots
-    }
+    return Spots;
 };
 
 
