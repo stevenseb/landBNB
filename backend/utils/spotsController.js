@@ -49,8 +49,13 @@ async function getAllSpots(req) {
           ...pagination
       });
 
-      const formattedSpots = await formatSpots(spots);
-      return formattedSpots;
+      const Spots = formatSpots(spots, pagination);
+      
+      return {
+        ...Spots,
+        page: page,
+        size: size
+      }
   } catch (error) {
       throw error;
   }
