@@ -9,7 +9,7 @@ const { formatDate, calculateAverageRating, formatSpots, formatSpotById } = requ
 const { getCurrentUserReviews } = require('../../utils/reviewsController');
 
 // get reviews of current user
-router.get('/current', async (req, res) => { 
+router.get('/current', requireAuth, async (req, res) => { 
     try {
         const reviews = await getCurrentUserReviews(req);
         res.json({ Reviews: reviews });

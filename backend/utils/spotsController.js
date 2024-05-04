@@ -23,13 +23,22 @@ async function getAllSpots(req) {
         pagination.offset = size * (page - 1);
   try {
     if (page == 0 || page < 1) {
-      const error = new Error("Page must be greater than or equal to 1");
+      const error = new Error("Bad Request");
       error.status = 400;
+      error.message = "Bad Request";
+      error.errors = {
+        "page": "Page must be greater than or equal to 1"
+      };
       throw error;
     }
+    console.log(size);
     if (size < 1 || size > 20) {
-      const error = new Error("Size must be between 1 and 20");
+      const error = new Error("Bad Request");
       error.status = 400;
+      error.message = "Bad Request";
+      error.errors = {
+        "size": "Size must be between 1 and 20"
+      };
       throw error;
     }
       const spots = await Spot.findAll({
@@ -49,7 +58,7 @@ async function getAllSpots(req) {
           ...pagination
       });
 
-      const Spots = formatSpots(spots, pagination);
+      const Spots = formatSpots(spots);
       
       return {
         Spots,

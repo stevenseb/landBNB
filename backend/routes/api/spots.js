@@ -17,7 +17,11 @@ router.get('/', async (req, res) => {
     } catch (error) {
         console.log(error.status);
         console.error(error);
-        res.status(error.status || 500).json({ message: error.message || 'Internal Server Error' });
+        if (error.errors) {
+            res.status(error.status || 400).json({ message: error.message || 'Bad Request', errors: error.errors });
+        } else {
+            res.status(error.status || 500).json({ message: error.message || 'Internal Server Error' });
+        }
     }
 });
 // GET spots of current user
@@ -92,7 +96,7 @@ router.get('/:spotId/reviews', async (req, res) => {
 }); 
 
 //GET all bookings by spot id
-router.get('/:spotId/bookings', async (req, res) => {
+router.get('/:spotId/bookings', requireAuth, async (req, res) => {
     const { spotId } = req.params;
     try {
         const bookings = await getAllBookingsBySpotId(req, spotId);
