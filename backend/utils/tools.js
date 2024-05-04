@@ -24,9 +24,7 @@ function formatDate(dateString, dateOnly) {
     return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 };
 
-function formatSpots(spots, pagination) {
-    // const page = pagination.offset + 1;
-    // const size = pagination.limit;
+function formatSpots(spots) {
     const Spots = spots.map(spot => ({
         id: spot.id,
         ownerId: spot.ownerId,
@@ -44,8 +42,6 @@ function formatSpots(spots, pagination) {
         avgRating: calculateAverageRating(spot.Reviews),
         previewImage: spot.SpotImages.length > 0 ? spot.SpotImages[0].url : null
     }));
-    // formattedSpots.page = page;
-    // formattedSpots.size = size;
     return Spots;
 };
 
