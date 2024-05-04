@@ -1,9 +1,62 @@
 const { requireAuth } = require('./auth');
 const { User, Spot, Booking, Review, ReviewImage, SpotImage } = require('../db/models');
-const { formatDate } = require('./tools');
+const { formatDate, formatSpots } = require('./tools');
 
 
-// Query for get all reviews by spot id
+
+//GET query for get all spots
+async function getAllSpots(req) {
+  let { page, size } = req.query;
+    page = parseInt(page);
+    size = parseInt(size);
+
+    if (page === undefined || page === null) {
+        page = 1;
+    }
+    if (size === undefined || size === null) {
+      size = 20;
+    }
+
+    const pagination = {};
+    // Calculate offset based on page and size
+        pagination.limit = size;
+        pagination.offset = size * (page - 1);
+  try {
+    if (page == 0 || page < 1) {
+      const error = new Error("Page must be greater than or equal to 1");
+      error.status = 400;
+      throw error;
+    }
+    if (size < 1 || size > 20) {
+      const error = new Error("Size must be between 1 and 20");
+      error.status = 400;
+      throw error;
+    }
+      const spots = await Spot.findAll({
+          include: [
+              {
+                  model: Review,
+                  attributes: ['stars']
+              },
+              {
+                  model: SpotImage,
+                  where: { preview: true },
+                  attributes: ['url']
+              }
+          ],
+          attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'description', 'price', 'createdAt', 'updatedAt'],
+          order: ['id'],
+          ...pagination
+      });
+
+      const formattedSpots = await formatSpots(spots);
+      return formattedSpots;
+  } catch (error) {
+      throw error;
+  }
+}
+
+//GET query for get all reviews by spot id
 async function getAllReviewsBySpotId(req, res) {
   const { spotId } = req.params;
 
@@ -23,7 +76,6 @@ async function getAllReviewsBySpotId(req, res) {
       ]
     });
 
-    // response formatting
     const formattedReviews = reviews.map(review => ({
       id: review.id,
       userId: review.userId,
@@ -61,7 +113,6 @@ async function getAllBookingsBySpotId(req, spotId) {
       
       let bookings;
       if (req.user.id === spot.ownerId) {
-          // If the user is the owner of the spot, retrieve all bookings
           bookings = await Booking.findAll({
               where: { spotId: spotId },
               include: [
@@ -73,14 +124,11 @@ async function getAllBookingsBySpotId(req, spotId) {
               attributes: ['id', 'spotId', 'userId', 'startDate', 'endDate', 'createdAt', 'updatedAt'],
           });
       } else {
-          // If the user is not the owner, retrieve only their bookings for the spot
           bookings = await Booking.findAll({
               where: { spotId: spotId, userId: req.user.id },
               attributes: ['id', 'spotId', 'startDate', 'endDate'],
           });
       }
-
-      // Format the response
       const formattedBookings = bookings.map(booking => {
           if (req.user.id === spot.ownerId) {
               return {
@@ -108,7 +156,7 @@ async function getAllBookingsBySpotId(req, spotId) {
 
       return formattedBookings;
   } catch (error) {
-      throw new Error('Error fetching bookings: ' + error.message);
+      throw error;
   }
 }
 
@@ -120,5 +168,6 @@ async function getAllBookingsBySpotId(req, spotId) {
 
 module.exports = {
   getAllReviewsBySpotId,
-  getAllBookingsBySpotId
+  getAllBookingsBySpotId,
+  getAllSpots
 };

@@ -1,40 +1,23 @@
 // backend/routes/api/users.js
 const express = require('express');
 const router = express.Router();
-const bcrypt = require('bcryptjs');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { validateSpot, validateReview } = require('../../utils/validation');
-const { check } = require('express-validator');
 const { User, Spot, Booking, Review, ReviewImage, SpotImage } = require('../../db/models');
-const { formatDate, calculateAverageRating, formatSpots, formatSpotById } = require('../../utils/tools');
-const { getAllReviewsBySpotId, getAllBookingsBySpotId } = require('../../utils/spotsController');
+const { formatDate, calculateAverageRating, formatSpots, formatSpotById, checkExistsAndAuthorized, checkBookingDates } = require('../../utils/tools');
+const { getAllReviewsBySpotId, getAllBookingsBySpotId, getAllSpots } = require('../../utils/spotsController');
+const { validateAndCreateBooking } = require('../../utils/bookingsController');
 const { Op } = require('sequelize');
 
 // GET all spots
-router.get('/', async (req, res) => {        
+router.get('/', async (req, res) => {
     try {
-        const spots = await Spot.findAll({
-            include: [
-                {
-                    model: Review,
-                    attributes: ['stars']
-                },
-                {
-                    model: SpotImage,
-                    where: { preview: true },
-                    attributes: ['url']
-                }
-            ],
-            attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'description', 'price', 'createdAt', 'updatedAt'],
-            order: ['id'],
-        });
-
-        const response = await formatSpots(spots);
-        
-        res.json({ Spots: response });
+        const spots = await getAllSpots(req);
+        res.json({ Spots: spots });
     } catch (error) {
+        console.log(error.status);
         console.error(error);
-        res.status(500).json({ message: 'Internal server error' });
+        res.status(error.status || 500).json({ message: error.message || 'Internal Server Error' });
     }
 });
 // GET spots of current user
@@ -109,7 +92,7 @@ router.get('/:spotId/reviews', async (req, res) => {
 }); 
 
 //GET all bookings by spot id
-router.get('/:spotId/bookings', async (req, res) => { 
+router.get('/:spotId/bookings', async (req, res) => {
     const { spotId } = req.params;
     try {
         const bookings = await getAllBookingsBySpotId(req, spotId);
@@ -118,10 +101,12 @@ router.get('/:spotId/bookings', async (req, res) => {
         if (error.status === 404) {
             return res.status(404).json({ message: "Spot couldn't be found" });
         }
+        console.log(error.status);
         console.error(error);
-        res.status(500).json({ message: error.message });
+        res.status(error.status || 500).json({ message: error.message || 'Internal Server Error' });
     }
 });
+
 
 // POST create a new spot
 router.post('/', requireAuth, validateSpot, async (req, res) => {
@@ -141,18 +126,9 @@ router.post('/', requireAuth, validateSpot, async (req, res) => {
             return res.status(400).json({ message: "Spot with the same address already exists" });
         }
 
-        const spot = await Spot.create({
-            ownerId: id,
-            address: address,
-            city: city,
-            state: state,
-            country: country,
-            lat: lat,
-            lng: lng,
-            name: name,
-            description: description,
-            price: price
-        });
+        const newSpot = Object.assign({}, req.body, { ownerId: id });
+
+        const spot = await Spot.create(newSpot);
 
         res.status(201).json({
             id: spot.id,
@@ -180,88 +156,31 @@ router.post('/:spotId/images', requireAuth, async (req, res) => {
     const { spotId } = req.params;
     const { url, preview } = req.body;
     const user = req.user.id;
-  
-    try {
-      const spot = await Spot.findByPk(spotId);
-      if (!spot) {
-        return res.status(404).json({ message: "Spot couldn't be found" });
-      }
-      if (spot.ownerId !== user) {
-        return res.status(403).json({ message: "You are not authorized to edit this spot" });
-      }
 
-      const spotImage = await SpotImage.create({
-        spotId: spotId,
-        url: url,
-        preview: preview
-      });
-  
-      res.status(200).json({
-        id: spotImage.id,
-        url: spotImage.url,
-        preview: spotImage.preview
-      });
+    try {
+        await checkExistsAndAuthorized(spotId, user, 'spot', 'edit');
+        const spotImage = await SpotImage.create(Object.assign({ spotId: spotId }, req.body));
+
+        res.status(200).json({
+            id: spotImage.id,
+            url: spotImage.url,
+            preview: spotImage.preview
+        });
     } catch (error) {
-      console.error('Error adding spot image:', error);
-      res.status(500).json({ error: 'Internal Server Error' });
+        console.error(error);
+        res.status(error.status || 500).json({ error: error.message || 'Internal Server Error' });
     }
-  });
+});
+
 
 // POST create a new booking by spot id
 router.post('/:spotId/bookings', requireAuth, async (req, res) => {
     const { spotId } = req.params;
     const { startDate, endDate } = req.body;
     const user = req.user.id;
-
     try {
-        const now = new Date();
-        if (new Date(startDate) <= now) {
-            return res.status(400).json({
-                message: "Bad Request",
-                errors: {
-                    startDate: "startDate must be in the future"
-                }
-            });
-        } else if (new Date(endDate) <= new Date(startDate)) {
-            return res.status(400).json({
-                message: "Bad Request",
-                errors: {
-                    endDate: "endDate cannot be on or before startDate"
-                }
-            });
-        }
-        const spot = await Spot.findByPk(spotId);
-        if (!spot) {
-            return res.status(404).json({ message: "Spot couldn't be found" });
-        }
-        if (spot.ownerId === user) {
-            return res.status(403).json({ message: "You are the owner of this spot, booking not allowed." });
-        }
-        const overlappingBookings = await Booking.findAll({
-            where: {
-                spotId: spotId,
-                startDate: {
-                    [Op.lt]: new Date(endDate)
-                },
-                endDate: {
-                    [Op.gt]: new Date(startDate)
-                }
-            }
-        });
-        if (overlappingBookings.length > 0) {
-            return res.status(400).json({
-                message: "Bad Request",
-                errors: {
-                    startDate: "Booking conflicts with existing bookings for this spot"
-                }
-            });
-        }
-        const booking = await Booking.create({
-            spotId: spotId,
-            userId: user,
-            startDate: startDate,
-            endDate: endDate
-        });
+        await checkBookingDates(startDate, endDate);
+        const booking = await validateAndCreateBooking(spotId, startDate, endDate, user);
 
         res.status(201).json({
             id: booking.id,
@@ -273,8 +192,15 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
             updatedAt: formatDate(booking.updatedAt)
         });
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Internal server error' });
+        if (error.message === "Spot couldn't be found" || error.message === "You are the owner of this spot, booking not allowed.") {
+            return res.status(404).json({ message: error.message });
+        } else if (error.message === "Booking conflicts with existing bookings for this spot") {
+            return res.status(400).json({ message: error.message });
+        } else if (error.message === "startDate must be in the future" || error.message === "endDate cannot be on or before startDate") {
+            return res.status(400).json({ message: error.message });
+        } else { console.error(error);
+            return res.status(500).json({ message: 'Internal server error' });
+        }
     }
 });
 
@@ -283,7 +209,6 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) =>
     const { spotId } = req.params;
     const { review, stars } = req.body;
     const userId = req.user.id;
-
     try {
         let spot = await Spot.findByPk(spotId);
         if (!spot) {
@@ -326,21 +251,10 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) =>
 router.put('/:spotId', requireAuth, validateSpot, async (req, res) => {
     const { spotId } = req.params;
     const user = req.user.id;
-
     try {
-        let spot = await Spot.findByPk(spotId);
-        if (!spot) {
-            return res.status(404).json({ message: "Spot couldn't be found" });
-        }
-        if (spot.ownerId !== user) {
-            return res.status(403).json({ message: "You are not authorized to edit this spot" });
-          }
-        for (const key in req.body) {
-            if (Object.hasOwnProperty.call(req.body, key)) {
-                spot[key] = req.body[key];
-            }
-        }
-
+        await checkExistsAndAuthorized(spotId, user, 'spot', 'edit');
+        const spot = await Spot.findByPk(spotId);
+        Object.assign(spot, req.body);
         spot = await spot.save();
 
         res.status(200).json({
@@ -360,7 +274,7 @@ router.put('/:spotId', requireAuth, validateSpot, async (req, res) => {
         });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Internal server error' });
+        res.status(error.status || 500).json({ error: error.message || 'Internal Server Error' });
     }
 });
 
@@ -369,24 +283,14 @@ router.delete('/:spotId', requireAuth, async (req, res) => {
     const { spotId } = req.params;
     const user = req.user.id;
     try {
-      const spot = await Spot.findByPk(spotId);
-  
-      if (!spot) {
-        return res.status(404).json({ message: "Spot couldn't be found" });
-      }
-      if (spot.ownerId !== user) {
-        return res.status(403).json({ message: "You are not authorized to delete this spot" });
-      }
+        await checkExistsAndAuthorized(spotId, user, 'spot', 'delete');
 
-      await spot.destroy();
-  
-      res.status(200).json({ message: "Successfully deleted" });
+    await spot.destroy();
+    res.status(200).json({ message: "Successfully deleted" });
     } catch (error) {
-      console.error('Error deleting spot:', error);
-      res.status(500).json({ error: 'Internal Server Error' });
+    console.error(error);
+    res.status(error.status || 500).json({ error: error.message || 'Internal Server Error' });
     }
   });
   
-  module.exports = router;
-
 module.exports = router;
