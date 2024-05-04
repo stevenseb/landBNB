@@ -10,10 +10,10 @@ async function getAllSpots(req) {
     page = parseInt(page);
     size = parseInt(size);
 
-    if (page === undefined || page === null) {
+    if (page === undefined || page === null || isNaN(page)) {
         page = 1;
     }
-    if (size === undefined || size === null) {
+    if (size === undefined || size === null || isNaN(size)) {
       size = 20;
     }
 
@@ -22,6 +22,7 @@ async function getAllSpots(req) {
         pagination.limit = size;
         pagination.offset = size * (page - 1);
   try {
+    console.log(typeof(size), typeof(page));
     if (page == 0 || page < 1) {
       const error = new Error("Bad Request");
       error.status = 400;
