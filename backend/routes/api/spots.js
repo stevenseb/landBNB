@@ -282,7 +282,7 @@ router.put('/:spotId', requireAuth, validateSpot, async (req, res) => {
     const user = req.user.id;
     try {
         await checkExistsAndAuthorized(spotId, user, 'spot', 'edit');
-        const spot = await Spot.findByPk(spotId);
+        let spot = await Spot.findByPk(spotId);
         Object.assign(spot, req.body);
         spot = await spot.save();
 
