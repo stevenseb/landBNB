@@ -117,25 +117,29 @@ const validatePriceQuery = [
     handleValidationErrors
   ];
 
+
+
+
+
 // VALIDATE MIN MAX LAT QUERY
 const validateLatQuery = [
     check('minLat')
         .optional()
         .isFloat({ min: -90, max: 90 })
-        .withMessage('Latitude is not valid.')
+        .withMessage('Minimum latitude is not valid.')
         .custom((value) => {
             if (!/^-?\d{1,3}\.\d{6}$/.test(value)) {
-                throw new Error('Latitude is not valid.');
+                throw new Error('Minimum latitude is not valid.');
             }
             return true;
         }),
     check('maxLat')
         .optional()
         .isFloat({ min: -90, max: 90 })
-        .withMessage('Latitude is not valid.')
+        .withMessage('Maximum latitude is not valid.')
         .custom((value) => {
             if (!/^-?\d{1,3}\.\d{6}$/.test(value)) {
-                throw new Error('Latitude is not valid.');
+                throw new Error('Maximum latitude is not valid.');
             }
             return true;
         })

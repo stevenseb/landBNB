@@ -12,6 +12,29 @@ const { Op } = require('sequelize');
 
 // GET all spots
 router.get('/', validatePriceQuery, validateLatQuery, validateLngQuery, async (req, res) => {
+    const { minLng, maxLng } = req.query;
+    const longitudeRegex = /^-?\d{1,3}\.\d{6}$/;
+    const validateLongitude = (value) => {
+      if (!longitudeRegex.test(value)) {
+        throw new Error('Longitude is not valid');
+      }
+    };
+
+    if (minLng) {
+      try {
+        validateLongitude(minLng);
+      } catch (error) {
+        return res.status(400).json({ message: 'Bad Request', errors: { minLng: 'Minimum longitude is invalid' } });
+      }
+    }
+
+    if (maxLng) {
+      try {
+        validateLongitude(maxLng);
+      } catch (error) {
+        return res.status(400).json({ message: 'Bad Request', errors: { maxLng: 'Maximum longitude is invalid' } });
+      }
+    }
         try {
         const Spots = await getAllSpots(req);
         res.json(Spots);
@@ -25,6 +48,7 @@ router.get('/', validatePriceQuery, validateLatQuery, validateLngQuery, async (r
         }
     }
 });
+
 // GET spots of current user
 router.get('/current', requireAuth, async (req, res) => { 
     const { user } = req;
