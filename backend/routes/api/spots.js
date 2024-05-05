@@ -316,7 +316,7 @@ router.delete('/:spotId', requireAuth, async (req, res) => {
     try {
         await checkExistsAndAuthorized(spotId, user, 'spot', 'delete');
 
-    await spot.destroy();
+    await Spot.destroy();
     res.status(200).json({ message: "Successfully deleted" });
     } catch (error) {
     console.error(error);
