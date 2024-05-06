@@ -41,10 +41,14 @@ async function validateAndUpdateBooking(bookingId, startDate, endDate, userId) {
     try {
         const booking = await Booking.findByPk(bookingId);
         if (!booking) {
-            throw new Error("Booking couldn't be found");
+            const error = new Error("Booking couldn't be found");
+            error.status = 404;
+            throw error;
         }
         if (booking.userId !== userId) {
-            throw new Error("You are not authorized to edit this booking");
+            const error = new Error("You are not authorized to edit this booking");
+            error.status = 403;
+            throw error;
         }
         const now = new Date();
         if (new Date(startDate) <= now) {
@@ -60,10 +64,10 @@ async function validateAndUpdateBooking(bookingId, startDate, endDate, userId) {
                     [Op.ne]: booking.id 
                 },
                 startDate: {
-                    [Op.lt]: new Date(endDate)
+                    [Op.lte]: new Date(endDate)
                 },
                 endDate: {
-                    [Op.gt]: new Date(startDate)
+                    [Op.gte]: new Date(startDate)
                 }
             }
         });
