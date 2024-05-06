@@ -57,7 +57,7 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
 
     try {
         const booking = await validateAndUpdateBooking(bookingId, startDate, endDate, userId);
-
+            
         await booking.update({
             startDate: startDate,
             endDate: endDate
@@ -67,21 +67,36 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
             attributes: ['id', 'spotId', 'userId', 'startDate', 'endDate', 'createdAt', 'updatedAt']
         });
 
+        // Adjust response dates to handle the issue with one day earlier
+        const responseStartDate = new Date(updatedBooking.startDate);
+        const responseEndDate = new Date(updatedBooking.endDate);
+        responseStartDate.setDate(responseStartDate.getDate() + 1);
+        responseEndDate.setDate(responseEndDate.getDate() + 1); 
+
         res.json({
             id: updatedBooking.id,
             spotId: updatedBooking.spotId,
             userId: updatedBooking.userId,
-            startDate: formatDate(updatedBooking.startDate, true),
-            endDate: formatDate(updatedBooking.endDate, true),
+            startDate: formatDate(responseStartDate, true),
+            endDate: formatDate(responseEndDate, true),
             createdAt: formatDate(updatedBooking.createdAt),
             updatedAt: formatDate(updatedBooking.updatedAt)
         });
-
+        const errorResponse = {
+            message: error.message,
+                errors: error.details
+        };
     } catch (error) {
         console.error(error);
-        res.status(error.status || 500).json({ error: error.message || 'Internal Server Error' });
+        const errorResponse = {
+            message: error.message,
+                errors: error.details
+        };
+        res.status(error.status || 500).json(errorResponse || { message: 'Internal Server Error' });
+
     }
 });
+
 
 
 

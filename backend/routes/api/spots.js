@@ -208,32 +208,36 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
     const { startDate, endDate } = req.body;
     const user = req.user.id;
     try {
-        await checkBookingDates(startDate, endDate);
+        checkBookingDates(startDate, endDate);
         const booking = await validateAndCreateBooking(spotId, startDate, endDate, user);
+
+        // Adjust dates for response object
+        const responseStartDate = new Date(startDate);
+        const responseEndDate = new Date(endDate);
+        responseStartDate.setDate(responseStartDate.getDate() + 1);
+        responseEndDate.setDate(responseEndDate.getDate() + 1);
 
         res.status(201).json({
             id: booking.id,
             spotId: parseInt(booking.spotId),
             userId: booking.userId,
-            startDate: formatDate(booking.startDate, true),
-            endDate: formatDate(booking.endDate, true),
+            startDate: formatDate(responseStartDate, true),
+            endDate: formatDate(responseEndDate, true),
             createdAt: formatDate(booking.createdAt),
             updatedAt: formatDate(booking.updatedAt)
         });
+        
     } catch (error) {
-        if (error.message === "Spot couldn't be found") {
-            return res.status(404).json({ message: error.message });
-        } else if (error.message === "You are the owner of this spot, booking not allowed.") {
-            return res.status(403).json({ message: error.message });
-        } else if (error.message === "Sorry, this spot is already booked for the specified dates.") {
-            return res.status(400).json({ message: error.message });
-        } else if (error.message === "startDate must be in the future" || error.message === "endDate cannot be on or before startDate") {
-            return res.status(400).json({ message: error.message });
-        } else { console.error(error);
-            return res.status(500).json({ message: 'Internal server error' });
-        }
+        console.error(error);
+        const errorResponse = {
+            message: error.message,
+                errors: error.details
+        };
+        res.status(error.status || 500).json(errorResponse || { message: 'Internal Server Error' });
+
     }
 });
+
 
 // POST create a new review by spot id
 router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) => {

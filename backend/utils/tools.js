@@ -6,7 +6,8 @@ const { Op } = require('sequelize');
 function calculateAverageRating(reviews) {
     if (!reviews || reviews.length === 0) return null;
     const totalStars = reviews.reduce((sum, review) => sum + review.stars, 0);
-    return totalStars / reviews.length;
+    const avgRating = totalStars / reviews.length;
+    return Number(avgRating.toFixed(1));
 };
 
 function formatDate(dateString, dateOnly) {
