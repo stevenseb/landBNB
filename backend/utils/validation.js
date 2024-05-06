@@ -119,8 +119,6 @@ const validatePriceQuery = [
 
 
 
-
-
 // VALIDATE MIN MAX LAT QUERY
 const validateLatQuery = [
     check('minLat')

@@ -36,7 +36,6 @@ async function getCurrentBookings(user) {
         throw new Error('Failed to fetch bookings');
     }
 }
-// Update booking helper function
 async function validateAndUpdateBooking(bookingId, startDate, endDate, userId) {
     try {
         const booking = await Booking.findByPk(bookingId);
@@ -54,7 +53,7 @@ async function validateAndUpdateBooking(bookingId, startDate, endDate, userId) {
         if (new Date(startDate) <= now) {
             throw new Error("startDate must be in the future");
         } else if (new Date(endDate) <= new Date(startDate)) {
-            throw new Error("endDate cannot be on or before startDate");
+            throw new Error("endDate must be after startDate");
         }
 
         const overlappingBookings = await Booking.findAll({
@@ -72,7 +71,13 @@ async function validateAndUpdateBooking(bookingId, startDate, endDate, userId) {
             }
         });
         if (overlappingBookings.length > 0) {
-            throw new Error("Sorry, this spot is already booked for the specified dates.");
+            const error = new Error("Sorry, this spot is already booked for the specified dates");
+            error.status = 403;
+            error.errors = {
+                startDate: "Start date conflicts with an existing booking",
+                endDate: "End date conflicts with an existing booking"
+            };
+            throw error;
         }
         
         return booking;
@@ -81,46 +86,52 @@ async function validateAndUpdateBooking(bookingId, startDate, endDate, userId) {
     }
 }
 
+
 //POST create a new booking from spot id
 async function validateAndCreateBooking(spotId, startDate, endDate, userId) {
     try {
-         //await checkBookingDates(startDate, endDate);
-        
+
         const spot = await Spot.findByPk(spotId);
-         if (!spot) {
+        if (!spot) {
             throw new Error("Spot couldn't be found");
-         }
+        }
         if (spot.ownerId === userId) {
-             throw new Error("You are the owner of this spot, booking not allowed.");
-         }
-        
-         const overlappingBookings = await Booking.findAll({
-               where: {
-                  spotId: spotId,
-                  startDate: {
-                       [Op.lt]: new Date(endDate)
-                    },
-                    endDate: {
-                        [Op.gt]: new Date(startDate)
-                    }
+            throw new Error("You are the owner of this spot, booking not allowed.");
+        }
+
+        const overlappingBookings = await Booking.findAll({
+            where: {
+                spotId: spotId,
+                startDate: {
+                    [Op.lt]: endDate 
+                },
+                endDate: {
+                    [Op.gt]: startDate 
                 }
-            });
-         if (overlappingBookings.length > 0) {
-              throw new Error("Sorry, this spot is already booked for the specified dates.");
-         }
-        
-         const booking = await Booking.create({
-               spotId: spotId,
-               userId: userId,
-               startDate: startDate,
-               endDate: endDate
-          });
-        
+            }
+        });
+        if (overlappingBookings.length > 0) {
+            const error = new Error("Sorry, this spot is already booked for the specified dates");
+            error.status = 403;
+            error.details = {
+                startDate: "Start date conflicts with an existing booking",
+                endDate: "End date conflicts with an existing booking"
+            };
+            throw error;
+        }
+
+        const booking = await Booking.create({
+            spotId: spotId,
+            userId: userId,
+            startDate: startDate,
+            endDate: endDate
+        });
+
         return booking;
     } catch (error) {
-          throw error;
-     }
- }
+        throw error;
+    }
+}
         
 
 
