@@ -75,7 +75,7 @@ async function validateAndCreateBooking(spotId, startDate, endDate, userId, req)
         const spot = await Spot.findByPk(spotId);
         if (!spot) {
             const error = new Error("Spot couldn't be found");
-            error.status = 403;
+            error.status = 404;
             throw error;
         }
         if (spot && spot.ownerId === userId) {
