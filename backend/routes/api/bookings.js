@@ -82,8 +82,8 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
             id: updatedBooking.id,
             spotId: updatedBooking.spotId,
             userId: updatedBooking.userId,
-            startDate: formatDate(responseStartDate, true),
-            endDate: formatDate(responseEndDate, true),
+            startDate: formatDate(startDate, true),
+            endDate: formatDate(endDate, true),
             createdAt: formatDate(updatedBooking.createdAt),
             updatedAt: formatDate(updatedBooking.updatedAt)
         });
