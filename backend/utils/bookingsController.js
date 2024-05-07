@@ -1,6 +1,6 @@
 const { requireAuth } = require('./auth');
 const { User, Spot, Booking, Review, ReviewImage, SpotImage } = require('../db/models');
-const { formatDate, calculateAverageRating, formatSpots, formatSpotById, formatBookings, formatBookingById, checkBookingDates } = require('./tools');
+const { formatDate, calculateAverageRating, formatSpots, formatSpotById, formatBookings, formatBookingById, checkBookingDates, bookingConflictCheck } = require('./tools');
 const { Op } = require('sequelize');
 
 
@@ -49,27 +49,8 @@ async function validateAndUpdateBooking(bookingId, startDate, endDate, userId) {
             error.status = 403;
             throw error;
         }
-        const now = new Date();
-        if (new Date(startDate) <= now) {
-            throw new Error("startDate must be in the future");
-        } else if (new Date(endDate) <= new Date(startDate)) {
-            throw new Error("endDate must be after startDate");
-        }
-
-        const overlappingBookings = await Booking.findAll({
-            where: {
-                spotId: booking.spotId,
-                id: {
-                    [Op.ne]: booking.id 
-                },
-                startDate: {
-                    [Op.lte]: new Date(endDate)
-                },
-                endDate: {
-                    [Op.gte]: new Date(startDate)
-                }
-            }
-        });
+        const overlappingBookings = await bookingConflictCheck(req, booking);
+        
         if (overlappingBookings.length > 0) {
             const error = new Error("Sorry, this spot is already booked for the specified dates");
             error.status = 403;
@@ -88,28 +69,23 @@ async function validateAndUpdateBooking(bookingId, startDate, endDate, userId) {
 
 
 //POST create a new booking from spot id
-async function validateAndCreateBooking(spotId, startDate, endDate, userId) {
+async function validateAndCreateBooking(spotId, startDate, endDate, userId, req) {
     try {
 
         const spot = await Spot.findByPk(spotId);
         if (!spot) {
-            throw new Error("Spot couldn't be found");
+            const error = new Error("Spot couldn't be found");
+            error.status = 403;
+            throw error;
         }
-        if (spot.ownerId === userId) {
-            throw new Error("You are the owner of this spot, booking not allowed.");
+        if (spot && spot.ownerId === userId) {
+            const error = new Error("You are the owner of this spot, booking not allowed.");
+            error.status = 403;
+            throw error;
         }
 
-        const overlappingBookings = await Booking.findAll({
-            where: {
-                spotId: spotId,
-                startDate: {
-                    [Op.lt]: endDate 
-                },
-                endDate: {
-                    [Op.gt]: startDate 
-                }
-            }
-        });
+        const overlappingBookings = await bookingConflictCheck(req, spotId);
+        
         if (overlappingBookings.length > 0) {
             const error = new Error("Sorry, this spot is already booked for the specified dates");
             error.status = 403;
