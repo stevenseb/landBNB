@@ -207,9 +207,12 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
     const { spotId } = req.params;
     const { startDate, endDate } = req.body;
     const user = req.user.id;
+    if (!spotId || isNaN(parseInt(spotId)))  {
+        return res.status(404).json({ message: "Spot couldn't be found" });
+    }
     try {
         checkBookingDates(startDate, endDate);
-        const booking = await validateAndCreateBooking(spotId, startDate, endDate, user);
+        const booking = await validateAndCreateBooking(spotId, startDate, endDate, user, req);
 
         // Adjust dates for response object
         const responseStartDate = new Date(startDate);

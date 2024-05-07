@@ -128,14 +128,14 @@ function formatBookingById(booking) {
     }
 };
 
-async function bookingConflictCheck(req, booking) {
+async function bookingConflictCheck(req, spotId) {
     const { bookingId } = req.params;
     const { startDate, endDate } = req.body;
     const bookings = await Booking.findAll({
     where: {
-        spotId: booking.spotId,
+        spotId: spotId,
         id: {
-            [Op.ne]: booking.id 
+            [Op.ne]: bookingId 
         },
         startDate: {
             [Op.lt]: new Date(endDate)
@@ -151,9 +151,13 @@ return bookings;
 function checkBookingDates(startDate, endDate) {
     const now = new Date();
     if (new Date(startDate) <= now) {
-        throw new Error("startDate must be in the future");
+        const error = new Error("startDate must be in the future");
+        error.status = 403;
+        throw error;
     } else if (new Date(endDate) <= new Date(startDate)) {
-        throw new Error("endDate cannot be on or before startDate");
+        const error = new Error("endDate cannot be on or before startDate");
+        error.status = 403;
+        throw error;
     }
 }
 
