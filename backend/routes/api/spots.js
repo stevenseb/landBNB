@@ -215,10 +215,10 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
         const booking = await validateAndCreateBooking(spotId, startDate, endDate, user, req);
 
         // Adjust dates for response object
-        const responseStartDate = new Date(startDate);
-        const responseEndDate = new Date(endDate);
-        responseStartDate.setDate(responseStartDate.getDate() + 1);
-        responseEndDate.setDate(responseEndDate.getDate() + 1);
+        // const responseStartDate = new Date(startDate);
+        // const responseEndDate = new Date(endDate);
+        // responseStartDate.setDate(responseStartDate.getDate() + 1);
+        // responseEndDate.setDate(responseEndDate.getDate() + 1);
 
         res.status(201).json({
             id: booking.id,
