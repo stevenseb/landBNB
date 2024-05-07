@@ -73,10 +73,10 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
         });
 
         // Adjust response dates to handle the issue with one day earlier
-        const responseStartDate = new Date(updatedBooking.startDate);
-        const responseEndDate = new Date(updatedBooking.endDate);
-        responseStartDate.setDate(responseStartDate.getDate() + 1);
-        responseEndDate.setDate(responseEndDate.getDate() + 1); 
+        // const responseStartDate = new Date(updatedBooking.startDate);
+        // const responseEndDate = new Date(updatedBooking.endDate);
+        // responseStartDate.setDate(responseStartDate.getDate() + 1);
+        // responseEndDate.setDate(responseEndDate.getDate() + 1); 
 
         res.json({
             id: updatedBooking.id,
