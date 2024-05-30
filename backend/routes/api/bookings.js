@@ -61,7 +61,7 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
     }
     try {
         checkBookingDates(startDate, endDate);
-        const booking = await validateAndUpdateBooking(bookingId, startDate, endDate, userId);
+        const booking = await validateAndUpdateBooking(bookingId, startDate, endDate, userId, req);
             
         await booking.update({
             startDate: startDate,

@@ -1,0 +1,81 @@
+/* frontend/src/components/Navbar.css */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #f8f9fa;
+}
+
+.navbar-brand a {
+  text-decoration: none;
+  color: #343a40;
+  font-size: 1.5rem;
+}
+
+.navbar-links {
+  position: relative; /* Needed for dropdown positioning */
+  display: flex;
+  align-items: center;
+}
+
+.navbar-button {
+  padding: 0.5rem 1rem;
+  margin-left: 0.5rem;
+  border: solid, gray;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.hamburger-button {
+  background-color: #7acfe8;
+  color: #000;
+  font-size: 1.5rem;
+  border-radius: 18px;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #f4f1f1;
+  box-shadow: 0 10px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  z-index: 1000;
+}
+
+.dropdown-item {
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  color: #343a40;
+  display: block;
+}
+
+.dropdown-item:hover {
+  background-color: #f1f1f1;
+}
+
+
+
+
+
+/* styles for separate buttons login, logout and signup
+/* .login-button {
+  background-color: #28a745;
+}
+
+.logout-button {
+  background-color: #ff6600;
+}
+
+.signup-button {
+  background-color: #007bff;
+}
+
+.navbar-button:hover {
+  opacity: 0.8;
+} */
