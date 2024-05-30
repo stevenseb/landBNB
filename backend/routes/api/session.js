@@ -45,7 +45,7 @@ router.post('/', validateLogin, async (req, res, next) => {
     return res.json({
       user: safeUser
     });
-  }
+  }  
 );
 
 
