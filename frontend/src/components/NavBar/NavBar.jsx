@@ -1,19 +1,20 @@
 import { NavLink } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useState, useEffect, useRef } from 'react';
-import * as sessionActions from '../../store/session';
+//import * as sessionActions from '../../store/session';
+import ProfileButton from './ProfileButton';
 import './NavBar.css';
 
 const NavBar = () => {
-  const dispatch = useDispatch();
+  //const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
 
-  const handleLogout = (e) => {
-    e.preventDefault();
-    dispatch(sessionActions.logout());
-  };
+  // const handleLogout = (e) => {
+  //   e.preventDefault();
+  //   dispatch(sessionActions.logout());
+  // };
 
   const handleMenuToggle = () => {
     setMenuOpen(!menuOpen);
@@ -38,6 +39,7 @@ const NavBar = () => {
         <NavLink to="/">LandBNB</NavLink>
       </div>
       <div className="navbar-links">
+        {sessionUser && <ProfileButton user={sessionUser} />}
         <button className="navbar-button hamburger-button" onClick={handleMenuToggle}>
           &#9776; {/* Unicode character for hamburger icon */}
         </button>
@@ -51,26 +53,26 @@ const NavBar = () => {
                 <NavLink to="/listing" className="dropdown-item" onClick={() => setMenuOpen(false)}>
                   List Your Land
                 </NavLink>
-                <NavLink to="/" onClick={handleLogout} className="dropdown-item">
+                {/* <NavLink to="/" onClick={handleLogout} className="dropdown-item">
                   Logout
-                </NavLink>
-                <NavLink to="/profile" className="dropdown-item" onClick={() => setMenuOpen(false)}>
+                </NavLink> */}
+                {/* <NavLink to="/profile" className="dropdown-item" onClick={() => setMenuOpen(false)}>
                   Profile
-                </NavLink>
+                </NavLink> */}
                 <NavLink to="/bookings" className="dropdown-item" onClick={() => setMenuOpen(false)}>
                   Bookings
                 </NavLink>
               </>
             ) : (
               <>
-              <NavLink to="/" className="dropdown-item" onClick={() => setMenuOpen(false)}>
+                <NavLink to="/" className="dropdown-item" onClick={() => setMenuOpen(false)}>
                   Home
                 </NavLink>
                 <NavLink to="/login" className="dropdown-item" onClick={() => setMenuOpen(false)}>
                   Login
                 </NavLink>
                 <NavLink to="/signup" className="dropdown-item" onClick={() => setMenuOpen(false)}>
-                  Signup
+                  Sign Up
                 </NavLink>
               </>
             )}
