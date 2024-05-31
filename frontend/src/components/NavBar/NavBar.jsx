@@ -5,7 +5,7 @@ import { useState, useEffect, useRef } from 'react';
 import ProfileButton from './ProfileButton';
 import './NavBar.css';
 import logo from '../../../assets/LandbnbLogo.png';
-
+import hamburger from '../../../assets/PinkHamburger.png'
 
 const NavBar = () => {
   //const dispatch = useDispatch();
@@ -45,7 +45,8 @@ const NavBar = () => {
       <div className="navbar-links">
         {sessionUser && <ProfileButton user={sessionUser} />}
         <button className="navbar-button hamburger-button" onClick={handleMenuToggle}>
-          &#9776; {/* Unicode character for hamburger icon */}
+        <img src={hamburger} alt="Menu" className="navbar-logo" />
+          {/* &#9776; */} {/* Unicode character for hamburger icon */}
         </button>
         {menuOpen && (
           <div className="dropdown-menu" ref={menuRef}>

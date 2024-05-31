@@ -14,8 +14,8 @@
 }
 
 .navbar-logo {
-  width: 28%; /* Adjust the percentage to scale the logo */
-  height: auto; /* Maintain aspect ratio */
+  width: 28%;
+  height: auto;
 }
 
 .navbar-links {
@@ -25,21 +25,21 @@
 }
 
 .navbar-button {
-  padding: 0.6rem 2rem;
+  padding: 0.3rem 0.5rem;
   margin-left: 0.5rem;
   border: solid, gray;
-  border-radius: 8px;
+  border-radius: 5px;
   text-decoration: none;
   color: #fff;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: .5rem;
 }
 
 .hamburger-button {
-  background-color: #e2608b;
+  background-color: #f8f5f6;
   opacity: 0.7;
   color: #000;
-  font-size: 14px;
+  font-size: 5px;
   border-radius: 22px;
 }
 
@@ -75,8 +75,8 @@
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 30px;
-  color: #000;
+  font-size: 32px;
+  color: #3b2e30;
 }
 
 .profile-dropdown {
