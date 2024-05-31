@@ -4,6 +4,8 @@ import { useState, useEffect, useRef } from 'react';
 //import * as sessionActions from '../../store/session';
 import ProfileButton from './ProfileButton';
 import './NavBar.css';
+import logo from '../../../assets/LandbnbLogo.png';
+import hamburger from '../../../assets/PinkHamburger.png'
 
 const NavBar = () => {
   //const dispatch = useDispatch();
@@ -36,12 +38,15 @@ const NavBar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-brand">
-        <NavLink to="/">LandBNB</NavLink>
+        <NavLink to="/">
+        <img src={logo} alt="Landbnb" className="navbar-logo" />
+        </NavLink>
       </div>
       <div className="navbar-links">
         {sessionUser && <ProfileButton user={sessionUser} />}
         <button className="navbar-button hamburger-button" onClick={handleMenuToggle}>
-          &#9776; {/* Unicode character for hamburger icon */}
+        <img src={hamburger} alt="Menu" className="navbar-logo" />
+          {/* &#9776; */} {/* Unicode character for hamburger icon */}
         </button>
         {menuOpen && (
           <div className="dropdown-menu" ref={menuRef}>

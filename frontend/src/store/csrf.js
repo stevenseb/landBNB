@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 
 // call this to get the "XSRF-TOKEN" cookie, should only be used in development
 export function restoreCSRF() {
-  return csrfFetch('/api/csrf/restore');
+  return csrfFetch('http://localhost:8000/api/csrf/restore');
 } 
 
 export async function csrfFetch(url, options = {}) {
