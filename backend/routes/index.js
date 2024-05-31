@@ -4,7 +4,7 @@ const router = express.Router();
 const apiRouter = require('./api');
 
 router.use('/api', apiRouter);
-
+console.log('################', process.env.NODE_ENV)
 // Static routes
 // Serve React build files in production
 if (process.env.NODE_ENV === 'production') {

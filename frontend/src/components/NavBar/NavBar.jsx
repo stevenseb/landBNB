@@ -4,6 +4,8 @@ import { useState, useEffect, useRef } from 'react';
 //import * as sessionActions from '../../store/session';
 import ProfileButton from './ProfileButton';
 import './NavBar.css';
+import logo from '../../../assets/LandbnbLogo.png';
+
 
 const NavBar = () => {
   //const dispatch = useDispatch();
@@ -36,7 +38,9 @@ const NavBar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-brand">
-        <NavLink to="/">LandBNB</NavLink>
+        <NavLink to="/">
+        <img src={logo} alt="Landbnb" className="navbar-logo" />
+        </NavLink>
       </div>
       <div className="navbar-links">
         {sessionUser && <ProfileButton user={sessionUser} />}

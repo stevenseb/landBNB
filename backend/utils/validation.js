@@ -1,6 +1,6 @@
 // backend/utils/validation.js
 const { validationResult, check } = require('express-validator');
-process.env.NODE_ENV = 'production';
+//process.env.NODE_ENV = 'production';
 // middleware for formatting errors from express-validator middleware
 // (to customize, see express-validator's documentation)
 const handleValidationErrors = (req, _res, next) => {
