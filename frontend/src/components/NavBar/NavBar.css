@@ -3,18 +3,22 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
+  padding: 10px 20px;
   background-color: #d8e4eb52;
+}
+.navbar-brand {
+  display: flex;
+  align-items: center;
 }
 
 .navbar-brand a {
   text-decoration: none;
   color: #343a40;
-  font-size: 1.5rem;
+  font-size: 1rem;
 }
 
 .navbar-logo {
-  width: 28%;
+  width: 30%;
   height: auto;
 }
 
@@ -25,22 +29,38 @@
 }
 
 .navbar-button {
-  padding: 0.3rem 0.5rem;
+  padding: 4px 2px;
   margin-left: 0.5rem;
   border: solid, gray;
   border-radius: 5px;
   text-decoration: none;
   color: #fff;
   cursor: pointer;
-  font-size: .5rem;
+  font-size: 14px;
 }
 
 .hamburger-button {
   background-color: #f8f5f6;
   opacity: 0.7;
   color: #000;
-  font-size: 5px;
-  border-radius: 22px;
+  max-width: 150px;
+  font-size: 2.1rem;
+  border-radius: 18px;
+}
+
+.navbar-button.hamburger-button {
+  font-size: 1.5rem;
+  padding: 0 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin-left: 15px;
+}
+
+.hamburger-icon {
+  width: 24px;
+  height: auto;
+  margin-left: 15px;
 }
 
 .dropdown-menu {
@@ -66,7 +86,7 @@
   background-color: #f1f1f1;
 }
 
-/* frontend/src/components/Navigation/ProfileButton.css */
+/*/NavBar/ProfileButton.css */
 .profile-button-container {
   position: relative;
 }
@@ -75,7 +95,8 @@
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 32px;
+  font-size: 28px;
+  padding: 0 25px;
   color: #3b2e30;
 }
 
