@@ -47,9 +47,12 @@ const NavBar = ({ isLoaded }) => {
         </div>
         {!sessionUser && menuOpen && (
           <div className="dropdown-menu" ref={menuRef}>
+          <ul>
+            <li>
             <NavLink to="/" className="dropdown-item" onClick={() => setMenuOpen(false)}>
               Home
             </NavLink>
+            </li>
             <li className="dropdown-item" onClick={() => setMenuOpen(false)}>
               <OpenModalButton
                 buttonText="Log In"
@@ -64,6 +67,8 @@ const NavBar = ({ isLoaded }) => {
                 className="text-link"
               />
             </li>
+            {isLoaded}
+            </ul>
           </div>
         )}
       </div>
