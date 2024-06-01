@@ -1,7 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useState, useEffect, useRef } from 'react';
-//import * as sessionActions from '../../store/session';
 import ProfileButton from './ProfileButton';
 import './NavBar.css';
 import logo from '../../../assets/LandbnbLogo.png';
@@ -43,8 +42,9 @@ const NavBar = () => {
         </NavLink>
       </div>
       <div className="navbar-links">
+        
+        <button className="navbar-brand navbar-button hamburger-button" onClick={handleMenuToggle}>
         {sessionUser && <ProfileButton user={sessionUser} />}
-        <button className="navbar-button hamburger-button" onClick={handleMenuToggle}>
         <img src={hamburger} alt="Menu" className="navbar-logo" />
           {/* &#9776; */} {/* Unicode character for hamburger icon */}
         </button>
