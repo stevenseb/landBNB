@@ -40,19 +40,14 @@ const NavBar = ({ isLoaded }) => {
       </div>
       <div className="navbar-links">
         <div className="menu-button">
-          {sessionUser && <ProfileButton user={sessionUser} />}
-          <button className="hamburger-button" onClick={handleMenuToggle}>
+            <button className="hamburger-button" onClick={handleMenuToggle}>
             <img src={hamburger} alt="Menu" className="hamburger-icon" />
           </button>
+          {sessionUser && <ProfileButton user={sessionUser} />}
         </div>
         {!sessionUser && menuOpen && (
           <div className="dropdown-menu" ref={menuRef}>
           <ul>
-            <li>
-            <NavLink to="/" className="dropdown-item" onClick={() => setMenuOpen(false)}>
-              Home
-            </NavLink>
-            </li>
             <li className="dropdown-item" onClick={() => setMenuOpen(false)}>
               <OpenModalButton
                 buttonText="Log In"
