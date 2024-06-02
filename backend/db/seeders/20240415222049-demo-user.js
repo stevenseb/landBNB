@@ -46,7 +46,112 @@ const demoUsers = [
     username: 'dmatt',
     hashedPassword: bcrypt.hashSync('guessmypassword')
   },
-]
+  {
+    firstName: 'Alice',
+    lastName: 'Johnson',
+    email: 'alice@gmail.com',
+    username: 'AJAJ',
+    hashedPassword: bcrypt.hashSync('password321')
+  },
+  {
+    firstName: 'Emily',
+    lastName: 'Smith',
+    email: 'emily@smith.com',
+    username: 'Esmith',
+    hashedPassword: bcrypt.hashSync('smith123')
+  },
+  {
+    firstName: 'Michael',
+    lastName: 'Brown',
+    email: 'mbrown@yahoo.com',
+    username: 'Mbrown',
+    hashedPassword: bcrypt.hashSync('brownie456')
+  },
+  {
+    firstName: 'Jessica',
+    lastName: 'Davis',
+    email: 'jdavis@gmail.com',
+    username: 'JessD',
+    hashedPassword: bcrypt.hashSync('jd123')
+  },
+  {
+    firstName: 'Jess',
+    lastName: 'Davis',
+    email: 'davis@gmail.com',
+    username: 'JessWorld',
+    hashedPassword: bcrypt.hashSync('jd456')
+  },
+  {
+    firstName: 'Christopher',
+    lastName: 'Wilson',
+    email: 'chris.wilson@hotmail.com',
+    username: 'ChrisW',
+    hashedPassword: bcrypt.hashSync('wilson789')
+  },
+  {
+    firstName: 'Samantha',
+    lastName: 'Martinez',
+    email: 'smartinez@gmail.com',
+    username: 'SamM',
+    hashedPassword: bcrypt.hashSync('sammy321')
+  },
+  {
+    firstName: 'Daniel',
+    lastName: 'Taylor',
+    email: 'dtaylor@yahoo.com',
+    username: 'DannyT',
+    hashedPassword: bcrypt.hashSync('taylor456')
+  },
+  {
+    firstName: 'Sarah',
+    lastName: 'Moore',
+    email: 'sarah.moore@gmail.com',
+    username: 'Smoore',
+    hashedPassword: bcrypt.hashSync('moore789')
+  },
+  {
+    firstName: 'Sam',
+    lastName: 'Moore',
+    email: 'sam.moore@gmail.com',
+    username: 'Boogie',
+    hashedPassword: bcrypt.hashSync('boogie789')
+  },
+  {
+    firstName: 'Matt',
+    lastName: 'Johnson',
+    email: 'me@hotmail.com',
+    username: 'MattL',
+    hashedPassword: bcrypt.hashSync('leematt')
+  },
+  {
+    firstName: 'Matthew',
+    lastName: 'Lee',
+    email: 'mlee@hotmail.com',
+    username: 'Mattz',
+    hashedPassword: bcrypt.hashSync('leematz')
+  },
+  {
+    firstName: 'Lauren',
+    lastName: 'Garcia',
+    email: 'lauren.garcia@yahoo.com',
+    username: 'Lgarcia',
+    hashedPassword: bcrypt.hashSync('garcia123')
+  },
+  {
+    firstName: 'Sara',
+    lastName: 'Garcia',
+    email: 'sara.garcia@yahoo.com',
+    username: 'Sgarcia',
+    hashedPassword: bcrypt.hashSync('garcia789')
+  },
+  {
+    firstName: 'Demo',
+    lastName: 'lition',
+    email: 'demo@demo.com',
+    username: 'demo',
+    hashedPassword: bcrypt.hashSync('demo')
+  },
+];
 
 
 /** @type {import('sequelize-cli').Migration} */

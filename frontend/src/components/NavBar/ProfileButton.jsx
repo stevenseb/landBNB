@@ -46,6 +46,11 @@ function ProfileButton({ user }) {
             <div>{user.email}</div>
           </li>
           <li>
+            <NavLink to="/" className="dropdown-item" onClick={() => setShowMenu(false)}>
+              Home
+            </NavLink>
+            </li>
+          <li>
             <NavLink to="/profile" className="profile-dropdown-item" onClick={() => setShowMenu(false)}>
               Profile
             </NavLink>
@@ -61,7 +66,7 @@ function ProfileButton({ user }) {
             </NavLink>
           </li>
           <li>
-            <button onClick={logout} className="profile-dropdown-item">Log Out</button>
+            <button onClick={logout} className="profile-dropdown-item logout logout:hover">Log Out</button>
           </li>
         </ul>
       )}

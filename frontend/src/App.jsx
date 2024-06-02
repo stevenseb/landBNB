@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import * as sessionActions from './store/session';
+import DisplaySpots from './components/DisplaySpots';
 
 function Layout() {
   const dispatch = useDispatch();
@@ -29,7 +30,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <h1>Welcome!</h1>,
+        element: <DisplaySpots />,
       },
     ],
   },

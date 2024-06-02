@@ -32,7 +32,7 @@
   display: flex;
   align-items: center;
   background-color: #f8f5f6;
-  opacity: 0.7;
+  opacity: 0.8;
   border-radius: 18px;
   padding: 5px;
   border: 1px solid #ccc; /* Add border */
@@ -70,7 +70,7 @@
 .dropdown-item {
   padding: 0.75rem 1.5rem;
   text-decoration: none;
-  color: #343a40;
+  color: #111112;
   display: block;
 }
 
@@ -82,7 +82,7 @@
   position: absolute;
   top: 100%;
   right: 0;
-  background-color: #f4f1f1;
+  background-color: #f4f3f3;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
   overflow: hidden;
@@ -92,13 +92,13 @@
 
 .profile-info {
   padding: 0.75rem 1.5rem;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #ffffff;
 }
 
 .profile-dropdown-item {
   padding: 0.75rem 1.5rem;
   text-decoration: none;
-  color: #343a40;
+  color: #1b1c1e;
   display: block;
   background: none;
   border: none;
@@ -107,20 +107,30 @@
 }
 
 .profile-dropdown-item:hover {
-  background-color: #f1f1f1;
+  background-color: #fefbfb;
 }
 
 /* Styles for making the login and signup buttons look like text links */
 .text-link {
   background: none;
   border: none;
+  display: block;
+  text-align: center;
   color: #343a40;
   text-decoration: none;
   cursor: pointer;
   padding: 0;
-  font-size: 16px; /* Change the font size to 14px */
+  font-size: 16px;
 }
 
 .text-link:hover {
+  text-decoration: underline;
+}
+
+.logout {
+  cursor: pointer;
+}
+
+.logout:hover {
   text-decoration: underline;
 }
