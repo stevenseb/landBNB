@@ -1,9 +1,16 @@
 .navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #f3f1f1;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
-  background-color: #d8e4eb52;
+  padding: 20px 20px; /* Increase the padding for more vertical space */
+  box-sizing: border-box; /* Ensure padding is included in width */
+  height: 80px; /* Increase the height of the navbar */
 }
 
 .navbar-brand {
@@ -18,14 +25,14 @@
 }
 
 .navbar-logo {
-  width: 30%;
+  width: 195px; /* Adjust size as needed */
   height: auto;
 }
 
 .navbar-links {
   display: flex;
   align-items: center;
-  position: relative;
+  justify-content: flex-end;
 }
 
 .menu-button {
@@ -35,7 +42,7 @@
   opacity: 0.8;
   border-radius: 18px;
   padding: 5px;
-  border: 1px solid #ccc; /* Add border */
+  border: 1px solid #ccc;
 }
 
 .profile-button,
@@ -43,11 +50,6 @@
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 1.5rem;
-  display: flex;
-  align-items: center;
-  margin: 0 5px;
-  padding: 5px;
 }
 
 .hamburger-icon {
@@ -62,16 +64,13 @@
   background-color: #f4f1f1;
   box-shadow: 0 10px 8px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
-  overflow: hidden;
+  border: 1px solid #ccc;
   z-index: 1000;
-  white-space: nowrap;
 }
 
 .dropdown-item {
-  padding: 0.75rem 1.5rem;
-  text-decoration: none;
-  color: #111112;
-  display: block;
+  padding: 10px 20px;
+  cursor: pointer;
 }
 
 .dropdown-item:hover {
@@ -110,7 +109,6 @@
   background-color: #fefbfb;
 }
 
-/* Styles for making the login and signup buttons look like text links */
 .text-link {
   background: none;
   border: none;
