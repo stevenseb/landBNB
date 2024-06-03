@@ -18,57 +18,57 @@ const demoSpotImages = [
     },
     {
       "spotId": 1,
-      "url": "https://unsplash.com/photos/2d4lAQAlbDA",
+      "url": "https://cdn.pixabay.com/photo/2018/06/14/22/50/nature-3475815_960_720.jpg",
       "preview": false
     },
     {
       "spotId": 1,
-      "url": "https://unsplash.com/photos/3d4lAQAlbDA",
+      "url": "https://media.licdn.com/dms/image/D4E12AQHybS2B4YHd5A/article-cover_image-shrink_720_1280/0/1706897145527?e=2147483647&v=beta&t=3xmpHSpFJyL36aI5WAlasAbxdYjGNcON5IB7azZPncM",
       "preview": false
     },
     {
       "spotId": 1,
-      "url": "https://unsplash.com/photos/4d4lAQAlbDA",
+      "url": "https://r2.starryai.com/results/1024735114/1056d543-a3fd-4351-99ef-e8a23d165994.webp",
+      "preview": false
+    },
+    {
+      "spotId": 2,
+      "url": "https://www.jetsetter.com//uploads/sites/7/2018/07/PuZpsRMx-1380x1035.jpeg",
+      "preview": true
+    },
+    {
+      "spotId": 2,
+      "url": "https://www.jetsetter.com//uploads/sites/7/2018/04/sjeL0BSe.jpeg",
       "preview": false
     },
     {
       "spotId": 2,
       "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Coastline_as_seen_from_Chimney_Rock%2C_Point_Reyes_National_Seashore.jpg/300px-Coastline_as_seen_from_Chimney_Rock%2C_Point_Reyes_National_Seashore.jpg",
-      "preview": true
-    },
-    {
-      "spotId": 2,
-      "url": "https://unsplash.com/photos/6d4lAQAlbDA",
       "preview": false
     },
     {
       "spotId": 2,
-      "url": "https://unsplash.com/photos/7d4lAQAlbDA",
-      "preview": false
-    },
-    {
-      "spotId": 2,
-      "url": "https://unsplash.com/photos/8d4lAQAlbDA",
+      "url": "https://www.jetsetter.com//uploads/sites/7/2018/07/GettyImages-866059648-1380x690.jpg",
       "preview": false
     },
     {
       "spotId": 3,
       "url": "https://network.land.com/wp-content/uploads/2017/02/listingPhotographyTips.jpg",
+      "preview": false
+    },
+    {
+      "spotId": 3,
+      "url": "https://media.istockphoto.com/id/467176236/photo/river-landscape.jpg?s=612x612&w=0&k=20&c=LM7cmOK8D5jYAg-Zc1Gyz7jmatbTna-DQCFiNWNy5xg=",
       "preview": true
     },
     {
       "spotId": 3,
-      "url": "https://unsplash.com/photos/10d4lAQAlbDA",
+      "url": "https://media.istockphoto.com/id/590136232/photo/yorkshire-dales-view-along-the-river-wharfe-near-grassington.jpg?s=612x612&w=0&k=20&c=OZczsXHbI94Lcyd781qo1gcF0OFa10G7dDINMqOHjrw=",
       "preview": false
     },
     {
       "spotId": 3,
-      "url": "https://unsplash.com/photos/11d4lAQAlbDA",
-      "preview": false
-    },
-    {
-      "spotId": 3,
-      "url": "https://unsplash.com/photos/12d4lAQAlbDA",
+      "url": "https://img.freepik.com/premium-photo/summer-green-landscape-nature-river-river-countryside-summer-rural-river-summer_615534-461.jpg",
       "preview": false
     },
     {
@@ -78,17 +78,17 @@ const demoSpotImages = [
     },
     {
       "spotId": 4,
-      "url": "https://unsplash.com/photos/14d4lAQAlbDA",
+      "url": "https://static.vecteezy.com/system/resources/previews/007/774/262/large_2x/beautiful-rural-landscape-of-green-grass-field-with-dusty-country-road-and-trees-on-hill-near-the-mountain-and-clear-blue-sky-nature-composition-free-photo.jpg",
       "preview": false
     },
     {
       "spotId": 4,
-      "url": "https://unsplash.com/photos/15d4lAQAlbDA",
+      "url": "https://digital-photography-school.com/wp-content/uploads/2021/06/3F6A8317.jpg",
       "preview": false
     },
     {
       "spotId": 4,
-      "url": "https://unsplash.com/photos/16d4lAQAlbDA",
+      "url": "https://media.istockphoto.com/id/155287684/photo/idyllic-rural.jpg?s=612x612&w=0&k=20&c=rRkWhMzpz1jmObtfBpOOqqRYKG7UKp_8wKLTyPgyQ8U=",
       "preview": false
     },
     {
@@ -98,17 +98,17 @@ const demoSpotImages = [
     },
     {
       "spotId": 5,
-      "url": "https://unsplash.com/photos/18d4lAQAlbDA",
+      "url": "https://w0.peakpx.com/wallpaper/1007/464/HD-wallpaper-rural-landscape-the-magnificent-natural-scenery.jpg",
       "preview": false
     },
     {
       "spotId": 5,
-      "url": "https://unsplash.com/photos/19d4lAQAlbDA",
+      "url": "https://www.jenjewell.ca/wp-content/uploads/2023/07/pros-and-cons-of-living-in-the-countryside.jpg",
       "preview": false
     },
     {
       "spotId": 5,
-      "url": "https://unsplash.com/photos/20d4lAQAlbDA",
+      "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNnD5xfTz1PGSwfFxq2R2z7MeWL-Yfj913vA&s",
       "preview": false
     },
     {
@@ -118,7 +118,7 @@ const demoSpotImages = [
     },
     {
       "spotId": 6,
-      "url": "https://unsplash.com/photos/22d4lAQAlbDA",
+      "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpHb6bkVtOcQxj8HM9rvs3LnOrKQV2ANVv5g&s",
       "preview": false
     },
     {
@@ -143,12 +143,12 @@ const demoSpotImages = [
     },
     {
       "spotId": 7,
-      "url": "https://unsplash.com/photos/27d4lAQAlbDA",
+      "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNnD5xfTz1PGSwfFxq2R2z7MeWL-Yfj913vA&s",
       "preview": false
     },
     {
       "spotId": 7,
-      "url": "https://unsplash.com/photos/28d4lAQAlbDA",
+      "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNnD5xfTz1PGSwfFxq2R2z7MeWL-Yfj913vA&s",
       "preview": false
     },
     {
@@ -203,12 +203,12 @@ const demoSpotImages = [
     },
     {
       "spotId": 10,
-      "url": "https://unsplash.com/photos/39d4lAQAlbDA",
+      "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNnD5xfTz1PGSwfFxq2R2z7MeWL-Yfj913vA&s",
       "preview": false
     },
     {
       "spotId": 10,
-      "url": "https://unsplash.com/photos/40d4lAQAlbDA",
+      "url": "https://st.depositphotos.com/1718692/54029/i/450/depositphotos_540296788-stock-photo-mountainous-rural-landscape-sunset-wonderful.jpg",
       "preview": false
     },
     {
@@ -218,12 +218,12 @@ const demoSpotImages = [
     },
     {
       "spotId": 11,
-      "url": "https://unsplash.com/photos/42d4lAQAlbDA",
+      "url": "https://st.depositphotos.com/1718692/54029/i/450/depositphotos_540296788-stock-photo-mountainous-rural-landscape-sunset-wonderful.jpg",
       "preview": false
     },
     {
       "spotId": 11,
-      "url": "https://unsplash.com/photos/43d4lAQAlbDA",
+      "url": "https://st.depositphotos.com/1718692/54029/i/450/depositphotos_540296788-stock-photo-mountainous-rural-landscape-sunset-wonderful.jpg",
       "preview": false
     },
     {
@@ -313,12 +313,12 @@ const demoSpotImages = [
     },
     {
       "spotId": 16,
-      "url": "https://unsplash.com/photos/61d4lAQAlbDA",
+      "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfeT3_IMg_LGj3T0aa5GYPAK02Lj8jJFrC0g&s",
       "preview": true
     },
     {
       "spotId": 16,
-      "url": "https://unsplash.com/photos/62d4lAQAlbDA",
+      "url": "https://npr.brightspotcdn.com/dims4/default/926b069/2147483647/strip/true/crop/1920x1242+0+0/resize/880x569!/quality/90/?url=http%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Flegacy%2Fsites%2Fupr%2Ffiles%2F202101%2Fwinter-4674782_1920.jpg",
       "preview": false
     },
     {
@@ -333,7 +333,7 @@ const demoSpotImages = [
     },
     {
       "spotId": 17,
-      "url": "https://unsplash.com/photos/65d4lAQAlbDA",
+      "url": "https://s3.amazonaws.com/sunriseimages-prod/static-app-content/cgs/129/images/gallery/4_b.jpg",
       "preview": true
     },
     {
@@ -353,7 +353,7 @@ const demoSpotImages = [
     },
     {
       "spotId": 18,
-      "url": "https://unsplash.com/photos/69d4lAQAlbDA",
+      "url": "https://sellthelandnow.com/wp-content/uploads/2022/11/Arizona-Land.jpg",
       "preview": true
     },
     {
@@ -373,7 +373,7 @@ const demoSpotImages = [
     },
     {
       "spotId": 19,
-      "url": "https://unsplash.com/photos/73d4lAQAlbDA",
+      "url": "https://cdn.shopify.com/s/files/1/2990/5508/files/nw-horse-trails-white-pass-horse-camp-4_large.jpg?v=1564091796",
       "preview": true
     },
     {
@@ -393,7 +393,7 @@ const demoSpotImages = [
     },
     {
       "spotId": 20,
-      "url": "https://unsplash.com/photos/77d4lAQAlbDA",
+      "url": "https://static.vecteezy.com/system/resources/thumbnails/033/352/387/small/grass-land-beautiful-green-landscape-ai-generated-photo.jpg",
       "preview": true
     },
     {
@@ -408,7 +408,7 @@ const demoSpotImages = [
     },
     {
       "spotId": 20,
-      "url": "https://unsplash.com/photos/80d4lAQAlbDA",
+      "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfeT3_IMg_LGj3T0aa5GYPAK02Lj8jJFrC0g&s",
       "preview": false
     },
     {

@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import * as sessionActions from './store/session';
 import DisplaySpots from './components/DisplaySpots';
+import SpotDetails from './components/SpotDetails';
 
 function Layout() {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ function Layout() {
 
   return (
     <>
-      <NavBar isLoaded={isLoaded}/>
+      <NavBar isLoaded={isLoaded} />
       {isLoaded && <Outlet />}
     </>
   );
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <DisplaySpots />,
+      },
+      {
+        path: '/spots/:id',
+        element: <SpotDetails />,
       },
     ],
   },
