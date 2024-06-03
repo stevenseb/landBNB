@@ -5,33 +5,38 @@
   padding: 16px;
 }
 
-.spot-tile {
+.spot-link {
+  text-decoration: none; /* Remove default link styles */
+  color: inherit; /* Inherit text color */
+  display: block; /* Ensure the link covers the entire tile */
   flex: 0 0 calc(25% - 20px); /* 4 spots per row */
   margin-bottom: 20px;
   box-sizing: border-box;
 }
 
 @media screen and (max-width: 768px) {
-  .spot-tile {
+  .spot-link {
     flex: 0 0 calc(50% - 20px); /* 2 spots per row */
   }
 }
 
 @media screen and (max-width: 480px) {
-  .spot-tile {
+  .spot-link {
     flex: 0 0 calc(100% - 20px); /* 1 spot per row */
   }
 }
 
+.spot-tile {
+  width: 100%; /* Ensure the tile takes full width of the link */
+}
+
 .spot-preview-img {
-  flex: 0 0 200px;
   width: 100%;
   height: auto;
   border-radius: 5px;
 }
 
 .spot-details {
-  flex: 1;
   padding: 10px;
   font-weight: bold;
 }

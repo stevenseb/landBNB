@@ -1,0 +1,98 @@
+.spot-details-container {
+  padding: 20px;
+  text-align: center; /* Center-align text within the container */
+}
+
+.spot-details-container h1 {
+  font-size: 2em;
+  margin-bottom: 10px;
+}
+
+.location {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+  color: gray;
+}
+
+.images-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+  justify-content: center;
+}
+
+.main-image {
+  flex: 1 1 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.large-img {
+  width: 100%;
+  height: auto;
+  max-width: 600px; /* Adjust this value as needed */
+  border-radius: 10px;
+}
+
+.small-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  flex: 1 1 40%;
+  justify-content: center;
+}
+
+.small-img {
+  flex: 1 1 calc(50% - 10px);
+  width: 100%;
+  height: auto;
+  max-width: 150px; /* Adjust this value as needed */
+  border-radius: 10px;
+}
+
+.hosted-by {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.description {
+  font-size: 1em;
+  margin-bottom: 20px;
+}
+
+.callout-box {
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 0 auto; /* Center the callout box */
+  max-width: 300px; /* Adjust as needed */
+  text-align: center; /* Center-align text within the callout box */
+}
+
+.price {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.price span {
+  font-size: 1em;
+  color: gray;
+}
+
+.reserve-button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.reserve-button:hover {
+  background-color: #0056b3;
+}
