@@ -1,0 +1,44 @@
+.footer {
+  border-top: 1px solid #ccc;
+  padding: 20px;
+  background-color: #f8f8f8;
+  text-align: center;
+  margin-top: 40px; /* Add margin-top for whitespace */
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer-info h2 {
+  margin: 0;
+  font-size: .85em;
+}
+
+.footer-info p {
+  margin: 5px 0;
+  color: #555;
+}
+
+.footer-links p {
+  margin: 5px 7px;
+  color: #555;
+  display: inline-block;
+}
+
+.footer-social {
+  margin-top: 10px;
+}
+
+.social-icon {
+  margin: 0 10px;
+  font-size: 1em;
+  color: #555;
+  cursor: pointer;
+}
+
+.social-icon:hover {
+  color: #000;
+}
