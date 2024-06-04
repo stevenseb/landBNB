@@ -36,12 +36,13 @@ const DisplaySpots = () => {
           <div className="spot-tile" title={spot.name}>
             <img src={spot.previewImage} alt={spot.name} className="spot-preview-img" />
             <div className="spot-details">
-            <div className="rating">
-                {spot.name}    
-                <FontAwesomeIcon icon={faStar} className="star-icon" />
-                {spot.avgRating ? spot.avgRating : "New"}
+              <div className="location-rating">
+                <div className="location">{spot.city}, {spot.state}</div>
+                <div className="avg-rating">
+                  <FontAwesomeIcon icon={faStar} className="star-icon" />
+                  {spot.avgRating ? spot.avgRating : "New"}
+                </div>
               </div>
-              <div className="city-state">{spot.city}, {spot.state}</div>
               <div className="price">${spot.price} night</div>
             </div>
           </div>

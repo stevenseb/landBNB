@@ -1,5 +1,5 @@
 .spot-details-container {
-  padding: 20px;
+  padding: 100px 290px; /* Adjusted padding for left and right margins */
   text-align: center; /* Center-align text within the container */
 }
 
@@ -16,14 +16,12 @@
 
 .images-container {
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  gap: 15px; /* Adjust gap as needed */
   margin-bottom: 20px;
-  justify-content: center;
 }
 
 .main-image {
-  flex: 1 1 60%;
+  flex: 2;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -38,47 +36,58 @@
 
 .small-images {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 10px;
-  flex: 1 1 40%;
+  flex: 1;
   justify-content: center;
 }
 
 .small-img {
-  flex: 1 1 calc(50% - 10px);
   width: 100%;
   height: auto;
   max-width: 150px; /* Adjust this value as needed */
   border-radius: 10px;
 }
 
-.hosted-by {
-  font-size: 1.2em;
-  margin-bottom: 10px;
+.details-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
 }
 
-.description {
-  font-size: 1em;
-  margin-bottom: 20px;
+.host-description {
+  flex: 2; /* Reduced flex value to give more space to the callout box */
+  text-align: left;
+  padding-right: 20px;
 }
 
 .callout-box {
+  flex: 1.5; /* Increased flex value to make the callout box wider */
   border: 1px solid #ddd;
-  padding: 20px;
+  padding: 30px 50px; /* Adjusted padding */
   border-radius: 10px;
-  margin: 0 auto; /* Center the callout box */
-  max-width: 300px; /* Adjust as needed */
   text-align: center; /* Center-align text within the callout box */
 }
 
-.price {
-  font-size: 1.5em;
+.price-reviews {
+  display: flex;
+  justify-content: space-between; /* Space out the price and reviews */
+  align-items: center;
   margin-bottom: 10px;
+}
+
+.price {
+  font-size: 1em;
 }
 
 .price span {
   font-size: 1em;
   color: gray;
+}
+
+.reviews {
+  display: flex;
+  align-items: center;
 }
 
 .reserve-button {
@@ -100,12 +109,16 @@
 .rating {
   display: flex;
   align-items: center;
-  justify-content: left;
+  justify-content: center;
   font-size: 1em;
   margin-top: 6px;
 }
 
 .star-icon {
   margin-right: 5px;
-  color: black; /* Solid black color for the star icon */
+  color: black;
+}
+
+.dot {
+  margin: 0 5px;
 }

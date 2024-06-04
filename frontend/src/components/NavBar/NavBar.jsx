@@ -53,17 +53,17 @@ const NavBar = ({ isLoaded }) => {
         {!sessionUser && menuOpen && (
           <div className="dropdown-menu" ref={menuRef}>
             <ul>
-              <li className="dropdown-item" onClick={() => setMenuOpen(false)}>
+            <li className="dropdown-item" onClick={() => setMenuOpen(false)}>
                 <OpenModalButton
-                  buttonText="Log In"
-                  modalComponent={<LoginFormModal />}
+                  buttonText="Sign Up"
+                  modalComponent={<SignupFormModal />}
                   className="text-link"
                 />
               </li>
               <li className="dropdown-item" onClick={() => setMenuOpen(false)}>
                 <OpenModalButton
-                  buttonText="Sign Up"
-                  modalComponent={<SignupFormModal />}
+                  buttonText="Log In"
+                  modalComponent={<LoginFormModal />}
                   className="text-link"
                 />
               </li>

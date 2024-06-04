@@ -53,6 +53,9 @@
 }
 
 .create-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-top: 30px;
 }
 
@@ -68,7 +71,6 @@
 .create-spot-form-container button:hover {
   background-color: #0056b3;
 }
-
 
 .black-text {
   color: black;

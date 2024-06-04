@@ -97,13 +97,16 @@ const initialState = {};
 
 const spotsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_SPOTS:
+    case SET_SPOTS: {
       return { ...state, ...action.spots };
-    case SET_SPOT:
-        return { ...state, [action.spot.id]: action.spot };
-    case ADD_SPOT:
+    }
+    case SET_SPOT: {
       return { ...state, [action.spot.id]: action.spot };
-    case ADD_IMAGE:
+    }
+    case ADD_SPOT: {
+      return { ...state, [action.spot.id]: action.spot };
+    }
+    case ADD_IMAGE: {
       const spot = state[action.image.spotId];
       if (spot) {
         return {
@@ -116,7 +119,8 @@ const spotsReducer = (state = initialState, action) => {
       } else {
         return state;
       }
-      default:
+    }
+    default:
       return state;
   }
 };

@@ -8,9 +8,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 20px; /* Increase the padding for more vertical space */
+  padding: 15px; /* Increase the padding for more vertical space */
   box-sizing: border-box; /* Ensure padding is included in width */
-  height: 90px; /* Increase the height of the navbar */
+  height: 75px; /* Increase the height of the navbar */
 }
 
 .navbar-brand {

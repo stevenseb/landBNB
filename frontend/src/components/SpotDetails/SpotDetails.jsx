@@ -21,7 +21,8 @@ const SpotDetails = () => {
   const otherImages = spot.spotImages ? spot.spotImages.filter(image => !image.preview).slice(0, 4) : [];
   const owner = spot.owner || {};
   const avgRating = spot.avgRating ? spot.avgRating : "New";
-console.log(avgRating);
+  const numReviews = spot.numReviews || 0;
+
   const handleReserveClick = () => {
     alert('Feature coming soon');
   };
@@ -40,19 +41,40 @@ console.log(avgRating);
           ))}
         </div>
       </div>
-      <div className="hosted-by">
-        Hosted by {owner.firstName} {owner.lastName}
-      </div>
-      <p className="description">{spot.description}</p>
-      <div className="callout-box">
-        <div className="price">
-          ${spot.price} <span>night</span>
+      <div className="details-container">
+        <div className="host-description">
+          <div className="hosted-by">
+            Hosted by {owner.firstName} {owner.lastName}
+          </div>
+          <p className="description">{spot.description}</p>
         </div>
-        <button className="reserve-button" onClick={handleReserveClick}>Reserve</button>
+        <div className="callout-box">
+          <div className="price-reviews">
+            <div className="price">
+              ${spot.price} <span>night</span>
+            </div>
+            <div className="reviews">
+              <FontAwesomeIcon icon={faStar} className="star-icon" />
+              {avgRating}
+              {numReviews > 0 && (
+                <>
+                  <span className="dot">•</span> {numReviews} {numReviews === 1 ? 'Review' : 'Reviews'}
+                </>
+              )}
+            </div>
+          </div>
+          <button className="reserve-button" onClick={handleReserveClick}>Reserve</button>
+        </div>
       </div>
+      <hr></hr>
       <div className="rating">
         <FontAwesomeIcon icon={faStar} className="star-icon" />
         {avgRating}
+        {numReviews > 0 && (
+          <>
+            <span className="dot">•</span> {numReviews} {numReviews === 1 ? 'Review' : 'Reviews'}
+          </>
+        )}
       </div>
     </div>
   );
