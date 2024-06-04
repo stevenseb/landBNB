@@ -39,30 +39,35 @@ const NavBar = ({ isLoaded }) => {
         </NavLink>
       </div>
       <div className="navbar-links">
+        {sessionUser && (
+          <NavLink to="/spots/new" className="create-spot-link">
+            Create a New Spot
+          </NavLink>
+        )}
         <div className="menu-button">
-            <button className="hamburger-button" onClick={handleMenuToggle}>
+          <button className="hamburger-button" onClick={handleMenuToggle}>
             <img src={hamburger} alt="Menu" className="hamburger-icon" />
           </button>
           {sessionUser && <ProfileButton user={sessionUser} />}
         </div>
         {!sessionUser && menuOpen && (
           <div className="dropdown-menu" ref={menuRef}>
-          <ul>
-            <li className="dropdown-item" onClick={() => setMenuOpen(false)}>
-              <OpenModalButton
-                buttonText="Log In"
-                modalComponent={<LoginFormModal />}
-                className="text-link"
-              />
-            </li>
-            <li className="dropdown-item" onClick={() => setMenuOpen(false)}>
-              <OpenModalButton
-                buttonText="Sign Up"
-                modalComponent={<SignupFormModal />}
-                className="text-link"
-              />
-            </li>
-            {isLoaded}
+            <ul>
+              <li className="dropdown-item" onClick={() => setMenuOpen(false)}>
+                <OpenModalButton
+                  buttonText="Log In"
+                  modalComponent={<LoginFormModal />}
+                  className="text-link"
+                />
+              </li>
+              <li className="dropdown-item" onClick={() => setMenuOpen(false)}>
+                <OpenModalButton
+                  buttonText="Sign Up"
+                  modalComponent={<SignupFormModal />}
+                  className="text-link"
+                />
+              </li>
+              {isLoaded}
             </ul>
           </div>
         )}

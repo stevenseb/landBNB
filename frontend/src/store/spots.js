@@ -3,6 +3,8 @@ import { csrfFetch } from './csrf';
 // Action types
 const SET_SPOTS = 'spots/setSpots';
 const SET_SPOT = 'spots/setSpot';
+const ADD_SPOT = 'spots/addSpot';
+const ADD_IMAGE = 'spots/addImage';
 
 // Action creators
 const setSpots = (spots) => ({
@@ -15,8 +17,18 @@ const setSpot = (spot) => ({
   spot,
 });
 
+const addSpot = (spot) => ({
+  type: ADD_SPOT,
+  spot,
+});
+
+const addImage = (image) => ({
+  type: ADD_IMAGE,
+  image,
+});
+
 // Thunks
-export const fetchSpots = (page = 1) => async (dispatch) => {
+export const fetchSpots = (page) => async (dispatch) => {
   const response = await csrfFetch(`/api/spots?=${page}`);
   const data = await response.json();
   const spotsArray = data.Spots;
@@ -36,15 +48,47 @@ export const fetchSpotDetails = (id) => async (dispatch) => {
   try {
     const response = await csrfFetch(`/api/spots/${id}`);
     const data = await response.json();
-    console.log('Spot Details API Response:', data); // Log the API response for debugging
     if (data && data.id) {
-      console.log('Dispatching spot data:', data);
       dispatch(setSpot(data));
     } else {
       console.error('Expected spot details');
     }
   } catch (error) {
     console.error('Failed to fetch spot details:', error);
+  }
+};
+
+export const createSpot = (spotData) => async (dispatch) => {
+  const response = await csrfFetch('/api/spots', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(spotData),
+  });
+
+  if (response.ok) {
+    const newSpot = await response.json();
+    dispatch(addSpot(newSpot));
+    return newSpot;
+  } else {
+    const errorData = await response.json();
+    throw new Error(errorData.message || 'Failed to create spot');
+  }
+};
+
+export const addImageToSpot = (spotId, url, preview) => async (dispatch) => {
+  const response = await csrfFetch(`/api/spots/${spotId}/images`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ url, preview }),
+  });
+
+  if (response.ok) {
+    const newImage = await response.json();
+    dispatch(addImage(newImage));
+    return newImage;
+  } else {
+    const errorData = await response.json();
+    throw new Error(errorData.message || 'Failed to add image');
   }
 };
 
@@ -56,13 +100,23 @@ const spotsReducer = (state = initialState, action) => {
     case SET_SPOTS:
       return { ...state, ...action.spots };
     case SET_SPOT:
-      if (action.spot && action.spot.id) {
         return { ...state, [action.spot.id]: action.spot };
+    case ADD_SPOT:
+      return { ...state, [action.spot.id]: action.spot };
+    case ADD_IMAGE:
+      const spot = state[action.image.spotId];
+      if (spot) {
+        return {
+          ...state,
+          [action.image.spotId]: {
+            ...spot,
+            images: [...(spot.images || []), action.image],
+          },
+        };
       } else {
-        console.error('Invalid spot data:', action.spot);
         return state;
       }
-    default:
+      default:
       return state;
   }
 };

@@ -96,3 +96,16 @@
 .reserve-button:hover {
   background-color: #0056b3;
 }
+
+.rating {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  font-size: 1em;
+  margin-top: 6px;
+}
+
+.star-icon {
+  margin-right: 5px;
+  color: black; /* Solid black color for the star icon */
+}

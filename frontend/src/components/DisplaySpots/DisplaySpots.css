@@ -57,15 +57,24 @@
 }
 
 .rating {
-  color: green;
+  display: flex;
+  align-items: center;
   font-weight: bold;
+  color: rgb(25, 78, 25);
+  margin-top: 5px; /* Adjust to align with other elements */
+}
+
+.star-icon {
+  margin-right: 5px;
+  color: black;
+  padding-left: 10px;
+  font-size: .7em;
 }
 
 .name {
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .price {
   font-weight: bold;
-  font-size: medium;
 }

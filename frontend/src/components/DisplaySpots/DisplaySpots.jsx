@@ -1,9 +1,10 @@
-//frontend/src/components/DisplaySpots/DisplaySpots.jsx
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { fetchSpots } from '../../store/spots';
-import './DisplaySpots.css'; // Import the CSS file for styling
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
+import './DisplaySpots.css';
 
 const DisplaySpots = () => {
   const dispatch = useDispatch();
@@ -35,10 +36,13 @@ const DisplaySpots = () => {
           <div className="spot-tile" title={spot.name}>
             <img src={spot.previewImage} alt={spot.name} className="spot-preview-img" />
             <div className="spot-details">
+            <div className="rating">
+                {spot.name}    
+                <FontAwesomeIcon icon={faStar} className="star-icon" />
+                {spot.avgRating ? spot.avgRating : "New"}
+              </div>
               <div className="city-state">{spot.city}, {spot.state}</div>
               <div className="price">${spot.price} night</div>
-              <div className="rating">{spot.avgRating ? spot.avgRating : "New"}</div>
-              <div className="name">{spot.name}</div>
             </div>
           </div>
         );

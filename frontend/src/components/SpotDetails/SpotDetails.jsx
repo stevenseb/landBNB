@@ -2,6 +2,8 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchSpotDetails } from '../../store/spots';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
 import './SpotDetails.css';
 
 const SpotDetails = () => {
@@ -10,28 +12,16 @@ const SpotDetails = () => {
   const spot = useSelector(state => state.spots[id]);
 
   useEffect(() => {
-    console.log('Fetching spot details for id:', id);
     dispatch(fetchSpotDetails(id));
   }, [dispatch, id]);
-
-  useEffect(() => {
-    if (spot) {
-      console.log('Spot Details:', spot);
-      if (spot.spotImages) {
-        const previewImage = spot.spotImages.find(image => image.preview)?.url;
-        const otherImages = spot.spotImages.filter(image => !image.preview).slice(0, 4);
-        console.log('Preview Image URL:', previewImage);
-        console.log('Other Image URLs:', otherImages.map(image => image.url));
-      }
-    }
-  }, [spot]);
 
   if (!spot) return <div>Loading...</div>;
 
   const previewImage = spot.spotImages ? spot.spotImages.find(image => image.preview)?.url : '';
   const otherImages = spot.spotImages ? spot.spotImages.filter(image => !image.preview).slice(0, 4) : [];
   const owner = spot.owner || {};
-
+  const avgRating = spot.avgRating ? spot.avgRating : "New";
+console.log(avgRating);
   const handleReserveClick = () => {
     alert('Feature coming soon');
   };
@@ -59,6 +49,10 @@ const SpotDetails = () => {
           ${spot.price} <span>night</span>
         </div>
         <button className="reserve-button" onClick={handleReserveClick}>Reserve</button>
+      </div>
+      <div className="rating">
+        <FontAwesomeIcon icon={faStar} className="star-icon" />
+        {avgRating}
       </div>
     </div>
   );
