@@ -10,30 +10,41 @@ const DisplaySpots = () => {
   const dispatch = useDispatch();
   const spots = useSelector(state => state.spots);
   const [currentPage, setCurrentPage] = useState(1);
+  const [moreSpots, setmoreSpots] = useState(true); // for infinite scroll to flag when no more spots to fetch
   const observer = useRef();
 
   useEffect(() => {
-    dispatch(fetchSpots(currentPage));
-  }, [dispatch, currentPage]);
+    const fetchData = async () => {
+      const response = await dispatch(fetchSpots(currentPage));
+      if (!response || response.length === 0) {
+        setmoreSpots(false);
+      }
+    };
 
-  // Ensure spots is an array before mapping
+    if (moreSpots) {
+      fetchData();
+    }
+  }, [dispatch, currentPage, moreSpots]);
+
   const spotsArray = Object.values(spots);
 
   const lastSpotElementRef = useCallback(node => {
     if (observer.current) observer.current.disconnect();
     observer.current = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting) {
+      if (entries[0].isIntersecting && moreSpots) {
         setCurrentPage(prevPage => prevPage + 1);
       }
     });
     if (node) observer.current.observe(node);
-  }, []);
+  }, [moreSpots]);
 
   return (
     <div className="spot-container">
       {spotsArray.map((spot, index) => {
+        if (!spot.id) return null; // don't render if spot is undefined
+
         const spotTile = (
-          <div className="spot-tile" title={spot.name}>
+          <div className="spot-tile" title={spot.name} key={spot.id}>
             <img src={spot.previewImage} alt={spot.name} className="spot-preview-img" />
             <div className="spot-details">
               <div className="location-rating">

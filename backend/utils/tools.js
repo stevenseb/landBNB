@@ -7,7 +7,7 @@ function calculateAverageRating(reviews) {
     if (!reviews || reviews.length === 0) return null;
     const totalStars = reviews.reduce((sum, review) => sum + review.stars, 0);
     const avgRating = totalStars / reviews.length;
-    return Number(avgRating.toFixed(1));
+    return avgRating.toFixed(1);
 };
 
 function formatDate(dateString, dateOnly) {
@@ -41,6 +41,7 @@ function formatSpots(spots) {
         createdAt: formatDate(spot.createdAt),
         updatedAt: formatDate(spot.updatedAt),
         avgRating: calculateAverageRating(spot.Reviews),
+        count: spot.Reviews.length,
         previewImage: spot.SpotImages.length > 0 ? spot.SpotImages[0].url : null
     }));
     return Spots;

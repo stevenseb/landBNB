@@ -1,3 +1,5 @@
+// frontend/src/store/store.js
+
 import { csrfFetch } from './csrf';
 
 // Action types
@@ -5,6 +7,8 @@ const SET_SPOTS = 'spots/setSpots';
 const SET_SPOT = 'spots/setSpot';
 const ADD_SPOT = 'spots/addSpot';
 const ADD_IMAGE = 'spots/addImage';
+const SET_USER_SPOTS = 'spots/setUserSpots';
+const REMOVE_SPOT = 'spots/removeSpot';
 
 // Action creators
 const setSpots = (spots) => ({
@@ -27,9 +31,19 @@ const addImage = (image) => ({
   image,
 });
 
+const setUserSpots = (spots) => ({
+  type: SET_USER_SPOTS,
+  spots,
+});
+
+const removeSpot = (spotId) => ({
+  type: REMOVE_SPOT,
+  spotId,
+});
+
 // Thunks
-export const fetchSpots = (page) => async (dispatch) => {
-  const response = await csrfFetch(`/api/spots?=${page}`);
+export const fetchSpots = (page) => async (dispatch, getState) => {
+  const response = await csrfFetch(`/api/spots?page=${page}`);
   const data = await response.json();
   const spotsArray = data.Spots;
 
@@ -38,9 +52,12 @@ export const fetchSpots = (page) => async (dispatch) => {
     spotsArray.forEach(spot => {
       normalizedSpots[spot.id] = spot;
     });
-    dispatch(setSpots(normalizedSpots));
+    const currentSpots = getState().spots;
+    dispatch(setSpots({ ...currentSpots, ...normalizedSpots }));
+    return spotsArray; 
   } else {
     console.error('Expected spots to be an array');
+    return [];
   }
 };
 
@@ -92,6 +109,25 @@ export const addImageToSpot = (spotId, url, preview) => async (dispatch) => {
   }
 };
 
+export const fetchUserSpots = () => async (dispatch) => {
+  const response = await csrfFetch(`/api/spots/current`);
+  const data = await response.json();
+  dispatch(setUserSpots(data.Spots));
+};
+
+export const deleteSpot = (spotId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/spots/${spotId}`, {
+    method: 'DELETE',
+  });
+  
+  if (response.ok) {
+    dispatch(removeSpot(spotId));
+  } else {
+    const errorData = await response.json();
+    throw new Error(errorData.message || 'Failed to delete spot');
+  }
+};
+
 // Reducer
 const initialState = {};
 
@@ -119,6 +155,19 @@ const spotsReducer = (state = initialState, action) => {
       } else {
         return state;
       }
+    }
+    case SET_USER_SPOTS: {
+      return { ...state, userSpots: action.spots };
+    }
+    case REMOVE_SPOT: {
+      const newState = { ...state };
+      delete newState[action.spotId];
+
+      if (newState.userSpots) {
+        newState.userSpots = newState.userSpots.filter(spot => spot.id !== action.spotId);
+      }
+
+      return newState;
     }
     default:
       return state;
