@@ -12,6 +12,18 @@
   flex: 0 0 calc(25% - 20px); /* 4 spots per row */
   margin-bottom: 20px;
   box-sizing: border-box;
+  transition: box-shadow 0.3s ease, transform 0.3s ease; /* Smooth transition for hover effects */
+}
+
+.spot-link:hover {
+  text-decoration: none; /* Ensure text doesn't get underlined on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle box shadow */
+  transform: translateY(-5px); /* Slightly lift the tile */
+}
+
+/* Optional: To add a slight background color change */
+.spot-link:hover .spot-tile {
+  background-color: rgba(0, 0, 0, 0.05); /* Slightly darker background on hover */
 }
 
 @media screen and (max-width: 768px) {
@@ -32,7 +44,7 @@
 
 .spot-preview-img {
   width: 100%;
-  height: auto;
+  height: 220px;
   border-radius: 5px;
 }
 
@@ -41,7 +53,6 @@
   font-weight: bold;
 }
 
-/* Additional styling for spot details */
 .spot-details h2 {
   margin-top: 0;
 }
@@ -50,22 +61,34 @@
   margin-bottom: 5px;
 }
 
-.city-state {
-  font-weight: bolder;
-  font-size: larger;
+.location-rating {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline; /* Align the baseline of the text */
+}
+
+.location {
+  font-size: 12px;
   color: rgb(6, 11, 52);
 }
 
-.rating {
-  color: green;
+.avg-rating {
+  display: flex;
+  align-items: center;
   font-weight: bold;
+  color: rgb(25, 78, 25);
+}
+
+.star-icon {
+  margin-right: 5px;
+  color: black;
+  font-size: 0.8em; /* Adjust size as needed */
 }
 
 .name {
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .price {
   font-weight: bold;
-  font-size: medium;
 }

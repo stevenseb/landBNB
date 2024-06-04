@@ -7,6 +7,7 @@ import Footer from './components/Footer';
 import * as sessionActions from './store/session';
 import DisplaySpots from './components/DisplaySpots';
 import SpotDetails from './components/SpotDetails';
+import CreateSpotForm from './components/CreateSpotForm';
 
 function Layout() {
   const dispatch = useDispatch();
@@ -21,7 +22,9 @@ function Layout() {
   return (
     <>
       <NavBar isLoaded={isLoaded} />
+      <div className="main-content">
       {isLoaded && <Outlet />}
+      </div>
       <Footer /> 
     </>
   );
@@ -38,6 +41,10 @@ const router = createBrowserRouter([
       {
         path: '/spots/:id',
         element: <SpotDetails />,
+      },
+      {
+        path: '/spots/new',
+        element: <CreateSpotForm />,
       },
     ],
   },

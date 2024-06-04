@@ -139,6 +139,7 @@ router.get('/:spotId/bookings', requireAuth, async (req, res) => {
 
 // POST create a new spot
 router.post('/', requireAuth, validateSpot, async (req, res) => {
+    console.log(req);
     const { address, city, state, country, lat, lng, name, description, price } = req.body;
     const id = req.user.id;
     try {

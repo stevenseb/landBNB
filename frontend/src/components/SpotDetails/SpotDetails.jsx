@@ -2,6 +2,8 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchSpotDetails } from '../../store/spots';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
 import './SpotDetails.css';
 
 const SpotDetails = () => {
@@ -10,27 +12,16 @@ const SpotDetails = () => {
   const spot = useSelector(state => state.spots[id]);
 
   useEffect(() => {
-    console.log('Fetching spot details for id:', id);
     dispatch(fetchSpotDetails(id));
   }, [dispatch, id]);
-
-  useEffect(() => {
-    if (spot) {
-      console.log('Spot Details:', spot);
-      if (spot.spotImages) {
-        const previewImage = spot.spotImages.find(image => image.preview)?.url;
-        const otherImages = spot.spotImages.filter(image => !image.preview).slice(0, 4);
-        console.log('Preview Image URL:', previewImage);
-        console.log('Other Image URLs:', otherImages.map(image => image.url));
-      }
-    }
-  }, [spot]);
 
   if (!spot) return <div>Loading...</div>;
 
   const previewImage = spot.spotImages ? spot.spotImages.find(image => image.preview)?.url : '';
   const otherImages = spot.spotImages ? spot.spotImages.filter(image => !image.preview).slice(0, 4) : [];
   const owner = spot.owner || {};
+  const avgRating = spot.avgRating ? spot.avgRating : "New";
+  const numReviews = spot.numReviews || 0;
 
   const handleReserveClick = () => {
     alert('Feature coming soon');
@@ -50,15 +41,40 @@ const SpotDetails = () => {
           ))}
         </div>
       </div>
-      <div className="hosted-by">
-        Hosted by {owner.firstName} {owner.lastName}
-      </div>
-      <p className="description">{spot.description}</p>
-      <div className="callout-box">
-        <div className="price">
-          ${spot.price} <span>night</span>
+      <div className="details-container">
+        <div className="host-description">
+          <div className="hosted-by">
+            Hosted by {owner.firstName} {owner.lastName}
+          </div>
+          <p className="description">{spot.description}</p>
         </div>
-        <button className="reserve-button" onClick={handleReserveClick}>Reserve</button>
+        <div className="callout-box">
+          <div className="price-reviews">
+            <div className="price">
+              ${spot.price} <span>night</span>
+            </div>
+            <div className="reviews">
+              <FontAwesomeIcon icon={faStar} className="star-icon" />
+              {avgRating}
+              {numReviews > 0 && (
+                <>
+                  <span className="dot">•</span> {numReviews} {numReviews === 1 ? 'Review' : 'Reviews'}
+                </>
+              )}
+            </div>
+          </div>
+          <button className="reserve-button" onClick={handleReserveClick}>Reserve</button>
+        </div>
+      </div>
+      <hr></hr>
+      <div className="rating">
+        <FontAwesomeIcon icon={faStar} className="star-icon" />
+        {avgRating}
+        {numReviews > 0 && (
+          <>
+            <span className="dot">•</span> {numReviews} {numReviews === 1 ? 'Review' : 'Reviews'}
+          </>
+        )}
       </div>
     </div>
   );

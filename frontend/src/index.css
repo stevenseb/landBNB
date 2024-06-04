@@ -1,86 +1,95 @@
-/* TODO: Add sitewide styles */
 /* index.css */
 
 /* Reset some default styles */
 body, h1, h2, h3, h4, h5, h6, p, ul, ol {
-    margin: 0;
-    padding: 0;
-  }
-  
-  /* Set base font styles */
+  margin: 0;
+  padding: 0;
+}
+
+/* Set base font styles */
+body {
+  padding-top: 100px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+}
+
+/* Main content padding */
+.main-content {
+  padding-left: 70px;
+  padding-right: 70px;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700; /* Bold headings */
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.75rem;
+}
+
+h4 {
+  font-size: 1.5rem;
+}
+
+h5 {
+  font-size: 1.25rem;
+}
+
+h6 {
+  font-size: 1rem;
+}
+
+/* Paragraphs */
+p {
+  margin-bottom: 1rem;
+}
+
+/* Links */
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Lists */
+ul, ol {
+  margin-bottom: 1rem;
+  margin-left: 1.5rem;
+}
+
+/* Responsive typography */
+@media (max-width: 768px) {
+  /* Adjust font sizes for smaller screens */
   body {
-    padding-top: 100px;
-    font-family: 'Roboto', sans-serif;
-    font-size: 16px;
-    line-height: 1.5;
-    color: #333;
+    font-size: 14px;
   }
-  
-  /* Headings */
-  h1, h2, h3, h4, h5, h6 {
-    font-weight: 700; /* Bold headings */
-    line-height: 1.2;
-    margin-bottom: 0.5rem;
-  }
-  
+
   h1 {
-    font-size: 2.5rem;
-  }
-  
-  h2 {
     font-size: 2rem;
   }
-  
-  h3 {
+
+  h2 {
     font-size: 1.75rem;
   }
-  
-  h4 {
-    font-size: 1.5rem;
+
+  .main-content {
+    padding-left: 20px;
+    padding-right: 20px;
   }
-  
-  h5 {
-    font-size: 1.25rem;
-  }
-  
-  h6 {
-    font-size: 1rem;
-  }
-  
-  /* Paragraphs */
-  p {
-    margin-bottom: 1rem;
-  }
-  
-  /* Links */
-  a {
-    color: #007bff;
-    text-decoration: none;
-  }
-  
-  a:hover {
-    text-decoration: underline;
-  }
-  
-  /* Lists */
-  ul, ol {
-    margin-bottom: 1rem;
-    margin-left: 1.5rem;
-  }
-  
-  /* Responsive typography */
-  @media (max-width: 768px) {
-    /* Adjust font sizes for smaller screens */
-    body {
-      font-size: 14px;
-    }
-  
-    h1 {
-      font-size: 2rem;
-    }
-  
-    h2 {
-      font-size: 1.75rem;
-    }
-  
-  }
+}
