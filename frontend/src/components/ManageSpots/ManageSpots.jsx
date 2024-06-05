@@ -20,20 +20,16 @@ const ManageSpots = () => {
   }, [dispatch, user]);
 
   const handleDelete = (spotId) => {
-    dispatch(deleteSpot(spotId));
+    setSpotToDelete(spotId);
+  };
+
+  const confirmDelete = async () => {
+    await dispatch(deleteSpot(spotToDelete));
     setSpotToDelete(null);
   };
 
   const handleUpdate = (spotId) => {
     navigate(`/spots/${spotId}/edit`);
-  };
-
-  const openDeleteModal = (spot) => {
-    setSpotToDelete(spot);
-  };
-
-  const closeDeleteModal = () => {
-    setSpotToDelete(null);
   };
 
   if (!userSpots.length) {
@@ -66,18 +62,19 @@ const ManageSpots = () => {
             </NavLink>
             <div className="spot-actions">
               <button onClick={() => handleUpdate(spot.id)}>Update</button>
-              <button onClick={() => openDeleteModal(spot)}>Delete</button>
+              <button onClick={() => handleDelete(spot.id)}>Delete</button>
             </div>
           </div>
         ))}
       </div>
-
       {spotToDelete && (
-        <div className="delete-modal">
-          <div className="delete-modal-content">
-            <p className="delete-warning">Are you sure you want to delete {spotToDelete.name} permanently? This can&apos;t be reversed!</p>
-            <button onClick={() => handleDelete(spotToDelete.id)} className="confirm-delete-button">Confirm Delete</button>
-            <button onClick={closeDeleteModal} className="cancel-delete-button">Cancel</button>
+        <div className="modal">
+          <div className="modal-content">
+            <h2 style={{ color: 'red' }}>
+              Are you sure you want to delete this spot permanently? This can&apos;t be reversed!
+            </h2>
+            <button onClick={confirmDelete} className="confirm-delete">Yes, delete</button>
+            <button onClick={() => setSpotToDelete(null)} className="cancel-delete">No, keep spot</button>
           </div>
         </div>
       )}

@@ -9,6 +9,8 @@ const ADD_SPOT = 'spots/addSpot';
 const ADD_IMAGE = 'spots/addImage';
 const SET_USER_SPOTS = 'spots/setUserSpots';
 const REMOVE_SPOT = 'spots/removeSpot';
+const UPDATE_SPOT = 'spots/updateSpot';
+const SET_REVIEWS = 'spots/setReviews';
 
 // Action creators
 const setSpots = (spots) => ({
@@ -41,6 +43,18 @@ const removeSpot = (spotId) => ({
   spotId,
 });
 
+const updateSpotAction = (spot) => ({
+  type: UPDATE_SPOT,
+  spot,
+});
+
+const setReviews = (spotId, reviews) => ({
+  type: SET_REVIEWS,
+  spotId,
+  reviews,
+});
+
+
 // Thunks
 export const fetchSpots = (page) => async (dispatch, getState) => {
   const response = await csrfFetch(`/api/spots?page=${page}`);
@@ -49,12 +63,12 @@ export const fetchSpots = (page) => async (dispatch, getState) => {
 
   if (Array.isArray(spotsArray)) {
     const normalizedSpots = {};
-    spotsArray.forEach(spot => {
+    spotsArray.forEach((spot) => {
       normalizedSpots[spot.id] = spot;
     });
     const currentSpots = getState().spots;
     dispatch(setSpots({ ...currentSpots, ...normalizedSpots }));
-    return spotsArray; 
+    return spotsArray;
   } else {
     console.error('Expected spots to be an array');
     return [];
@@ -119,12 +133,39 @@ export const deleteSpot = (spotId) => async (dispatch) => {
   const response = await csrfFetch(`/api/spots/${spotId}`, {
     method: 'DELETE',
   });
-  
+
   if (response.ok) {
     dispatch(removeSpot(spotId));
   } else {
     const errorData = await response.json();
     throw new Error(errorData.message || 'Failed to delete spot');
+  }
+};
+
+export const updateSpot = (spotData) => async (dispatch) => {
+  const response = await csrfFetch(`/api/spots/${spotData.id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(spotData),
+  });
+
+  if (response.ok) {
+    const updatedSpot = await response.json();
+    dispatch(updateSpotAction(updatedSpot));
+    return updatedSpot;
+  } else {
+    const errorData = await response.json();
+    throw new Error(errorData.message || 'Failed to update spot');
+  }
+};
+
+export const fetchReviews = (spotId) => async (dispatch) => {
+  try {
+    const response = await csrfFetch(`/api/spots/${spotId}/reviews`);
+    const data = await response.json();
+    dispatch(setReviews(spotId, data.Reviews));
+  } catch (error) {
+    console.error('Failed to fetch reviews:', error);
   }
 };
 
@@ -164,9 +205,20 @@ const spotsReducer = (state = initialState, action) => {
       delete newState[action.spotId];
 
       if (newState.userSpots) {
-        newState.userSpots = newState.userSpots.filter(spot => spot.id !== action.spotId);
+        newState.userSpots = newState.userSpots.filter((spot) => spot.id !== action.spotId);
       }
 
+      return newState;
+    }
+    case UPDATE_SPOT: {
+      return { ...state, [action.spot.id]: action.spot };
+    }
+    case SET_REVIEWS: {
+      const newState = { ...state };
+      newState[action.spotId] = {
+        ...newState[action.spotId],
+        reviews: action.reviews,
+      };
       return newState;
     }
     default:
