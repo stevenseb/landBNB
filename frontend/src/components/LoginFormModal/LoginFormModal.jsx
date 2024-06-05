@@ -65,7 +65,7 @@ function LoginFormModal() {
     <div className="modal-backdrop">
       <div className="modal-content" ref={modalRef}>
         <div className="login-box">
-          <h1>Log In</h1>
+          <h2>Log In</h2>
           <form onSubmit={handleSubmit}>
             <label>
               Username or Email
@@ -88,7 +88,7 @@ function LoginFormModal() {
             {errors.credential && (<p>{errors.credential}</p>)}
             <button type="submit" disabled={isDisabled}>Log In</button>
             <br />
-            <button type="button" onClick={handleDemoLogin}>
+            <button type="demo" onClick={handleDemoLogin}>
               Demo User
             </button>
           </form>

@@ -15,6 +15,7 @@ const SpotDetails = () => {
   const [userHasReviewed, setUserHasReviewed] = useState(false);
 
   useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to top when component mounts
     dispatch(fetchSpotDetails(id));
     dispatch(fetchReviews(id));
   }, [dispatch, id]);
@@ -85,7 +86,7 @@ const SpotDetails = () => {
           <button className="reserve-button" onClick={handleReserveClick}>Reserve</button>
         </div>
       </div>
-      <hr />
+      <hr style={{ marginTop: '20px' }} />
       <div className="rating">
         <FontAwesomeIcon icon={faStar} className="star-icon" />
         {avgRating}

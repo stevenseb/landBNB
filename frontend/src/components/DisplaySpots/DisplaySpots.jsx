@@ -5,19 +5,21 @@ import { fetchSpots } from '../../store/spots';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import './DisplaySpots.css';
+import placeholderImage from '../../../assets/coming-soon.jpg';
 
 const DisplaySpots = () => {
   const dispatch = useDispatch();
   const spots = useSelector(state => state.spots);
   const [currentPage, setCurrentPage] = useState(1);
-  const [moreSpots, setmoreSpots] = useState(true); // for infinite scroll to flag when no more spots to fetch
+  const [moreSpots, setMoreSpots] = useState(true); // for infinite scroll to flag when no more spots to fetch
   const observer = useRef();
+  const [imageLoadedState, setImageLoadedState] = useState({}); // State to manage image load status
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await dispatch(fetchSpots(currentPage));
       if (!response || response.length === 0) {
-        setmoreSpots(false);
+        setMoreSpots(false);
       }
     };
 
@@ -38,14 +40,33 @@ const DisplaySpots = () => {
     if (node) observer.current.observe(node);
   }, [moreSpots]);
 
+  const handleImageLoad = (id) => {
+    setImageLoadedState(prevState => ({
+      ...prevState,
+      [id]: true,
+    }));
+  };
+
   return (
     <div className="spot-container">
       {spotsArray.map((spot, index) => {
         if (!spot.id) return null; // don't render if spot is undefined
 
+        const previewImage = spot.previewImage || placeholderImage;
+        const imageLoaded = imageLoadedState[spot.id] || false;
+
         const spotTile = (
           <div className="spot-tile" title={spot.name} key={spot.id}>
-            <img src={spot.previewImage} alt={spot.name} className="spot-preview-img" />
+            <img
+              src={previewImage}
+              alt={spot.name}
+              className={`spot-preview-img ${!imageLoaded && 'placeholder'}`}
+              onLoad={() => handleImageLoad(spot.id)}
+              onError={(e) => {
+                e.target.src = placeholderImage;
+                e.target.classList.add('placeholder');
+              }}
+            />
             <div className="spot-details">
               <div className="location-rating">
                 <div className="location">{spot.city}, {spot.state}</div>
