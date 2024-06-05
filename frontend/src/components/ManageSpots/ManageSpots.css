@@ -1,0 +1,150 @@
+/* ManageSpots.css */
+.spot-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 16px;
+}
+
+.spot-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  flex: 0 0 calc(25% - 20px); /* 4 spots per row */
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  transition: box-shadow 0.3s ease, transform 0.3s ease; /* for hover effects */
+}
+
+.spot-link:hover {
+  text-decoration: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px); /* raise the tile slightly on mouse over */
+}
+
+
+.spot-link:hover .spot-tile {
+  background-color: rgba(0, 0, 0, 0.05); /* slightly darker background on hover */
+}
+
+@media screen and (max-width: 768px) {
+  .spot-link {
+    flex: 0 0 calc(50% - 20px); /* 2 spots per row */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .spot-link {
+    flex: 0 0 calc(100% - 20px); /* 1 spot per row */
+  }
+}
+
+.spot-tile {
+  width: 100%;
+}
+
+.spot-preview-img {
+  width: 100%;
+  height: 220px;
+  border-radius: 5px;
+}
+
+.spot-details {
+  padding: 10px;
+  font-weight: bold;
+}
+
+.location-rating {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.location {
+  font-size: 12px;
+  color: rgb(6, 11, 52);
+}
+
+.avg-rating {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  color: rgb(25, 78, 25);
+}
+
+.star-icon {
+  margin-right: 5px;
+  color: black;
+  font-size: 0.8em;
+}
+
+.price {
+  font-weight: bold;
+}
+
+.spot-actions {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.spot-actions button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.spot-actions button:hover {
+  background-color: #0056b3;
+}
+
+/* Modal styles */
+.delete-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.delete-modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+}
+
+.delete-warning {
+  color: red;
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+.confirm-delete-button,
+.cancel-delete-button {
+  padding: 10px 20px;
+  margin: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.confirm-delete-button {
+  background-color: #ff4d4d;
+  color: white;
+}
+
+.cancel-delete-button {
+  background-color: #ccc;
+}

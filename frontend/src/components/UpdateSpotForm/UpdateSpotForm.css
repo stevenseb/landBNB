@@ -1,0 +1,90 @@
+.update-spot-form-container {
+  padding: 20px;
+  text-align: center;
+}
+
+.update-spot-form-container h1 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-row {
+  display: flex;
+  gap: 20px;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+.form-group.price-group {
+  display: flex;
+  align-items: center;
+}
+
+.form-group.price-group label {
+  margin-right: 5px;
+}
+
+.error {
+  color: red;
+  font-size: 0.875em;
+  margin-top: 5px;
+  display: block;
+}
+
+.update-button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.update-button-container button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  width: 45%;
+  box-sizing: border-box; /* Ensures padding and border are included in the width */
+}
+
+.update-button-container button[type="submit"] {
+  background-color: #007bff;
+  color: white;
+  height: 40px; /* Adjust as needed */
+}
+
+.update-button-container button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+.update-button-container .cancel-button {
+  background-color: #333;
+  color: white;
+  height: 38px; /* Reduced height by 20% */
+  margin-top: 8px; /* Adjust to align with submit button */
+}
+
+.update-button-container .cancel-button:hover {
+  background-color: #000;
+}

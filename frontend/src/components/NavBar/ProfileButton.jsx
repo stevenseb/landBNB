@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { FaUserCircle } from 'react-icons/fa';
 import * as sessionActions from '../../store/session';
@@ -7,12 +7,15 @@ import './NavBar.css';
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
   const menuRef = useRef(null);
 
   const logout = (e) => {
     e.preventDefault();
-    dispatch(sessionActions.logout());
+    dispatch(sessionActions.logout()).then(() => {
+      navigate('/');
+    });
   };
 
   const openMenu = () => {
@@ -50,24 +53,19 @@ function ProfileButton({ user }) {
             <NavLink to="/" className="dropdown-item" onClick={() => setShowMenu(false)}>
               Home
             </NavLink>
-            </li>
+          </li>
           <li>
             <NavLink to="/profile" className="profile-dropdown-item" onClick={() => setShowMenu(false)}>
-              Profile
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/listing" className="profile-dropdown-item" onClick={() => setShowMenu(false)}>
-              List Your Land
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/bookings" className="profile-dropdown-item" onClick={() => setShowMenu(false)}>
               Bookings
             </NavLink>
           </li>
           <li>
-            <button onClick={logout} className="profile-dropdown-item logout logout:hover">Log Out</button>
+            <NavLink to="/manage-spots" className="profile-dropdown-item" onClick={() => setShowMenu(false)}>
+              Manage Spots
+            </NavLink>
+          </li>
+          <li>
+            <button onClick={logout} className="profile-dropdown-item logout">Log Out</button>
           </li>
         </ul>
       )}

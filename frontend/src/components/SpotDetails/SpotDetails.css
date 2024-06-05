@@ -122,3 +122,48 @@
 .dot {
   margin: 0 5px;
 }
+
+/* reviews section styles */
+
+.reviews-section {
+  margin-top: 20px;
+}
+
+.review {
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+}
+
+.review-author {
+  font-weight: bold;
+}
+
+.review-date {
+  color: gray;
+  font-size: 0.875em;
+}
+
+.review-content {
+  margin-top: 5px;
+}
+
+/* post a review button styles */
+
+.post-review-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 1em;
+  margin: 10px 0;
+}
+
+.post-review-button:hover {
+  background-color: #0056b3;
+}
+
+hr {
+  margin-top: 20px; /* Adjust this value to add space above the <hr> tag */
+}

@@ -8,8 +8,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px; /* Increase the padding for more vertical space */
-  box-sizing: border-box; /* Ensure padding is included in width */
+  padding: 15px;
+  box-sizing: border-box;
   height: 75px; /* Increase the height of the navbar */
 }
 
@@ -25,7 +25,7 @@
 }
 
 .navbar-logo {
-  width: 205px; /* Adjust size as needed */
+  width: 205px;
   height: auto;
   padding-left: 10px;
 }

@@ -1,3 +1,4 @@
+// NavBar.jsx
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useState, useEffect, useRef } from 'react';
@@ -53,7 +54,7 @@ const NavBar = ({ isLoaded }) => {
         {!sessionUser && menuOpen && (
           <div className="dropdown-menu" ref={menuRef}>
             <ul>
-            <li className="dropdown-item" onClick={() => setMenuOpen(false)}>
+              <li className="dropdown-item" onClick={() => setMenuOpen(false)}>
                 <OpenModalButton
                   buttonText="Sign Up"
                   modalComponent={<SignupFormModal />}
