@@ -1,4 +1,3 @@
-// frontend/src/components/UpdateSpotForm/UpdateSpotForm.jsx
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -37,7 +36,7 @@ const UpdateSpotForm = () => {
       setName(spot.name || '');
       setPrice(spot.price || '');
       setDescription(spot.description || '');
-      const imageUrls = spot.spotImages.map(image => image.url);
+      const imageUrls = (spot.spotImages || []).map(image => image.url);
       setImageUrls([
         imageUrls[0] || '',
         imageUrls[1] || '',
