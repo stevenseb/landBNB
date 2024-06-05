@@ -46,18 +46,20 @@ const ManageSpots = () => {
       <h1>Manage Spots</h1>
       <div className="spot-container">
         {userSpots.map(spot => (
-          <div className="spot-tile" key={spot.id}>
+          <div className="spot-tile-wrapper" key={spot.id}>
             <NavLink to={`/spots/${spot.id}`} className="spot-link">
-              <img src={spot.previewImage} alt={spot.name} className="spot-preview-img" />
-              <div className="spot-details">
-                <div className="location-rating">
-                  <div className="location">{spot.city}, {spot.state}</div>
-                  <div className="avg-rating">
-                    <FontAwesomeIcon icon={faStar} className="star-icon" />
-                    {spot.avgRating ? spot.avgRating : "New"}
+              <div className="spot-tile">
+                <img src={spot.previewImage} alt={spot.name} className="spot-preview-img" />
+                <div className="spot-details">
+                  <div className="location-rating">
+                    <div className="location">{spot.city}, {spot.state}</div>
+                    <div className="avg-rating">
+                      <FontAwesomeIcon icon={faStar} className="star-icon" />
+                      {spot.avgRating ? spot.avgRating : "New"}
+                    </div>
                   </div>
+                  <div className="price">${spot.price} night</div>
                 </div>
-                <div className="price">${spot.price} night</div>
               </div>
             </NavLink>
             <div className="spot-actions">
@@ -68,13 +70,13 @@ const ManageSpots = () => {
         ))}
       </div>
       {spotToDelete && (
-        <div className="modal">
-          <div className="modal-content">
-            <h2 style={{ color: 'red' }}>
+        <div className="delete-modal">
+          <div className="delete-modal-content">
+            <h2 className="delete-warning">
               Are you sure you want to delete this spot permanently? This can&apos;t be reversed!
             </h2>
-            <button onClick={confirmDelete} className="confirm-delete">Yes, delete</button>
-            <button onClick={() => setSpotToDelete(null)} className="cancel-delete">No, keep spot</button>
+            <button onClick={confirmDelete} className="confirm-delete-button">Yes, delete</button>
+            <button onClick={() => setSpotToDelete(null)} className="cancel-delete-button">No, keep spot</button>
           </div>
         </div>
       )}
