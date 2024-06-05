@@ -1,24 +1,32 @@
+// frontend/src/components/SpotDetails/SpotDetails.jsx
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchSpotDetails, fetchReviews } from '../../store/spots';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { selectSpotById, selectReviewsBySpotId } from '../../store/selectors';
+import { useModal } from '../../context/Modal';
+import ReviewForm from '../CreateReviewModal/ReviewForm';
 import './SpotDetails.css';
 
 const SpotDetails = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const spot = useSelector(state => state.spots[id]);
-  const reviews = useSelector(state => state.spots[id]?.reviews || []);
-  const user = useSelector(state => state.session.user);
+  const spot = useSelector((state) => selectSpotById(state, id));
+  const reviews = useSelector((state) => selectReviewsBySpotId(state, id));
+  const user = useSelector((state) => state.session.user);
   const [userHasReviewed, setUserHasReviewed] = useState(false);
+  const { setModalContent, closeModal } = useModal();
 
   useEffect(() => {
-    window.scrollTo(0, 0); // Scroll to top when component mounts
     dispatch(fetchSpotDetails(id));
     dispatch(fetchReviews(id));
   }, [dispatch, id]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [id]);
 
   useEffect(() => {
     if (user && reviews.length > 0) {
@@ -27,7 +35,7 @@ const SpotDetails = () => {
     }
   }, [user, reviews]);
 
-  if (!spot) return <div>Loading...</div>;
+  if (!spot.id) return <div>Loading...</div>;
 
   const previewImage = spot.spotImages ? spot.spotImages.find(image => image.preview)?.url : '';
   const otherImages = spot.spotImages ? spot.spotImages.filter(image => !image.preview).slice(0, 4) : [];
@@ -37,6 +45,10 @@ const SpotDetails = () => {
 
   const handleReserveClick = () => {
     alert('Feature coming soon');
+  };
+
+  const handleReviewClick = () => {
+    setModalContent(<ReviewForm spotId={spot.id} closeModal={closeModal} />);
   };
 
   const formatDate = (dateString) => {
@@ -97,7 +109,7 @@ const SpotDetails = () => {
         )}
       </div>
       {shouldShowReviewButton && (
-        <button className="post-review-button">Post Your Review</button>
+        <button className="post-review-button" onClick={handleReviewClick}>Post Your Review</button>
       )}
       <div className="reviews-section">
         <h2>Reviews</h2>

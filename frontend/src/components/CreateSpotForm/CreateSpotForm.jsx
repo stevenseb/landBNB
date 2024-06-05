@@ -58,7 +58,6 @@ const CreateSpotForm = () => {
       try {
         const createdSpot = await dispatch(createSpot(newSpot));
         if (createdSpot) {
-          // After creating the spot, add images
           for (const url of imageUrls) {
             if (url) {
               await dispatch(addImageToSpot(createdSpot.id, url, url === imageUrls[0]));
@@ -145,6 +144,7 @@ const CreateSpotForm = () => {
         {errors.includes('Price per night is required') && <span className="error">Price per night is required</span>}
         <hr ></hr>
         <br></br>
+        <p className="blue-text">***Image links must end with .png, .jpg, or .jpeg***</p>
         {imageUrls.map((url, index) => (
           <div key={index} className="form-group">
             <input

@@ -1,6 +1,10 @@
 .spot-details-container {
-  padding: 100px 290px; /* Adjusted padding for left and right margins */
-  text-align: center; /* Center-align text within the container */
+  padding: 100px 290px; 
+  text-align: center; 
+}
+
+.spot-details-container .location {
+  font-size: 19px;
 }
 
 .spot-details-container h1 {
@@ -16,7 +20,7 @@
 
 .images-container {
   display: flex;
-  gap: 15px; /* Adjust gap as needed */
+  gap: 15px; 
   margin-bottom: 20px;
 }
 
@@ -30,7 +34,7 @@
 .large-img {
   width: 100%;
   height: auto;
-  max-width: 600px; /* Adjust this value as needed */
+  max-width: 600px;
   border-radius: 10px;
 }
 
@@ -45,7 +49,7 @@
 .small-img {
   width: 100%;
   height: auto;
-  max-width: 150px; /* Adjust this value as needed */
+  max-width: 150px;
   border-radius: 10px;
 }
 
@@ -56,22 +60,26 @@
 }
 
 .host-description {
-  flex: 2; /* Reduced flex value to give more space to the callout box */
+  flex: 2;
   text-align: left;
   padding-right: 20px;
 }
 
+.host-description .hosted-by {
+  font-size: 20px;
+}
+
 .callout-box {
-  flex: 1.5; /* Increased flex value to make the callout box wider */
+  flex: 1.5; 
   border: 1px solid #ddd;
-  padding: 30px 50px; /* Adjusted padding */
+  padding: 30px 50px;
   border-radius: 10px;
-  text-align: center; /* Center-align text within the callout box */
+  text-align: center;
 }
 
 .price-reviews {
   display: flex;
-  justify-content: space-between; /* Space out the price and reviews */
+  justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
 }
@@ -165,5 +173,5 @@
 }
 
 hr {
-  margin-top: 20px; /* Adjust this value to add space above the <hr> tag */
+  margin-top: 20px; 
 }
