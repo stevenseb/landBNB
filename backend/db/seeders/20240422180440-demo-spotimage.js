@@ -228,7 +228,7 @@ const demoSpotImages = [
     },
     {
       "spotId": 11,
-      "url": "https://unsplash.com/photos/44d4lAQAlbDA",
+      "url": "https://static.vecteezy.com/system/resources/previews/024/893/441/non_2x/panoramic-aerial-view-showcases-beauty-in-nature-rural-scene-generated-by-ai-photo.jpg",
       "preview": false
     },
     {
@@ -398,7 +398,7 @@ const demoSpotImages = [
     },
     {
       "spotId": 20,
-      "url": "https://unsplash.com/photos/78d4lAQAlbDA",
+      "url": "https://www.worldatlas.com/r/w1200/upload/39/f1/6e/shutterstock-231369109.jpg",
       "preview": false
     },
     {
@@ -413,12 +413,12 @@ const demoSpotImages = [
     },
     {
       "spotId": 21,
-      "url": "https://unsplash.com/photos/81d4lAQAlbDA",
+      "url": "https://www.worldatlas.com/r/w1200/upload/39/f1/6e/shutterstock-231369109.jpg",
       "preview": true
     },
     {
       "spotId": 21,
-      "url": "https://unsplash.com/photos/82d4lAQAlbDA",
+      "url": "https://images.photowall.com/products/67670/green-forest-in-summer.jpg",
       "preview": false
     },
     {
@@ -434,7 +434,7 @@ const demoSpotImages = [
     {
       "spotId": 22,
       "url": "https://unsplash.com/photos/85d4lAQAlbDA",
-      "preview": true
+      "preview": false
     },
     {
       "spotId": 22,
@@ -448,17 +448,17 @@ const demoSpotImages = [
     },
     {
       "spotId": 22,
-      "url": "https://unsplash.com/photos/88d4lAQAlbDA",
+      "url": "https://images.photowall.com/products/67670/green-forest-in-summer.jpg",
       "preview": false
     },
     {
       "spotId": 23,
-      "url": "https://unsplash.com/photos/89d4lAQAlbDA",
+      "url": "https://res.cloudinary.com/simpleview/image/upload/v1476808509/clients/denver/rocky-mountain-national-park-aglow_763256ea-f0ae-5102-065b089a4c479241.jpg",
       "preview": true
     },
     {
       "spotId": 23,
-      "url": "https://unsplash.com/photos/90d4lAQAlbDA",
+      "url": "https://peakvisor.com/img/news/southern-rocky-mountains.jpg",
       "preview": false
     },
     {
@@ -473,27 +473,27 @@ const demoSpotImages = [
     },
     {
       "spotId": 24,
-      "url": "https://unsplash.com/photos/93d4lAQAlbDA",
+      "url": "https://images.photowall.com/products/67670/green-forest-in-summer.jpg",
       "preview": true
     },
     {
       "spotId": 24,
-      "url": "https://unsplash.com/photos/94d4lAQAlbDA",
+      "url": "https://peakvisor.com/img/news/southern-rocky-mountains.jpg",
       "preview": false
     },
     {
       "spotId": 24,
-      "url": "https://unsplash.com/photos/95d4lAQAlbDA",
+      "url": "https://res.cloudinary.com/simpleview/image/upload/v1476808509/clients/denver/rocky-mountain-national-park-aglow_763256ea-f0ae-5102-065b089a4c479241.jpg",
       "preview": false
     },
     {
       "spotId": 24,
-      "url": "https://unsplash.com/photos/96d4lAQAlbDA",
+      "url": "https://www.worldatlas.com/r/w1200/upload/39/f1/6e/shutterstock-231369109.jpg",
       "preview": false
     },
     {
       "spotId": 25,
-      "url": "https://unsplash.com/photos/97d4lAQAlbDA",
+      "url": "https://peakvisor.com/img/news/southern-rocky-mountains.jpg",
       "preview": true
     },
     {
@@ -513,7 +513,7 @@ const demoSpotImages = [
     },
     {
       "spotId": 26,
-      "url": "https://unsplash.com/photos/101d4lAQAlbDA",
+      "url": "https://cdn.aarp.net/content/dam/aarp/travel/Domestic/2020/07/1140-rocky-mountain-national-park.jpg",
       "preview": true
     },
     {
@@ -528,7 +528,7 @@ const demoSpotImages = [
     },
     {
       "spotId": 27,
-      "url": "https://images.unsplash.com/photo-1533328624755-6e81fd927bc4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "url": "https://www.mediastorehouse.com/p/251/palm-trees-sunset-key-west-florida-usa-19403158.jpg",
       "preview": true
     },
     {
@@ -550,7 +550,7 @@ const demoSpotImages = [
     {
       "spotId": 29,
       "url": "https://images.unsplash.com/photo-1504280690773-38650740aaa5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80", 
-      "preview": true
+      "preview": false
     },
     {
       "spotId": 29,
@@ -560,7 +560,7 @@ const demoSpotImages = [
     {
       "spotId": 30,
       "url": "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-      "preview": true
+      "preview": false
     },
     {
       "spotId": 30,
@@ -571,7 +571,7 @@ const demoSpotImages = [
     {
       "spotId": 31,
       "url": "https://images.unsplash.com/photo-1600857262923-7b6c9d4c0350?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-      "preview": true
+      "preview": false
     },
     {
       "spotId": 31,
@@ -592,7 +592,7 @@ const demoSpotImages = [
     {
       "spotId": 32,
       "url": "https://images.unsplash.com/photo-1542601675-c9d78d9b5a32?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-      "preview": true
+      "preview": false
     },
     {
       "spotId": 32,
@@ -612,12 +612,12 @@ const demoSpotImages = [
     {
       "spotId": 33,
       "url": "https://images.unsplash.com/photo-1600857262923-7b6c9d4c0350?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-      "preview": true
+      "preview": false
     },
     {
         "spotId": 33,
         "url": "https://images.unsplash.com/photo-1533328624755-6e81fd927bc4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-        "preview": true
+        "preview": false
       },
       {
         "spotId": 33,
@@ -638,11 +638,11 @@ const demoSpotImages = [
       {
         "spotId": 35,
         "url": "https://images.unsplash.com/photo-1504280690773-38650740aaa5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80", 
-        "preview": true
+        "preview": false
       },
       {
         "spotId": 37,
-        "url": "https://images.unsplash.com/photo-1571004343638-82ceb27dbde0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+        "url": "https://www.shutterstock.com/image-photo/beautiful-utah-mountains-fall-260nw-2372015141.jpg",
         "preview": true
       },
       {
@@ -657,7 +657,7 @@ const demoSpotImages = [
       },
       {
         "spotId": 36,
-        "url": "https://images.unsplash.com/photo-1600857262923-7b6c9d4c0350?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+        "url": "https://storage.googleapis.com/pod_public/1300/152656.jpg",
         "preview": true
       },
       {
@@ -672,13 +672,13 @@ const demoSpotImages = [
       },
       {
         "spotId": 37,
-        "url": "https://images.unsplash.com/photo-1600857262923-7b6c9d4c0350?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+        "url": "https://www.croatiatravelco.com/wp-content/uploads/2014/02/croatia-green-forest-and-waterfall.jpg",
         "preview": false
       },
       {
         "spotId": 38,
         "url": "https://images.unsplash.com/photo-1542601675-c9d78d9b5a32?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-        "preview": true
+        "preview": false
       },
       {
         "spotId": 38,
@@ -698,29 +698,29 @@ const demoSpotImages = [
     
       {
         "spotId": 39,
-        "url": "https://images.unsplash.com/photo-1533328624755-6e81fd927bc4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+        "url": "https://www.croatiatravelco.com/wp-content/uploads/2014/02/croatia-green-forest-and-waterfall.jpg",
         "preview": true
       },
       {
         "spotId": 40,
-        "url": "https://images.unsplash.com/photo-1601053539591-da7b9c54d2c1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+        "url": "https://images.photowall.com/products/50398/emerald-green-forest.jpg?h=699&q=85",
         "preview": true
       },
       {
         "spotId": 40,
-        "url": "https://images.unsplash.com/photo-1601053539591-da7b9c54d2c1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+        "url": "https://mynaturebookadventures.com/cdn/shop/articles/10-reasons-you-should-visit-badlands-national-park-162342.jpg",
         "preview": false
       },
       {
         "spotId": 41,
-        "url": "https://images.unsplash.com/photo-1601053539591-da7b9c54d2c1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+        "url": "https://images.photowall.com/products/50398/emerald-green-forest.jpg",
         "preview": false
       },
     
       {
         "spotId": 41,
         "url": "https://images.unsplash.com/photo-1504280690773-38650740aaa5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80", 
-        "preview": true
+        "preview": false
       },
       {
         "spotId": 42,
@@ -730,7 +730,7 @@ const demoSpotImages = [
       {
         "spotId": 42,
         "url": "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-        "preview": true
+        "preview": false
       },
       {
         "spotId": 43,
@@ -741,7 +741,7 @@ const demoSpotImages = [
       {
         "spotId": 43,
         "url": "https://images.unsplash.com/photo-1600857262923-7b6c9d4c0350?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-        "preview": true
+        "preview": false
       },
       {
         "spotId": 44,
@@ -761,7 +761,7 @@ const demoSpotImages = [
     
       {
         "spotId": 44,
-        "url": "https://images.unsplash.com/photo-1542601675-c9d78d9b5a32?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+        "url": "https://storage.googleapis.com/pod_public/1300/152656.jpg",
         "preview": true
       },
       {
@@ -782,7 +782,7 @@ const demoSpotImages = [
       {
         "spotId": 46,
         "url": "https://images.unsplash.com/photo-1533328624755-6e81fd927bc4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-        "preview": true
+        "preview": false
       },
       {
         "spotId": 47,
@@ -792,17 +792,17 @@ const demoSpotImages = [
       {
         "spotId": 47,
         "url": "https://images.unsplash.com/photo-1601053539591-da7b9c54d2c1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-        "preview": true
+        "preview": false
       },
     {
       "spotId": 48,
       "url": "https://images.unsplash.com/photo-1601053539591-da7b9c54d2c1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-      "preview": true
+      "preview": false
     },
     {
       "spotId": 49,
       "url": "https://images.unsplash.com/photo-1533328624755-6e81fd927bc4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-      "preview": true
+      "preview": false
     },
     {
       "spotId": 48,
@@ -822,7 +822,7 @@ const demoSpotImages = [
     
     {
       "spotId": 50,
-      "url": "https://images.unsplash.com/photo-1504280690773-38650740aaa5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80", 
+      "url": "https://mynaturebookadventures.com/cdn/shop/articles/10-reasons-you-should-visit-badlands-national-park-162342.jpg", 
       "preview": true
     },
     {
@@ -832,7 +832,7 @@ const demoSpotImages = [
     },
     {
       "spotId": 51,
-      "url": "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "url": "https://www.traveloffpath.com/wp-content/uploads/2021/10/top5badlands-1024x676.jpg",
       "preview": false
     },
     {
@@ -840,20 +840,19 @@ const demoSpotImages = [
       "url": "https://images.unsplash.com/photo-1512856822635-e6e19a987417?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
       "preview": false
     },
-  
     {
       "spotId": 51,
-      "url": "https://images.unsplash.com/photo-1600857262923-7b6c9d4c0350?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "url": "https://storage.googleapis.com/pod_public/1300/152656.jpg",
       "preview": true
     },
     {
       "spotId": 52,
-      "url": "https://images.unsplash.com/photo-1600857262923-7b6c9d4c0350?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "url": "https://media.cntraveler.com/photos/64ac7fecfc96ce0cb0027210/16:9/w_2560%2Cc_limit/Guide%2520to%2520Rocky%2520Mountain%2520National%2520Park_GettyImages-1396014637.jpg",
       "preview": true
     },
     {
       "spotId": 53,
-      "url": "https://images.unsplash.com/photo-1600857262923-7b6c9d4c0350?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "url": "https://adventures.com/media/4793/canadian-rockies-mountains-nature-forest-lake-peaks-landscape-1.jpg",
       "preview": true
     },
     {
@@ -864,7 +863,7 @@ const demoSpotImages = [
   
     {
       "spotId": 54,
-      "url": "https://images.unsplash.com/photo-1542601675-c9d78d9b5a32?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "url": "https://hips.hearstapps.com/hmg-prod/images/moraine-lake-and-the-valley-of-the-ten-peaks-in-the-royalty-free-image-1571062944.jpg",
       "preview": true
     },
     {
@@ -874,7 +873,7 @@ const demoSpotImages = [
     },
     {
       "spotId": 55,
-      "url": "https://images.unsplash.com/photo-1542601675-c9d78d9b5a32?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "url": "https://as1.ftcdn.net/v2/jpg/03/84/86/98/1000_F_384869839_3RLEgzoXaM8kFbJxpZ2mlvJuqnAYR8iL.jpg",
       "preview": true
     },
     {
@@ -884,7 +883,7 @@ const demoSpotImages = [
     },
     {
       "spotId": 56,
-      "url": "https://images.unsplash.com/photo-1533328624755-6e81fd927bc4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "url": "https://www.nrdc.org/sites/default/files/styles/huge_16x9_100/public/2023-04/talmie-peak-trail-wa-0pkjf1WRkU0.jpg",
       "preview": true
     },
     {
@@ -905,7 +904,7 @@ const demoSpotImages = [
     
     {
       "spotId": 58,
-      "url": "https://images.unsplash.com/photo-1504280690773-38650740aaa5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80", 
+      "url": "https://www.trolleytours.com/wp-content/uploads/2016/06/key-west-higgs-beach.jpg", 
       "preview": true
     },
     {
@@ -915,7 +914,7 @@ const demoSpotImages = [
     },
     {
       "spotId": 59,
-      "url": "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "url": "https://www.fao.org/images/devforestslibraries/default-album/forests.jpg",
       "preview": true
     },
     {
@@ -925,7 +924,7 @@ const demoSpotImages = [
     },
     {
       "spotId": 60,
-      "url": "https://images.unsplash.com/photo-1600857262923-7b6c9d4c0350?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "url": "https://media.istockphoto.com/id/1006274284/photo/palm-tree-on-the-tropical-beach.jpg",
       "preview": true
     },
     {
@@ -935,7 +934,7 @@ const demoSpotImages = [
     },
     {
       "spotId": 61,
-      "url": "https://images.unsplash.com/photo-1600857262923-7b6c9d4c0350?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "url": "https://www.lakehomes.com/info/wp-content/uploads/2020/10/great-salt-lake-utah.jpg",
       "preview": true
     },
     {
@@ -946,7 +945,7 @@ const demoSpotImages = [
   
     {
       "spotId": 62,
-      "url": "https://images.unsplash.com/photo-1542601675-c9d78d9b5a32?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "url": "https://e7jecw7o93n.exactdn.com/wp-content/uploads/2020/06/az_Saguaro_NP_iStock_001.jpg",
       "preview": true
     },
     {
@@ -966,7 +965,7 @@ const demoSpotImages = [
     },
     {
       "spotId": 64,
-      "url": "https://images.pexels.com/photos/440731/pexels-photo-440731.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "url": "https://images.pexels.com/photos/440731/pexels-photo-440731.jpeg",
       "preview": true
     },
     {
@@ -976,17 +975,17 @@ const demoSpotImages = [
     },
     {
       "spotId": 65,
-      "url": "https://images.unsplash.com/photo-1600857262923-7b6c9d4c0350?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "url": "https://st2.depositphotos.com/2110927/46849/i/450/depositphotos_468494414-stock-photo-tropical-landscape-jungle.jpg",
       "preview": true
     },
     {
       "spotId": 65,
-      "url": "https://images.unsplash.com/photo-1600857262923-7b6c9d4c0350?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "url": "https://i.pinimg.com/originals/98/ba/ca/98baca7250f8acf2f4324143288706a4.jpg",
       "preview": false
     },
     {
       "spotId": 66,
-      "url": "https://images.unsplash.com/photo-1600857262923-7b6c9d4c0350?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "url": "https://i.pinimg.com/originals/98/ba/ca/98baca7250f8acf2f4324143288706a4.jpg",
       "preview": true
     },
     {
@@ -996,7 +995,7 @@ const demoSpotImages = [
     },
     {
       "spotId": 67,
-      "url": "https://images.unsplash.com/photo-1542601675-c9d78d9b5a32?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "url": "https://live.staticflickr.com/4662/39848501801_036cb48a97_h.jpg",
       "preview": true
     },
     {
@@ -1006,7 +1005,7 @@ const demoSpotImages = [
     },
     {
       "spotId": 68,
-      "url": "https://images.unsplash.com/photo-1542601675-c9d78d9b5a32?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "url": "https://t3.ftcdn.net/jpg/01/84/44/82/360_F_184448258_TdQNk0v8NlcJgnIHe0fBE0Un8KoddIlw.jpg",
       "preview": true
     },
     {
@@ -1016,7 +1015,7 @@ const demoSpotImages = [
     },
     {
       "spotId": 69,
-      "url": "https://images.unsplash.com/photo-1504280690773-38650740aaa5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "url": "https://cdn.pixabay.com/photo/2015/08/25/22/18/bridge-907770_1280.jpg",
       "preview": true
     },
     {
@@ -1026,7 +1025,7 @@ const demoSpotImages = [
     },
     {
       "spotId": 69,
-      "url": "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "url": "https://www.fao.org/images/devforestslibraries/default-album/forests.jpg",
       "preview": false
     },
     {
@@ -1037,7 +1036,7 @@ const demoSpotImages = [
   
     {
       "spotId": 70,
-      "url": "https://images.unsplash.com/photo-1600857262923-7b6c9d4c0350?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKrAyF8y2hP_SaEzE3OO4OajeFxKbG5xanig&s",
       "preview": true
     },
     {
@@ -1121,7 +1120,7 @@ const demoSpotImages = [
   
     {
       "spotId": 74,
-      "url": "https://images.unsplash.com/photo-1600857262923-7b6c9d4c0350?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "url": "https://www.traveloffpath.com/wp-content/uploads/2021/10/top5badlands-1024x676.jpg",
       "preview": true
     },
     {
@@ -1136,7 +1135,7 @@ const demoSpotImages = [
     },
     {
       "spotId": 75,
-      "url": "https://images.unsplash.com/photo-1504280690773-38650740aaa5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "url": "https://www.landzero.com/cdn/shop/articles/pexels-pixabay-221315_1000x1000.jpg?v=1689637731",
       "preview": true
     },
     {
@@ -1157,12 +1156,12 @@ const demoSpotImages = [
   
     {
       "spotId": 76,
-      "url": "https://images.unsplash.com/photo-1600857262923-7b6c9d4c0350?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "url": "https://azbigmedia.com/wp-content/uploads/2021/07/most-affordable-land.jpg",
       "preview": true
     },
     {
       "spotId": 77,
-      "url": "https://images.unsplash.com/photo-1600857262923-7b6c9d4c0350?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "url": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0d/82/fe/93/beautiful-scenery.jpg",
       "preview": true
     },
     {
@@ -1178,7 +1177,7 @@ const demoSpotImages = [
   
     {
       "spotId": 78,
-      "url": "https://images.unsplash.com/photo-1542601675-c9d78d9b5a32?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "url": "https://www.josephfiler.com/images/xl/Florida-Keys-5517-Edit.jpg",
       "preview": true
     },
     {
@@ -1193,13 +1192,13 @@ const demoSpotImages = [
     },
     {
       "spotId": 79,
-      "url": "https://images.unsplash.com/photo-1542601675-c9d78d9b5a32?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "url": "https://www.cuddlynest.com/blog/wp-content/uploads/2023/05/clear-water-beaches-florida-scaled.jpg",
       "preview": true
     },
   
     {
       "spotId": 80,
-      "url": "https://images.unsplash.com/photo-1533328624755-6e81fd927bc4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "url": "https://d1l4e1efm2qo9x.cloudfront.net/margaritavilleresorts.com-1367967347/cms/cache/v2/64a31f412ee70.jpg/1200x630/fit/80/f2c384391216f389b53825062a4b7637.jpg",
       "preview": true
     },
     {
@@ -1256,7 +1255,7 @@ const demoSpotImages = [
     },
     {
       "spotId": 81,
-      "url": "https://images.unsplash.com/photo-1600857262923-7b6c9d4c0350?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "url": "https://st3.depositphotos.com/31468036/34329/i/450/depositphotos_343290404-stock-photo-sunset-rural-scene.jpg",
       "preview": true
     },
     {
@@ -1271,22 +1270,22 @@ const demoSpotImages = [
     },
     {
       "spotId": 82,
-      "url": "https://images.unsplash.com/photo-1542601675-c9d78d9b5a32?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "url": "https://cdn.thewire.in/wp-content/uploads/2018/06/30163424/forest.jpg",
       "preview": true
     },
     {
       "spotId": 82,
-      "url": "https://images.unsplash.com/photo-1542601675-c9d78d9b5a32?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "url": "https://static.vecteezy.com/system/resources/previews/024/891/164/large_2x/majestic-mountain-range-in-africa-a-non-urban-rural-scene-generated-by-ai-photo.jpg",
       "preview": false
     },
     {
       "spotId": 82,
-      "url": "https://images.unsplash.com/photo-1542601675-c9d78d9b5a32?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "url": "https://cdn.thewire.in/wp-content/uploads/2018/06/30163424/forest.jpg",
       "preview": false
     },
     {
       "spotId": 82,
-      "url": "https://images.unsplash.com/photo-1542601675-c9d78d9b5a32?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+      "url": "https://www.wpr.org/wp-content/uploads/2021/10/pelican_river_forest_wi_072_c_jay_brittain.jpg",
       "preview": false
     }
 ]
