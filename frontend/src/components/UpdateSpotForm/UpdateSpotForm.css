@@ -65,13 +65,13 @@
   cursor: pointer;
   font-size: 1em;
   width: 45%;
-  box-sizing: border-box; /* Ensures padding and border are included in the width */
+  box-sizing: border-box; 
 }
 
 .update-button-container button[type="submit"] {
   background-color: #007bff;
   color: white;
-  height: 40px; /* Adjust as needed */
+  height: 40px; 
 }
 
 .update-button-container button[type="submit"]:hover {
@@ -81,8 +81,8 @@
 .update-button-container .cancel-button {
   background-color: #333;
   color: white;
-  height: 38px; /* Reduced height by 20% */
-  margin-top: 8px; /* Adjust to align with submit button */
+  height: 38px; 
+  margin-top: 8px; 
 }
 
 .update-button-container .cancel-button:hover {

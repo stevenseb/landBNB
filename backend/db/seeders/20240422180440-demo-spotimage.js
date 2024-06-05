@@ -924,7 +924,7 @@ const demoSpotImages = [
     },
     {
       "spotId": 60,
-      "url": "https://media.istockphoto.com/id/1006274284/photo/palm-tree-on-the-tropical-beach.jpg",
+      "url": "https://www.visittheusa.com/sites/default/files/styles/hero_l/public/images/hero_media_image/2016-10/1%20HERO_11-%20Tybee%20Island%2C%20Savannah%27s%20Beach_Web72DPI.jpg",
       "preview": true
     },
     {

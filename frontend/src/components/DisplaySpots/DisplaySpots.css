@@ -6,9 +6,8 @@
 }
 
 .spot-link {
-  text-decoration: none; /* Remove default link styles */
-  color: inherit; /* Inherit text color */
-  display: block; /* Ensure the link covers the entire tile */
+  text-decoration: none;
+  display: block;
   flex: 0 0 calc(25% - 20px); /* 4 spots per row */
   margin-bottom: 20px;
   box-sizing: border-box;
@@ -16,12 +15,11 @@
 }
 
 .spot-link:hover {
-  text-decoration: none; /* Ensure text doesn't get underlined on hover */
+  text-decoration: none;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle box shadow */
   transform: translateY(-5px); /* Slightly lift the tile */
 }
 
-/* Optional: To add a slight background color change */
 .spot-link:hover .spot-tile {
   background-color: rgba(0, 0, 0, 0.05); /* Slightly darker background on hover */
 }
@@ -39,7 +37,7 @@
 }
 
 .spot-tile {
-  width: 100%; /* Ensure the tile takes full width of the link */
+  width: 100%;
 }
 
 .spot-preview-img {
@@ -51,6 +49,7 @@
 .spot-details {
   padding: 10px;
   font-weight: bold;
+  font-size: 18px;
 }
 
 .spot-details h2 {
@@ -64,25 +63,27 @@
 .location-rating {
   display: flex;
   justify-content: space-between;
-  align-items: baseline; /* Align the baseline of the text */
+  align-items: baseline;
 }
 
-.location {
-  font-size: 12px;
+.spot-details .location {
+  font-weight: bold;
+  font-size: 16px; /* Adjusted font size */
   color: rgb(6, 11, 52);
 }
 
-.avg-rating {
+.spot-details .avg-rating {
   display: flex;
   align-items: center;
   font-weight: bold;
   color: rgb(25, 78, 25);
+  font-size: 18px; /* Adjusted font size */
 }
 
 .star-icon {
   margin-right: 5px;
   color: black;
-  font-size: 0.8em; /* Adjust size as needed */
+  font-size: 0.8em;
 }
 
 .name {

@@ -13,7 +13,7 @@ const DisplaySpots = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [moreSpots, setMoreSpots] = useState(true); // for infinite scroll to flag when no more spots to fetch
   const observer = useRef();
-  const [imageLoadedState, setImageLoadedState] = useState({}); // State to manage image load status
+  const [imageLoadedState, setImageLoadedState] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
@@ -51,7 +51,9 @@ const DisplaySpots = () => {
     <div className="spot-container">
       {spotsArray.map((spot, index) => {
         if (!spot.id) return null; // don't render if spot is undefined
-
+        // when using back button from details page the placeholder is a bit wonky
+        // it tends to flash for a second before the preview image loads and sometimes the 
+        // preview image never reloads unless refreshing the page 
         const previewImage = spot.previewImage || placeholderImage;
         const imageLoaded = imageLoadedState[spot.id] || false;
 
@@ -72,6 +74,9 @@ const DisplaySpots = () => {
                 <div className="location">{spot.city}, {spot.state}</div>
                 <div className="avg-rating">
                   <FontAwesomeIcon icon={faStar} className="star-icon" />
+                  {/* ################# Having a big problem that the avgRating 
+                  renders momentarily and then the New text appears, I feel like
+                   it maybe something with state? */}
                   {spot.avgRating ? spot.avgRating : "New"}
                 </div>
               </div>

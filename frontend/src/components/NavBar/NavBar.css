@@ -1,3 +1,111 @@
+/* Dark mode styles */
+body.dark-mode {
+  background-color: #121212;
+  color: #ffffff;
+}
+.navbar.dark-mode {
+  background-color: #333333;
+}
+
+.dropdown-menu.dark-mode {
+  background-color: #444444;
+}
+
+body.dark-mode, 
+body.dark-mode .navbar,
+body.dark-mode .navbar a,
+body.dark-mode .create-spot-link,
+body.dark-mode .dropdown-menu,
+body.dark-mode .dropdown-menu a,
+body.dark-mode .profile-dropdown,
+body.dark-mode .profile-dropdown a,
+body.dark-mode .text-link,
+body.dark-mode .logout,
+body.dark-mode .spot-details,
+body.dark-mode .spot-details h1,
+body.dark-mode .spot-details p,
+body.dark-mode .spot-details .price-reviews,
+body.dark-mode .spot-details .price-reviews .price,
+body.dark-mode .spot-details .price-reviews .reviews,
+body.dark-mode .spot-details .reviews-section,
+body.dark-mode .spot-details .reviews-section h2,
+body.dark-mode .spot-details .reviews-section .review,
+body.dark-mode .spot-details .reviews-section .review .review-author,
+body.dark-mode .spot-details .reviews-section .review .review-date,
+body.dark-mode .spot-details .reviews-section .review .review-content,
+body.dark-mode .spot-link,
+body.dark-mode .spot-details .location,
+body.dark-mode .spot-details .avg-rating, .star-icon {
+  color: #ffffff;
+}
+/* You can add more dark-mode styles for other elements as needed */
+.navbar.dark-mode {
+  background-color: #333333;
+}
+
+.dropdown-menu.dark-mode {
+  background-color: #444444;
+}
+
+/* Dark mode toggle switch */
+.dark-mode-toggle {
+  position: relative;
+  margin-left: 8px;
+  display: inline-block;
+  width: 63px;
+  height: 55px;
+  vertical-align: middle; /* Ensure vertical alignment with the text */
+}
+
+.dark-mode-toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 50%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+  transform: translateY(-30%); /* Center vertically */
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px; /* Adjust the height to match the button size */
+  width: 30px; /* Adjust the width to match the button size */
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #0e0e0e;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px); /* Adjust the translation to match the button size */
+}
+
+.toggle-label {
+  display: block;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 900;
+  margin-top: -11px;
+}
+
+
+/* regular navbar styles */
 .navbar {
   position: fixed;
   top: 0;
@@ -10,7 +118,7 @@
   align-items: center;
   padding: 15px;
   box-sizing: border-box;
-  height: 75px; /* Increase the height of the navbar */
+  height: 75px;
 }
 
 .navbar-brand {
@@ -34,6 +142,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  padding: 10px;
 }
 
 .menu-button {
