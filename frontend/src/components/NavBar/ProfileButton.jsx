@@ -1,9 +1,10 @@
+// ProfileButton.jsx
 import { useState, useEffect, useRef } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { FaUserCircle } from 'react-icons/fa';
+import hamburger from '../../../assets/PinkHamburger.png';
 import * as sessionActions from '../../store/session';
-import './NavBar.css';
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -18,9 +19,8 @@ function ProfileButton({ user }) {
     });
   };
 
-  const openMenu = () => {
-    if (showMenu) return;
-    setShowMenu(true);
+  const toggleMenu = () => {
+    setShowMenu((prev) => !prev);
   };
 
   const closeMenu = (event) => {
@@ -37,12 +37,13 @@ function ProfileButton({ user }) {
   }, []);
 
   return (
-    <div className="profile-button-container">
-      <button onClick={openMenu} className="profile-button">
-        <FaUserCircle />
+    <div className="profile-button-container" onClick={toggleMenu} ref={menuRef}>
+      <button className="profile-button">
+        <img src={hamburger} alt="Menu" className="hamburger-icon" />
+        <FaUserCircle className="user-icon" />
       </button>
       {showMenu && (
-        <ul className="profile-dropdown" ref={menuRef}>
+        <ul className="profile-dropdown">
           <li className="profile-info">
             <div>Hello {user.firstName}</div>
             <div>{user.username}</div>

@@ -3,11 +3,13 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchSpotDetails, fetchReviews } from '../../store/spots';
+import { deleteReview } from '../../store/reviews';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { selectSpotById, selectReviewsBySpotId } from '../../store/selectors';
 import { useModal } from '../../context/Modal';
 import ReviewForm from '../CreateReviewModal/ReviewForm';
+import DeleteReviewModal from '../DeleteReviewModal/DeleteReviewModal';
 import './SpotDetails.css';
 
 const SpotDetails = () => {
@@ -40,15 +42,29 @@ const SpotDetails = () => {
   const previewImage = spot.spotImages ? spot.spotImages.find(image => image.preview)?.url : '';
   const otherImages = spot.spotImages ? spot.spotImages.filter(image => !image.preview).slice(0, 4) : [];
   const owner = spot.owner || {};
-  const avgRating = spot.avgRating ? spot.avgRating : "New";
   const numReviews = spot.numReviews || 0;
-
+  
   const handleReserveClick = () => {
     alert('Feature coming soon');
   };
 
   const handleReviewClick = () => {
     setModalContent(<ReviewForm spotId={spot.id} closeModal={closeModal} />);
+  };
+
+  const handleDeleteClick = (reviewId) => {
+    setModalContent(
+      <DeleteReviewModal
+        onDelete={() => handleConfirmDelete(reviewId)}
+        onCancel={closeModal}
+      />
+    );
+  };
+
+  const handleConfirmDelete = (reviewId) => {
+    dispatch(deleteReview(reviewId)).then(() => {
+      closeModal();
+    });
   };
 
   const formatDate = (dateString) => {
@@ -87,7 +103,7 @@ const SpotDetails = () => {
             </div>
             <div className="reviews">
               <FontAwesomeIcon icon={faStar} className="star-icon" />
-              {avgRating}
+              {spot.avgRating ? spot.avgRating : "New"}
               {numReviews > 0 && (
                 <>
                   <span className="dot">•</span> {numReviews} {numReviews === 1 ? 'Review' : 'Reviews'}
@@ -101,7 +117,7 @@ const SpotDetails = () => {
       <hr style={{ marginTop: '20px' }} />
       <div className="rating">
         <FontAwesomeIcon icon={faStar} className="star-icon" />
-        {avgRating}
+        {spot.avgRating ? spot.avgRating : "New"}
         {numReviews > 0 && (
           <>
             <span className="dot">•</span> {numReviews} {numReviews === 1 ? 'Review' : 'Reviews'}
@@ -119,6 +135,9 @@ const SpotDetails = () => {
               <div className="review-author">{review.User.firstName}</div>
               <div className="review-date">{formatDate(review.createdAt)}</div>
               <div className="review-content">{review.review}</div>
+              {user && user.id === review.userId && (
+                <button className="delete-review-button" onClick={() => handleDeleteClick(review.id)}>Delete</button>
+              )}
             </div>
           ))
         ) : (

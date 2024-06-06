@@ -1,0 +1,44 @@
+/* frontend/src/components/DeleteReviewModal/DeleteReviewModal.css */
+.delete-review-modal {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 300px; /* Adjust width as needed */
+  margin: 0 auto; /* Center the modal */
+}
+
+.delete-review-modal h2 {
+  margin-top: 0;
+}
+
+.delete-review-modal p {
+  margin-bottom: 20px;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.delete-button,
+.cancel-button {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.cancel-button {
+  background-color: darkgrey;
+}
+
+.delete-button:hover,
+.cancel-button:hover {
+  opacity: 0.8;
+}
