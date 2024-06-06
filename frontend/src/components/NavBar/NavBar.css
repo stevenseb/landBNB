@@ -3,15 +3,7 @@ body.dark-mode {
   background-color: #121212;
   color: #ffffff;
 }
-.navbar.dark-mode {
-  background-color: #333333;
-}
 
-.dropdown-menu.dark-mode {
-  background-color: #444444;
-}
-
-body.dark-mode, 
 body.dark-mode .navbar,
 body.dark-mode .navbar a,
 body.dark-mode .create-spot-link,
@@ -35,10 +27,11 @@ body.dark-mode .spot-details .reviews-section .review .review-date,
 body.dark-mode .spot-details .reviews-section .review .review-content,
 body.dark-mode .spot-link,
 body.dark-mode .spot-details .location,
-body.dark-mode .spot-details .avg-rating, .star-icon {
+body.dark-mode .spot-details .avg-rating, 
+body.dark-mode .star-icon {
   color: #ffffff;
 }
-/* You can add more dark-mode styles for other elements as needed */
+
 .navbar.dark-mode {
   background-color: #333333;
 }
@@ -104,7 +97,6 @@ input:checked + .slider:before {
   margin-top: -11px;
 }
 
-
 /* regular navbar styles */
 .navbar {
   position: fixed;
@@ -145,6 +137,10 @@ input:checked + .slider:before {
   padding: 10px;
 }
 
+/* NavBar.css */
+
+/* NavBar.css */
+
 .menu-button {
   display: flex;
   align-items: center;
@@ -153,10 +149,17 @@ input:checked + .slider:before {
   border-radius: 18px;
   padding: 8px;
   border: 1px solid #ccc;
+  cursor: pointer; /* Add cursor pointer */
 }
 
-.profile-button,
-.hamburger-button {
+.profile-button-container {
+  display: flex;
+  align-items: center;
+  cursor: pointer; /* Ensure the entire container is clickable */
+}
+
+.hamburger-button,
+.profile-button {
   background: none;
   border: none;
   cursor: pointer;
@@ -166,6 +169,11 @@ input:checked + .slider:before {
 .hamburger-icon {
   width: 24px;
   height: auto;
+}
+
+.user-icon {
+  margin-left: 8px;
+  font-size: 24px;
 }
 
 .dropdown-menu {

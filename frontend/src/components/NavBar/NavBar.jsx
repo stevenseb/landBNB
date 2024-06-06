@@ -1,3 +1,4 @@
+// NavBar.jsx
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useState, useEffect, useRef } from 'react';
@@ -13,10 +14,12 @@ const NavBar = ({ isLoaded }) => {
   const sessionUser = useSelector((state) => state.session.user);
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    return localStorage.getItem('isDarkMode') === 'true';
+  });
 
   const handleMenuToggle = () => {
-    setMenuOpen(!menuOpen);
+    setMenuOpen((prev) => !prev);
   };
 
   const handleClickOutside = (event) => {
@@ -26,16 +29,19 @@ const NavBar = ({ isLoaded }) => {
   };
 
   const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-    document.body.classList.toggle('dark-mode', !isDarkMode);
+    const newIsDarkMode = !isDarkMode;
+    setIsDarkMode(newIsDarkMode);
+    document.body.classList.toggle('dark-mode', newIsDarkMode);
+    localStorage.setItem('isDarkMode', newIsDarkMode);
   };
 
   useEffect(() => {
+    document.body.classList.toggle('dark-mode', isDarkMode);
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, []);
+  }, [isDarkMode]);
 
   return (
     <nav className="navbar">
@@ -50,10 +56,12 @@ const NavBar = ({ isLoaded }) => {
             Create a New Spot
           </NavLink>
         )}
-        <div className="menu-button">
-          <button className="hamburger-button" onClick={handleMenuToggle}>
-            <img src={hamburger} alt="Menu" className="hamburger-icon" />
-          </button>
+        <div className="menu-button" ref={menuRef}>
+          {!sessionUser && (
+            <button className="hamburger-button" onClick={handleMenuToggle}>
+              <img src={hamburger} alt="Menu" className="hamburger-icon" />
+            </button>
+          )}
           {sessionUser && <ProfileButton user={sessionUser} />}
         </div>
         <div className="dark-mode-container">

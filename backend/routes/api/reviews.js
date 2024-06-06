@@ -106,7 +106,7 @@ router.delete('/:reviewId', requireAuth, async (req, res) => {
       console.error('Error deleting review:', error);
       res.status(500).json({ error: 'Internal Server Error' });
     }
-  })
+  });
 
 
 module.exports = router;

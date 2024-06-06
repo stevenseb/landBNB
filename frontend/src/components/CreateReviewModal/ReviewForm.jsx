@@ -2,6 +2,8 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createReview } from '../../store/reviews';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
 
 const ReviewForm = ({ spotId, closeModal }) => {
   const dispatch = useDispatch();
@@ -30,7 +32,7 @@ const ReviewForm = ({ spotId, closeModal }) => {
           spotId,
           userId: user.id,
           review: comment,
-          stars
+          stars,
         };
         await dispatch(createReview(reviewPayload));
         closeModal();
@@ -38,6 +40,10 @@ const ReviewForm = ({ spotId, closeModal }) => {
         setErrors([error.message]);
       }
     }
+  };
+
+  const handleStarClick = (rating) => {
+    setStars(rating);
   };
 
   return (
@@ -58,14 +64,16 @@ const ReviewForm = ({ spotId, closeModal }) => {
         ></textarea>
         <div className="stars-input">
           <label htmlFor="stars">Stars</label>
-          <input
-            type="number"
-            id="stars"
-            value={stars}
-            onChange={(e) => setStars(parseInt(e.target.value))}
-            min="1"
-            max="5"
-          />
+          <div className="star-rating">
+            {[1, 2, 3, 4, 5].map((rating) => (
+              <FontAwesomeIcon
+                key={rating}
+                icon={faStar}
+                className={`star ${rating <= stars ? 'selected' : ''}`}
+                onClick={() => handleStarClick(rating)}
+              />
+            ))}
+          </div>
         </div>
         <button
           type="submit"

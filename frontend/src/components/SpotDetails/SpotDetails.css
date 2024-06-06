@@ -1,3 +1,4 @@
+/* SpotDetails.css */
 .spot-details-container {
   padding: 100px 290px; 
   text-align: center; 
@@ -174,4 +175,21 @@
 
 hr {
   margin-top: 20px; 
+}
+
+/* Dark mode styles */
+body.dark-mode .spot-details-container .star-icon {
+  color: white; /* Change star color to white in dark mode */
+}
+
+body.dark-mode .spot-details-container .location {
+  color: white; /* Change location text color to white in dark mode */
+}
+
+body.dark-mode .spot-details-container .reviews {
+  color: white; /* Change reviews text color to white in dark mode */
+}
+
+body.dark-mode .spot-details-container .price {
+  color: white; /* Change price text color to white in dark mode */
 }

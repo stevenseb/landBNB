@@ -93,3 +93,12 @@
 .price {
   font-weight: bold;
 }
+
+/* Dark mode styling */
+body.dark-mode .spot-details .avg-rating .star-icon {
+  color: white; /* Change star color to white in dark mode */
+}
+
+body.dark-mode .spot-details .location {
+  color: white; /* Change location text color to white in dark mode */
+}

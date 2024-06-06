@@ -55,7 +55,7 @@ const setReviews = (spotId, reviews) => ({
 });
 
 
-// Thunks
+// Thunk to fetch spots
 export const fetchSpots = (page) => async (dispatch, getState) => {
   const response = await csrfFetch(`/api/spots?page=${page}`);
   const data = await response.json();
@@ -75,6 +75,7 @@ export const fetchSpots = (page) => async (dispatch, getState) => {
   }
 };
 
+// Thunk to fetch spot details by id
 export const fetchSpotDetails = (id) => async (dispatch) => {
   try {
     const response = await csrfFetch(`/api/spots/${id}`);
@@ -89,6 +90,7 @@ export const fetchSpotDetails = (id) => async (dispatch) => {
   }
 };
 
+// Thunk to create a new spot
 export const createSpot = (spotData) => async (dispatch) => {
   const response = await csrfFetch('/api/spots', {
     method: 'POST',
@@ -106,6 +108,7 @@ export const createSpot = (spotData) => async (dispatch) => {
   }
 };
 
+// Thunk to add an image to a spot
 export const addImageToSpot = (spotId, url, preview) => async (dispatch) => {
   const response = await csrfFetch(`/api/spots/${spotId}/images`, {
     method: 'POST',
@@ -123,12 +126,14 @@ export const addImageToSpot = (spotId, url, preview) => async (dispatch) => {
   }
 };
 
+// Thunk to fetch spots for current user
 export const fetchUserSpots = () => async (dispatch) => {
   const response = await csrfFetch(`/api/spots/current`);
   const data = await response.json();
   dispatch(setUserSpots(data.Spots));
 };
 
+// Thunk to delete a spot by owner
 export const deleteSpot = (spotId) => async (dispatch) => {
   const response = await csrfFetch(`/api/spots/${spotId}`, {
     method: 'DELETE',
@@ -142,6 +147,7 @@ export const deleteSpot = (spotId) => async (dispatch) => {
   }
 };
 
+// Thunk to update a spot
 export const updateSpot = (spotData) => async (dispatch) => {
   const response = await csrfFetch(`/api/spots/${spotData.id}`, {
     method: 'PUT',
@@ -159,6 +165,7 @@ export const updateSpot = (spotData) => async (dispatch) => {
   }
 };
 
+// Thunk to fetch reviews by spot id
 export const fetchReviews = (spotId) => async (dispatch) => {
   try {
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`);
@@ -169,7 +176,6 @@ export const fetchReviews = (spotId) => async (dispatch) => {
   }
 };
 
-// Reducer
 const initialState = {};
 
 const spotsReducer = (state = initialState, action) => {
@@ -207,7 +213,6 @@ const spotsReducer = (state = initialState, action) => {
       if (newState.userSpots) {
         newState.userSpots = newState.userSpots.filter((spot) => spot.id !== action.spotId);
       }
-
       return newState;
     }
     case UPDATE_SPOT: {

@@ -41,7 +41,7 @@ function formatSpots(spots) {
         createdAt: formatDate(spot.createdAt),
         updatedAt: formatDate(spot.updatedAt),
         avgRating: calculateAverageRating(spot.Reviews),
-        count: spot.Reviews.length,
+        numReviews: spot.Reviews.length,
         previewImage: spot.SpotImages.length > 0 ? spot.SpotImages[0].url : null
     }));
     return Spots;
@@ -66,9 +66,10 @@ function formatSpotById(spot, owner) {
             price: spot.price,
             createdAt: formatDate(spot.createdAt),
             updatedAt: formatDate(spot.updatedAt),
+            avgRating: calculateAverageRating(spot.Reviews),
             numReviews: spot.Reviews.length,
-            avgStarRating: calculateAverageRating(spot.Reviews),
             spotImages: spot.SpotImages,
+            previewImage: spot.SpotImages.length > 0 ? spot.SpotImages[0].url : null,
             owner: owner
         }
         return spot;
