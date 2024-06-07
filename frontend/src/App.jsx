@@ -10,6 +10,7 @@ import SpotDetails from './components/SpotDetails';
 import CreateSpotForm from './components/CreateSpotForm';
 import ManageSpots from './components/ManageSpots';
 import UpdateSpotForm from './components/UpdateSpotForm';
+import BookingForm from './components/BookingForm/BookingForm';
 
 function Layout() {
   const dispatch = useDispatch();
@@ -25,9 +26,9 @@ function Layout() {
     <>
       <NavBar isLoaded={isLoaded} />
       <div className="main-content">
-      {isLoaded && <Outlet />}
+        {isLoaded && <Outlet />}
       </div>
-      <Footer /> 
+      <Footer />
     </>
   );
 }
@@ -55,6 +56,10 @@ const router = createBrowserRouter([
       {
         path: '/spots/:id/edit',
         element: <UpdateSpotForm />,
+      },
+      {
+        path: '/booking',
+        element: <BookingForm />,
       }
     ],
   },

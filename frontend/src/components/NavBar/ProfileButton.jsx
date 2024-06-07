@@ -1,4 +1,3 @@
-// ProfileButton.jsx
 import { useState, useEffect, useRef } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -16,10 +15,12 @@ function ProfileButton({ user }) {
     e.preventDefault();
     dispatch(sessionActions.logout()).then(() => {
       navigate('/');
+      setShowMenu(false); // Close menu on logout
     });
   };
 
-  const toggleMenu = () => {
+  const toggleMenu = (e) => {
+    e.stopPropagation();
     setShowMenu((prev) => !prev);
   };
 
@@ -37,8 +38,8 @@ function ProfileButton({ user }) {
   }, []);
 
   return (
-    <div className="profile-button-container" onClick={toggleMenu} ref={menuRef}>
-      <button className="profile-button">
+    <div className="profile-button-container" ref={menuRef}>
+      <button className="profile-button" onClick={toggleMenu}>
         <img src={hamburger} alt="Menu" className="hamburger-icon" />
         <FaUserCircle className="user-icon" />
       </button>
@@ -56,7 +57,7 @@ function ProfileButton({ user }) {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/profile" className="profile-dropdown-item" onClick={() => setShowMenu(false)}>
+            <NavLink to="/booking" className="profile-dropdown-item" onClick={() => setShowMenu(false)}>
               Bookings
             </NavLink>
           </li>
