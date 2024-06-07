@@ -1,5 +1,4 @@
-// NavBar.jsx
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useState, useEffect, useRef } from 'react';
 import ProfileButton from './ProfileButton';
@@ -17,6 +16,7 @@ const NavBar = ({ isLoaded }) => {
   const [isDarkMode, setIsDarkMode] = useState(() => {
     return localStorage.getItem('isDarkMode') === 'true';
   });
+  const navigate = useNavigate();
 
   const handleMenuToggle = () => {
     setMenuOpen((prev) => !prev);
@@ -35,6 +35,11 @@ const NavBar = ({ isLoaded }) => {
     localStorage.setItem('isDarkMode', newIsDarkMode);
   };
 
+  const handleLogoClick = () => {
+    window.scrollTo(0, 0);
+    navigate('/');
+  };
+
   useEffect(() => {
     document.body.classList.toggle('dark-mode', isDarkMode);
     document.addEventListener('mousedown', handleClickOutside);
@@ -46,7 +51,7 @@ const NavBar = ({ isLoaded }) => {
   return (
     <nav className="navbar">
       <div className="navbar-brand">
-        <NavLink to="/">
+        <NavLink to="/" onClick={handleLogoClick}>
           <img src={logo} alt="Landbnb" className="navbar-logo" />
         </NavLink>
       </div>
