@@ -67,7 +67,7 @@ const NavBar = ({ isLoaded }) => {
               <img src={hamburger} alt="Menu" className="hamburger-icon" />
             </button>
           )}
-          {sessionUser && <ProfileButton user={sessionUser} />}
+          {sessionUser && <ProfileButton user={sessionUser} className="profile-icon" />}
         </div>
         <div className="dark-mode-container">
           <label className="dark-mode-toggle">

@@ -1,8 +1,8 @@
-// frontend/src/components/SpotDetails/SpotDetails.jsx
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { fetchSpotDetails, fetchReviews } from '../../store/spots';
+import { fetchSpotDetails } from '../../store/spots';
+import { fetchReviews } from '../../store/reviews';
 import { deleteReview } from '../../store/reviews';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
@@ -32,24 +32,34 @@ const SpotDetails = () => {
 
   useEffect(() => {
     if (user && reviews.length > 0) {
-      const hasReviewed = reviews.some(review => review.userId === user.id);
+      const hasReviewed = reviews.some((review) => review.userId === user.id);
       setUserHasReviewed(hasReviewed);
     }
   }, [user, reviews]);
 
+  const addNewReview = () => {
+    setUserHasReviewed(true);
+    dispatch(fetchReviews(id));
+  };
+
   if (!spot.id) return <div>Loading...</div>;
 
-  const previewImage = spot.spotImages ? spot.spotImages.find(image => image.preview)?.url : '';
-  const otherImages = spot.spotImages ? spot.spotImages.filter(image => !image.preview).slice(0, 4) : [];
+  console.log('Spot:', spot);
+  console.log('Spot avgRating:', spot.avgRating);
+  console.log('Reviews:', reviews);
+
+  const previewImage = spot.spotImages ? spot.spotImages.find((image) => image.preview)?.url : '';
+  const otherImages = spot.spotImages ? spot.spotImages.filter((image) => !image.preview).slice(0, 4) : [];
   const owner = spot.owner || {};
-  const numReviews = spot.numReviews || 0;
-  
+  const numReviews = reviews.length;
+  const avgRating = typeof spot.avgRating === 'string' ? parseFloat(spot.avgRating).toFixed(1) : 'New';
+
   const handleReserveClick = () => {
     alert('Feature coming soon');
   };
 
   const handleReviewClick = () => {
-    setModalContent(<ReviewForm spotId={spot.id} closeModal={closeModal} />);
+    setModalContent(<ReviewForm spotId={spot.id} closeModal={closeModal} addNewReview={addNewReview} />);
   };
 
   const handleDeleteClick = (reviewId) => {
@@ -63,6 +73,8 @@ const SpotDetails = () => {
 
   const handleConfirmDelete = (reviewId) => {
     dispatch(deleteReview(reviewId)).then(() => {
+      setUserHasReviewed(true);
+      dispatch(fetchReviews(id));
       closeModal();
     });
   };
@@ -103,7 +115,7 @@ const SpotDetails = () => {
             </div>
             <div className="reviews">
               <FontAwesomeIcon icon={faStar} className="star-icon" />
-              {spot.avgRating ? spot.avgRating : "New"}
+              {avgRating}
               {numReviews > 0 && (
                 <>
                   <span className="dot">•</span> {numReviews} {numReviews === 1 ? 'Review' : 'Reviews'}
@@ -117,7 +129,7 @@ const SpotDetails = () => {
       <hr style={{ marginTop: '20px' }} />
       <div className="rating">
         <FontAwesomeIcon icon={faStar} className="star-icon" />
-        {spot.avgRating ? spot.avgRating : "New"}
+        {avgRating}
         {numReviews > 0 && (
           <>
             <span className="dot">•</span> {numReviews} {numReviews === 1 ? 'Review' : 'Reviews'}
@@ -132,7 +144,7 @@ const SpotDetails = () => {
         {reviews.length > 0 ? (
           reviews.map((review) => (
             <div key={review.id} className="review">
-              <div className="review-author">{review.User.firstName}</div>
+              <div className="review-author">{review.User?.firstName || 'Anonymous'}</div>
               <div className="review-date">{formatDate(review.createdAt)}</div>
               <div className="review-content">{review.review}</div>
               {user && user.id === review.userId && (
