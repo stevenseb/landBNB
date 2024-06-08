@@ -37,16 +37,13 @@ const SpotDetails = () => {
     }
   }, [user, reviews]);
 
-  const addNewReview = () => {
+  const addNewReview = async () => {
     setUserHasReviewed(true);
-    dispatch(fetchReviews(id));
+    await dispatch(fetchReviews(id));
+    await dispatch(fetchSpotDetails(id));
   };
 
   if (!spot.id) return <div>Loading...</div>;
-
-  console.log('Spot:', spot);
-  console.log('Spot avgRating:', spot.avgRating);
-  console.log('Reviews:', reviews);
 
   const previewImage = spot.spotImages ? spot.spotImages.find((image) => image.preview)?.url : '';
   const otherImages = spot.spotImages ? spot.spotImages.filter((image) => !image.preview).slice(0, 4) : [];
@@ -75,6 +72,7 @@ const SpotDetails = () => {
     dispatch(deleteReview(reviewId)).then(() => {
       setUserHasReviewed(true);
       dispatch(fetchReviews(id));
+      dispatch(fetchSpotDetails(id));
       closeModal();
     });
   };
