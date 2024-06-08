@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createReview } from '../../store/reviews';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
+import './CreateReviewModal.css';
 
 const ReviewForm = ({ spotId, closeModal, addNewReview }) => {
   const dispatch = useDispatch();
@@ -35,7 +36,7 @@ const ReviewForm = ({ spotId, closeModal, addNewReview }) => {
           stars,
         };
         const newReview = await dispatch(createReview(reviewPayload));
-        addNewReview(newReview);  // Call the function passed from the parent component
+        addNewReview(newReview);  // callback function passed as a prop
         closeModal();
       } catch (error) {
         setErrors([error.message]);

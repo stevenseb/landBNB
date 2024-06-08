@@ -1,4 +1,4 @@
-// frontend/src/store/reviews.js
+// src/store/reviews.js
 import { csrfFetch } from './csrf';
 
 const LOAD_REVIEWS = 'reviews/LOAD_REVIEWS';
@@ -6,8 +6,9 @@ const ADD_REVIEW = 'reviews/ADD_REVIEW';
 const DELETE_REVIEW = 'reviews/DELETE_REVIEW';
 
 // Action Creators
-const loadReviews = (reviews) => ({
+const loadReviews = (spotId, reviews) => ({
   type: LOAD_REVIEWS,
+  spotId,
   reviews,
 });
 
@@ -25,8 +26,9 @@ const deleteReviewAction = (reviewId) => ({
 export const fetchReviews = (spotId) => async (dispatch) => {
   const response = await csrfFetch(`/api/spots/${spotId}/reviews`);
   if (response.ok) {
-    const reviews = await response.json();
-    dispatch(loadReviews(reviews));
+    const { Reviews: reviews } = await response.json(); // Ensure the response is correctly formatted
+    console.log('Fetched Reviews:', reviews);
+    dispatch(loadReviews(spotId, reviews));
   }
 };
 
@@ -61,38 +63,35 @@ export const deleteReview = (reviewId) => async (dispatch) => {
   }
 };
 
-const initialState = { bySpotId: {}, byReviewId: {} };
+const initialState = { bySpotId: {}, byId: {} };
 
 const reviewsReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_REVIEWS: {
-      const bySpotId = { ...state.bySpotId };
-      const byReviewId = { ...state.byReviewId };
-      if (action.reviews.length > 0) {
-        const spotId = action.reviews[0].spotId;
-        bySpotId[spotId] = action.reviews.map(review => review.id);
-        action.reviews.forEach(review => {
-          byReviewId[review.id] = review;
-        });
-      }
-      return { ...state, bySpotId, byReviewId };
+      const newState = { ...state };
+      const reviewsById = {};
+      action.reviews.forEach((review) => {
+        reviewsById[review.id] = review;
+      });
+      newState.bySpotId[action.spotId] = action.reviews.map((review) => review.id);
+      newState.byId = { ...newState.byId, ...reviewsById };
+      return newState;
     }
     case ADD_REVIEW: {
-      const bySpotId = { ...state.bySpotId };
-      const byReviewId = { ...state.byReviewId };
+      const newState = { ...state };
       const spotId = action.review.spotId;
-      bySpotId[spotId] = [...(bySpotId[spotId] || []), action.review.id];
-      byReviewId[action.review.id] = action.review;
-      return { ...state, bySpotId, byReviewId };
+      newState.byId[action.review.id] = action.review;
+      newState.bySpotId[spotId] = [...(newState.bySpotId[spotId] || []), action.review.id];
+      return newState;
     }
     case DELETE_REVIEW: {
-      const bySpotId = { ...state.bySpotId };
-      const byReviewId = { ...state.byReviewId };
-      Object.keys(bySpotId).forEach(spotId => {
-        bySpotId[spotId] = bySpotId[spotId].filter(reviewId => reviewId !== action.reviewId);
-      });
-      delete byReviewId[action.reviewId];
-      return { ...state, bySpotId, byReviewId };
+      const newState = { ...state };
+      const reviewId = action.reviewId;
+      for (const spotId in newState.bySpotId) {
+        newState.bySpotId[spotId] = newState.bySpotId[spotId].filter((id) => id !== reviewId);
+      }
+      delete newState.byId[reviewId];
+      return newState;
     }
     default:
       return state;

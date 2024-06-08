@@ -10,7 +10,7 @@ const ADD_IMAGE = 'spots/addImage';
 const SET_USER_SPOTS = 'spots/setUserSpots';
 const REMOVE_SPOT = 'spots/removeSpot';
 const UPDATE_SPOT = 'spots/updateSpot';
-const SET_REVIEWS = 'spots/setReviews';
+//const SET_REVIEWS = 'spots/setReviews';
 
 // Action creators
 const setSpots = (spots) => ({
@@ -48,11 +48,11 @@ const updateSpotAction = (spot) => ({
   spot,
 });
 
-const setReviews = (spotId, reviews) => ({
-  type: SET_REVIEWS,
-  spotId,
-  reviews,
-});
+// const setReviews = (spotId, reviews) => ({
+//   type: SET_REVIEWS,
+//   spotId,
+//   reviews,
+// });
 
 
 // Thunk to fetch spots
@@ -165,16 +165,16 @@ export const updateSpot = (spotData) => async (dispatch) => {
   }
 };
 
-// Thunk to fetch reviews by spot id
-export const fetchReviews = (spotId) => async (dispatch) => {
-  try {
-    const response = await csrfFetch(`/api/spots/${spotId}/reviews`);
-    const data = await response.json();
-    dispatch(setReviews(spotId, data.Reviews));
-  } catch (error) {
-    console.error('Failed to fetch reviews:', error);
-  }
-};
+// //Thunk to fetch reviews by spot id
+// export const fetchReviews = (spotId) => async (dispatch) => {
+//   try {
+//     const response = await csrfFetch(`/api/spots/${spotId}/reviews`);
+//     const data = await response.json();
+//     dispatch(setReviews(spotId, data.Reviews));
+//   } catch (error) {
+//     console.error('Failed to fetch reviews:', error);
+//   }
+// };
 
 const initialState = {};
 
@@ -218,14 +218,14 @@ const spotsReducer = (state = initialState, action) => {
     case UPDATE_SPOT: {
       return { ...state, [action.spot.id]: action.spot };
     }
-    case SET_REVIEWS: {
-      const newState = { ...state };
-      newState[action.spotId] = {
-        ...newState[action.spotId],
-        reviews: action.reviews,
-      };
-      return newState;
-    }
+    // case SET_REVIEWS: {
+    //   const newState = { ...state };
+    //   newState[action.spotId] = {
+    //     ...newState[action.spotId],
+    //     reviews: action.reviews,
+    //   };
+    //   return newState;
+    // }
     default:
       return state;
   }

@@ -7,6 +7,9 @@ export const selectSpotById = createSelector(
 );
 
 export const selectReviewsBySpotId = createSelector(
-  (state, id) => state.spots[id]?.reviews || [],
+  (state, id) => {
+    const reviewIds = state.reviews.bySpotId[id] || [];
+    return reviewIds.map((reviewId) => state.reviews.byId[reviewId]);
+  },
   (reviews) => reviews
 );

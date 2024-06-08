@@ -15,7 +15,7 @@ function ProfileButton({ user }) {
     e.preventDefault();
     dispatch(sessionActions.logout()).then(() => {
       navigate('/');
-      setShowMenu(false); // Close menu on logout
+      setShowMenu(false);
     });
   };
 
