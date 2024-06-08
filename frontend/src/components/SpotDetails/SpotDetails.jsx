@@ -83,6 +83,8 @@ const SpotDetails = () => {
     return date.toLocaleDateString(undefined, options);
   };
 
+  const sortedReviews = [...reviews].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
   const shouldShowReviewButton = user && !userHasReviewed && user.id !== spot.ownerId;
 
   return (
@@ -139,8 +141,8 @@ const SpotDetails = () => {
       )}
       <div className="reviews-section">
         <h2>Reviews</h2>
-        {reviews.length > 0 ? (
-          reviews.map((review) => (
+        {sortedReviews.length > 0 ? (
+          sortedReviews.map((review) => (
             <div key={review.id} className="review">
               <div className="review-author">{review.User?.firstName || 'Anonymous'}</div>
               <div className="review-date">{formatDate(review.createdAt)}</div>
