@@ -5,7 +5,7 @@ import { createReview } from '../../store/reviews';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 
-const ReviewForm = ({ spotId, closeModal }) => {
+const ReviewForm = ({ spotId, closeModal, addNewReview }) => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user);
   const [comment, setComment] = useState('');
@@ -34,7 +34,8 @@ const ReviewForm = ({ spotId, closeModal }) => {
           review: comment,
           stars,
         };
-        await dispatch(createReview(reviewPayload));
+        const newReview = await dispatch(createReview(reviewPayload));
+        addNewReview(newReview);  // Call the function passed from the parent component
         closeModal();
       } catch (error) {
         setErrors([error.message]);

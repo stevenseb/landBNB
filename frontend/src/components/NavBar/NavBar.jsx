@@ -69,12 +69,14 @@ const NavBar = ({ isLoaded }) => {
           )}
           {sessionUser && <ProfileButton user={sessionUser} />}
         </div>
+        <div>
         <div className="dark-mode-container">
           <label className="dark-mode-toggle">
             <input type="checkbox" checked={isDarkMode} onChange={toggleDarkMode} />
             <span className="slider"></span>
           </label>
-          <span className="toggle-label">MODE</span>
+        </div>
+        <span className="toggle-label" color="black">MODE</span>
         </div>
         {!sessionUser && menuOpen && (
           <div className="dropdown-menu" ref={menuRef}>

@@ -1,4 +1,3 @@
-// frontend/src/components/SpotDetails/SpotDetails.jsx
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -37,6 +36,11 @@ const SpotDetails = () => {
     }
   }, [user, reviews]);
 
+  const addNewReview = () => {
+    setUserHasReviewed(true);
+    dispatch(fetchReviews(id));
+  };
+
   if (!spot.id) return <div>Loading...</div>;
 
   const previewImage = spot.spotImages ? spot.spotImages.find(image => image.preview)?.url : '';
@@ -49,7 +53,7 @@ const SpotDetails = () => {
   };
 
   const handleReviewClick = () => {
-    setModalContent(<ReviewForm spotId={spot.id} closeModal={closeModal} />);
+    setModalContent(<ReviewForm spotId={spot.id} closeModal={closeModal} addNewReview={addNewReview} />);
   };
 
   const handleDeleteClick = (reviewId) => {
@@ -63,6 +67,8 @@ const SpotDetails = () => {
 
   const handleConfirmDelete = (reviewId) => {
     dispatch(deleteReview(reviewId)).then(() => {
+      setUserHasReviewed(true);
+      dispatch(fetchReviews(id));
       closeModal();
     });
   };

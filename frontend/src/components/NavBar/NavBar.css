@@ -4,15 +4,6 @@ body.dark-mode {
   color: #ffffff;
 }
 
-body.dark-mode .navbar,
-body.dark-mode .navbar a,
-body.dark-mode .create-spot-link,
-body.dark-mode .dropdown-menu,
-body.dark-mode .dropdown-menu a,
-body.dark-mode .profile-dropdown,
-body.dark-mode .profile-dropdown a,
-body.dark-mode .text-link,
-body.dark-mode .logout,
 body.dark-mode .spot-details,
 body.dark-mode .spot-details h1,
 body.dark-mode .spot-details p,
@@ -37,7 +28,7 @@ body.dark-mode .star-icon {
 }
 
 .dropdown-menu.dark-mode {
-  background-color: #444444;
+  background-color: #252424;
 }
 
 /* Dark mode toggle switch */
@@ -95,6 +86,7 @@ input:checked + .slider:before {
   font-size: 10px;
   font-weight: 900;
   margin-top: -11px;
+  color: black;
 }
 
 /* regular navbar styles */
