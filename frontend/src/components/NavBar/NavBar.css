@@ -255,9 +255,9 @@ body.dark-mode .user-icon {
 }
 
 /* Media Query for mobile screens */
-@media (max-width: 600px) {
+@media (max-width: 740px) {
   .navbar-logo {
-    width: 50%; /* Adjust the size to 50% */
+    width: 60%; /* Adjust the logo on mobile */
     height: auto;
   }
 }
