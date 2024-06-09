@@ -179,17 +179,86 @@ hr {
 
 /* Dark mode styles */
 body.dark-mode .spot-details-container .star-icon {
-  color: white; /* Change star color to white in dark mode */
+  color: white; 
 }
 
 body.dark-mode .spot-details-container .location {
-  color: white; /* Change location text color to white in dark mode */
+  color: white; 
 }
 
 body.dark-mode .spot-details-container .reviews {
-  color: white; /* Change reviews text color to white in dark mode */
+  color: white; 
 }
 
 body.dark-mode .spot-details-container .price {
-  color: white; /* Change price text color to white in dark mode */
+  color: white; 
+}
+
+/* Mobile responsive styles */
+@media screen and (max-width: 1200px) {
+  .spot-details-container {
+    padding: 50px 100px; /* Adjust padding for screens between 820px and 1200px */
+    text-align: left; /* Align text to left */
+  }
+
+  .images-container {
+    flex-direction: column; /* Stack images vertically */
+  }
+
+  .small-images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .small-img {
+    width: calc(50% - 5px); /* Two columns */
+  }
+
+  .details-container {
+    flex-direction: row; /* Stack details vertically */
+  }
+
+  .host-description {
+    padding-right: 0; /* Remove padding */
+    margin-bottom: 20px; /* Add margin for spacing */
+  }
+
+  .callout-box {
+    padding: 20px; /* Adjust padding */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .spot-details-container {
+    padding: 20px; /* Adjust padding for mobile */
+    text-align: left; /* Align text to left */
+  }
+
+  .images-container {
+    flex-direction: column; /* Stack images vertically */
+  }
+
+  .small-images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .small-img {
+    width: calc(50% - 5px); /* Two columns */
+  }
+
+  .details-container {
+    flex-direction: column; /* Stack details vertically */
+  }
+
+  .host-description {
+    padding-right: 0; /* Remove padding */
+    margin-bottom: 20px; /* Add margin for spacing */
+  }
+
+  .callout-box {
+    padding: 20px; /* Adjust padding */
+  }
 }
