@@ -21,10 +21,16 @@
 }
 
 .spot-link:hover .spot-tile {
-  background-color: rgba(0, 0, 0, 0.05); /* Slightly darker background on hover */
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1024px) {
+  .spot-link {
+    flex: 0 0 calc(33.33% - 20px); /* 3 spots per row */
+  }
+}
+
+@media screen and (max-width: 825px) {
   .spot-link {
     flex: 0 0 calc(50% - 20px); /* 2 spots per row */
   }
@@ -42,8 +48,9 @@
 
 .spot-preview-img {
   width: 100%;
-  height: 220px;
+  height: auto; /* Adjust height to auto to maintain aspect ratio */
   border-radius: 5px;
+  object-fit: cover; /* Ensures image covers the area while maintaining aspect ratio */
 }
 
 .spot-details {
@@ -68,7 +75,7 @@
 
 .spot-details .location {
   font-weight: bold;
-  font-size: 16px; /* Adjusted font size */
+  font-size: 16px;
   color: rgb(6, 11, 52);
 }
 
@@ -77,7 +84,7 @@
   align-items: center;
   font-weight: bold;
   color: rgb(25, 78, 25);
-  font-size: 18px; /* Adjusted font size */
+  font-size: 18px;
 }
 
 .star-icon {

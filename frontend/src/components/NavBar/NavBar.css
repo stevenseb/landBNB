@@ -253,3 +253,11 @@ body.dark-mode .user-icon {
   color: black;
   padding: 10px;
 }
+
+/* Media Query for mobile screens */
+@media (max-width: 600px) {
+  .navbar-logo {
+    width: 50%; /* Adjust the size to 50% */
+    height: auto;
+  }
+}
