@@ -19,7 +19,7 @@
   display: flex;
   flex-direction: column;
   align-items: center; /* Center-align form content */
-  margin-left: 10px;
+  margin-left: 15px;
 }
 
 /* Label styling */
@@ -43,7 +43,7 @@ input {
 /* Submit button styling */
 button[type="submit"],
 button[type="button"] {
-  width: 100%; /* Ensure buttons take full width */
+  width: 90%;
   background-color: #4CAF50;
   color: white;
   padding: 10px 20px;
@@ -66,10 +66,10 @@ button[type="submit"]:hover {
 
 /* Disabled submit button styling */
 button[type="submit"]:disabled {
-  background-color: #ccc; /* Greyed out background */
-  color: #666; /* Subdued text color */
-  cursor: not-allowed; /* Change cursor to not-allowed */
-  box-shadow: none; /* Remove any shadow effect */
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+  box-shadow: none;
 }
 
 /* Error message styling */

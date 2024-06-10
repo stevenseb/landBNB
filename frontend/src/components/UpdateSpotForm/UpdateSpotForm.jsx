@@ -115,27 +115,27 @@ const UpdateSpotForm = () => {
       <h1>Update Your Spot</h1>
       <form onSubmit={handleSubmit}>
         <h5>Where&apos;s your place located?</h5>
-        <p className="black-text">Guests will only get your exact address once they booked a reservation.</p>
+        <p>Guests will only get your exact address once they booked a reservation.</p>
         <div className="form-group">
-          <label className="black-text">Country</label>
+          <label>Country</label>
           <input type="text" value={country} onChange={(e) => setCountry(e.target.value)} />
           {errors.includes('Country is required') && <span className="error">Country is required</span>}
         </div>
 
         <div className="form-group">
-          <label className="black-text">Street Address</label>
+          <label>Street Address</label>
           <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} />
           {errors.includes('Address is required') && <span className="error">Address is required</span>}
         </div>
-
+        
         <div className="form-row">
           <div className="form-group">
-            <label className="black-text">City</label>
+            <label>City</label>
             <input type="text" value={city} onChange={(e) => setCity(e.target.value)} />
             {errors.includes('City is required') && <span className="error">City is required</span>}
           </div>
           <div className="form-group">
-            <label className="black-text">State</label>
+            <label>State</label>
             <input type="text" value={state} onChange={(e) => setState(e.target.value)} />
             {errors.includes('State is required') && <span className="error">State is required</span>}
           </div>
@@ -143,39 +143,39 @@ const UpdateSpotForm = () => {
 
         <div className="form-row">
           <div className="form-group">
-            <label className="black-text">Latitude</label>
+            <label>Latitude</label>
             <input type="text" value={lat} onChange={(e) => setLat(e.target.value)} />
             {errors.includes('Latitude is required') && <span className="error">Latitude is required</span>}
           </div>
           <div className="form-group">
-            <label className="black-text">Longitude</label>
+            <label>Longitude</label>
             <input type="text" value={lng} onChange={(e) => setLng(e.target.value)} />
             {errors.includes('Longitude is required') && <span className="error">Longitude is required</span>}
           </div>
         </div>
-        <hr ></hr>
-        <br></br>
+        <hr />
+        <br />
         <h5>Describe your place to guests</h5>
-        <p className="black-text">Mention the best features of your space, any special amenities like fast wifi or parking, and what you love about the neighborhood.</p>
+        <p>Mention the best features of your space, any special amenities like fast wifi or parking, and what you love about the neighborhood.</p>
         <textarea placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} />
         {errors.includes('Description needs 30 or more characters') && <span className="error">Description needs 30 or more characters</span>}
-        <hr ></hr>
-        <br></br>
+        <hr />
+        <br />
         <h5>Create a title for your spot</h5>
-        <p className="black-text">Catch guests&apos; attention with a spot title that highlights what makes your place special.</p>
+        <p>Catch guests&apos; attention with a spot title that highlights what makes your place special.</p>
         <input type="text" placeholder="Name of your spot" value={name} onChange={(e) => setName(e.target.value)} />
         {errors.includes('Name is required') && <span className="error">Name is required</span>}
-        <hr ></hr>
-        <br></br>
+        <hr />
+        <br />
         <h5>Set a base price for your spot</h5>
-        <p className="black-text">Competitive pricing can help your listing stand out and rank higher in search results.</p>
+        <p>Competitive pricing can help your listing stand out and rank higher in search results.</p>
         <div className="form-group price-group">
-          <label className="black-text">$</label>
+          <label>$</label>
           <input type="text" placeholder="Price per night (USD)" value={price} onChange={(e) => setPrice(e.target.value)} />
         </div>
         {errors.includes('Price per night is required') && <span className="error">Price per night is required</span>}
-        <hr ></hr>
-        <br></br>
+        <hr />
+        <br />
         {imageUrls.map((url, index) => (
           <div key={index} className="form-group">
             <input
@@ -188,7 +188,7 @@ const UpdateSpotForm = () => {
             {errors.includes(`Image URL ${index + 1} must end in .png, .jpg, or .jpeg`) && <span className="error">Image URL must end in .png, .jpg, or .jpeg</span>}
           </div>
         ))}
-        <hr ></hr>
+        <hr />
         <div className="update-button-container">
           <button type="submit">Update Spot</button>
           <button type="button" onClick={handleCancel} className="cancel-button">Cancel</button>
