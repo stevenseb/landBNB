@@ -17,8 +17,8 @@ form {
 
 hr {
   border: 0;
-  border-top: 1px solid #ccc; /* Style for horizontal line */
-  margin: 20px 0; /* Spacing around hr */
+  border-top: 1px solid #ccc; 
+  margin: 20px 0; 
 }
 
 .form-group {
@@ -100,4 +100,22 @@ hr {
 
 .update-button-container .cancel-button:hover {
   background-color: #000;
+}
+
+/* Dark mode styles */
+body.dark-mode .update-spot-form-container,
+body.dark-mode .update-spot-form-container .form-group label,
+body.dark-mode .update-spot-form-container .form-group input,
+body.dark-mode .update-spot-form-container .form-group textarea,
+body.dark-mode .update-spot-form-container .black-text,
+body.dark-mode .update-spot-form-container .blue-text {
+  color: black; /* Ensure text remains black */
+}
+
+body.dark-mode h1 {
+  color: white;
+}
+
+body.dark-mode .create-spot-form-container .error {
+  color: red; /* Keep error text red */
 }
