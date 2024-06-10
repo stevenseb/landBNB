@@ -117,6 +117,10 @@ body.dark-mode .create-spot-form-container .blue-text {
   color: black; /* Ensure text remains black */
 }
 
+body.dark-mode h1 {
+  color: white;
+}
+
 body.dark-mode .create-spot-form-container .error {
   color: red; /* Keep error text red */
 }

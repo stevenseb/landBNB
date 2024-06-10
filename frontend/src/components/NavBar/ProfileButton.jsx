@@ -52,6 +52,7 @@ function ProfileButton({ user }) {
             <div>&#x2022; {user.firstName} {user.lastName}</div>
             <div>&#x2022; {user.email}</div>
           </li>
+          <hr />
           <li>
             <NavLink to="/" className="profile-dropdown-item" onClick={() => setShowMenu(false)}>
               Home

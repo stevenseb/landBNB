@@ -96,3 +96,12 @@ p {
   color: red;
   font-weight: bold;
 }
+
+/* Ensure text remains black in dark mode */
+body.dark-mode .signup-box,
+body.dark-mode .signup-form,
+body.dark-mode .signup-box label,
+body.dark-mode .signup-box input,
+body.dark-mode .signup-box p {
+  color: black;
+}
