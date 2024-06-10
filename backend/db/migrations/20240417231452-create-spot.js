@@ -17,10 +17,6 @@ module.exports = {
       ownerId: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        // references: {
-        //   model: User,
-        //   key: 'id',
-        // },
       },
       address: {
         allowNull: false,
@@ -39,11 +35,11 @@ module.exports = {
         type: Sequelize.STRING
       },
       lat: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.FLOAT
       },
       lng: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.FLOAT
       },
       name: {
