@@ -1,4 +1,3 @@
-// frontend/src/context/Modal.jsx
 import { useRef, useState, useContext, createContext } from 'react';
 import ReactDOM from 'react-dom';
 import './Modal.css';
@@ -18,7 +17,6 @@ export function ModalProvider({ children }) {
     }
   };
 
-
   const contextValue = {
     modalRef,
     modalContent,
@@ -30,7 +28,7 @@ export function ModalProvider({ children }) {
   return (
     <>
       <ModalContext.Provider value={contextValue}>
-      {children}
+        {children}
       </ModalContext.Provider>
       <div ref={modalRef} />
     </>
@@ -38,16 +36,17 @@ export function ModalProvider({ children }) {
 }
 
 export function Modal() {
-    const { modalRef, modalContent, closeModal } = useContext(ModalContext)
-    if (!modalRef || !modalRef.current || !modalContent) return null;
+  const { modalRef, modalContent, closeModal } = useContext(ModalContext);
+  if (!modalRef || !modalRef.current || !modalContent) return null;
 
-    return ReactDOM.createPortal(
-      <div id="modal">
-        <div id="modal-background" onClick={closeModal} />
-        <div id="modal-content">{modalContent}</div>
-      </div>,
-      modalRef.current
-    );
+  return ReactDOM.createPortal(
+    <div className="modal-backdrop" onClick={closeModal}>
+      <div className="modal-container" onClick={(e) => e.stopPropagation()}>
+        {modalContent}
+      </div>
+    </div>,
+    modalRef.current
+  );
 }
 
 export const useModal = () => useContext(ModalContext);

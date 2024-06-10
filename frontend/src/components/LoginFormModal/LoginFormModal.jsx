@@ -1,5 +1,4 @@
-// frontend/src/componenets/LoginFormModal/LoginFormModal.jsx
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
 import { useModal } from '../../context/Modal';
@@ -11,7 +10,6 @@ function LoginFormModal() {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
-  const modalRef = useRef();
   const [isDisabled, setIsDisabled] = useState(true);
 
   useEffect(() => {
@@ -43,57 +41,35 @@ function LoginFormModal() {
       });
   };
 
-  useEffect(() => {
-    window.scrollTo(0, 0); // Scroll to the top when the modal opens
-
-    const handleClickOutside = (e) => {
-      if (modalRef.current && !modalRef.current.contains(e.target)) {
-        closeModal();
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      setCredential("");
-      setPassword("");
-      setErrors({});
-    };
-  }, [closeModal]);
-
   return (
-    <div className="modal-backdrop">
-      <div className="modal-content" ref={modalRef}>
-        <div className="login-box">
-          <h2>Log In</h2>
-          <form onSubmit={handleSubmit}>
-            <label>
-              Username or Email
-              <input
-                type="text"
-                value={credential}
-                onChange={(e) => setCredential(e.target.value)}
-                required
-              />
-            </label>
-            <label>
-              Password
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-            </label>
-            {errors.credential && (<p>{errors.credential}</p>)}
-            <button type="submit" disabled={isDisabled}>Log In</button>
-            <br />
-            <button type="demo" onClick={handleDemoLogin}>
-              Demo User
-            </button>
-          </form>
-        </div>
-      </div>
+    <div className="login-box">
+      <h2>Log In</h2>
+      <form className="login-form" onSubmit={handleSubmit}>
+        <label>
+          Username or Email
+          <input
+            type="text"
+            value={credential}
+            onChange={(e) => setCredential(e.target.value)}
+            required
+          />
+        </label>
+        <label>
+          Password
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </label>
+        {errors.credential && (<p>{errors.credential}</p>)}
+        <button type="submit" disabled={isDisabled}>Log In</button>
+        <br />
+        <button type="button" onClick={handleDemoLogin}>
+          Demo User
+        </button>
+      </form>
     </div>
   );
 }

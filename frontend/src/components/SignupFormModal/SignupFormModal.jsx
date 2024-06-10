@@ -81,10 +81,10 @@ function SignupFormModal() {
 
   return (
     <div className="modal-backdrop">
-      <div className="modal-content" ref={modalRef}>
+      <div className="modal-container" ref={modalRef}>
         <div className="signup-box">
-          <h1>Sign Up</h1>
-          <form onSubmit={handleSubmit}>
+          <h5>Sign Up</h5>
+          <form className="signup-form" onSubmit={handleSubmit}>
             <label>
               Email
               <input
