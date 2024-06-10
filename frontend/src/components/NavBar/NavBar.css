@@ -260,4 +260,12 @@ body.dark-mode .user-icon {
     width: 60%; /* Adjust the logo on mobile */
     height: auto;
   }
+
+  .profile-button {
+    margin-left: 0; /* Reset the margin for stacked icons */
+  }
+  
+  .user-icon {
+    margin-left: -2px; /* Adjust this value as needed */
+  }
 }
