@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { FaUserCircle } from 'react-icons/fa';
 import hamburger from '../../../assets/PinkHamburger.png';
 import * as sessionActions from '../../store/session';
+import './NavBar.css';
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -46,13 +47,13 @@ function ProfileButton({ user }) {
       {showMenu && (
         <ul className="profile-dropdown">
           <li className="profile-info">
-            <div>Hello {user.firstName}</div>
-            <div>{user.username}</div>
-            <div>{user.firstName} {user.lastName}</div>
-            <div>{user.email}</div>
+            <div>Hello {user.firstName}!</div>
+            <div>&#x2022; {user.username}</div>
+            <div>&#x2022; {user.firstName} {user.lastName}</div>
+            <div>&#x2022; {user.email}</div>
           </li>
           <li>
-            <NavLink to="/" className="dropdown-item" onClick={() => setShowMenu(false)}>
+            <NavLink to="/" className="profile-dropdown-item" onClick={() => setShowMenu(false)}>
               Home
             </NavLink>
           </li>

@@ -10,8 +10,8 @@
 
 hr {
   border: 0;
-  border-top: 1px solid #ccc; /* Style for horizontal line */
-  margin: 20px 0; /* Spacing around hr */
+  border-top: 1px solid #ccc; 
+  margin: 20px 0;
 }
 
 .form-group {
@@ -60,8 +60,10 @@ hr {
 
 .create-button-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: center; /* Center the buttons */
+  align-items: center;
   margin-top: 20px;
+  gap: 20px; /* Add space between buttons if needed */
 }
 
 .create-button-container button {
@@ -70,7 +72,7 @@ hr {
   border-radius: 5px;
   cursor: pointer;
   font-size: 1em;
-  width: 45%;
+  width: auto; /* Adjust width to auto for central alignment */
   box-sizing: border-box; 
 }
 
@@ -103,4 +105,18 @@ hr {
 
 .blue-text {
   color: rgb(28, 28, 129);
+}
+
+/* Dark mode styles */
+body.dark-mode .create-spot-form-container,
+body.dark-mode .create-spot-form-container .form-group label,
+body.dark-mode .create-spot-form-container .form-group input,
+body.dark-mode .create-spot-form-container .form-group textarea,
+body.dark-mode .create-spot-form-container .black-text,
+body.dark-mode .create-spot-form-container .blue-text {
+  color: black; /* Ensure text remains black */
+}
+
+body.dark-mode .create-spot-form-container .error {
+  color: red; /* Keep error text red */
 }

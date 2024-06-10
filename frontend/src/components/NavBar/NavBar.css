@@ -3,7 +3,7 @@ body.dark-mode {
   background-color: #121212;
   color: #ffffff;
 }
-
+ 
 body.dark-mode .spot-details,
 body.dark-mode .spot-details h1,
 body.dark-mode .spot-details p,
@@ -252,6 +252,25 @@ body.dark-mode .user-icon {
 .create-spot-link {
   color: black;
   padding: 10px;
+}
+
+/* Ensure all drop-down text remains black in light and dark mode */
+.profile-dropdown, .profile-dropdown-item, .dropdown-item, .profile-info {
+  color: black !important;
+}
+
+/* Ensure the 'Home' link is styled like other drop-down links */
+.profile-dropdown-item a {
+  text-decoration: none;
+  color: black;
+  display: block;
+  padding: 0.75rem 1.5rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.profile-dropdown-item a:hover {
+  background-color: #fefbfb;
 }
 
 /* Media Query for mobile screens */
