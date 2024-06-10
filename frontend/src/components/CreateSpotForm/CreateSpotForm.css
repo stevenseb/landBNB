@@ -1,75 +1,98 @@
 .create-spot-form-container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  background-color: #f9f9f9;
+  padding: 2% 20%;
+  text-align: center;
 }
 
 .create-spot-form-container h1 {
-  text-align: center;
+  font-size: 2em;
   margin-bottom: 20px;
 }
 
+hr {
+  border: 0;
+  border-top: 1px solid #ccc; /* Style for horizontal line */
+  margin: 20px 0; /* Spacing around hr */
+}
+
 .form-group {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
 }
 
 .form-row {
   display: flex;
-  justify-content: space-between;
+  gap: 20px;
 }
 
 .form-row .form-group {
-  flex: 0 0 48%;
+  flex: 1;
 }
 
-.label {
-  display: block;
-  margin-bottom: 5px;
-}
-
-.input {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.price-group {
+.form-group.price-group {
   display: flex;
   align-items: center;
 }
 
-.price-group label {
+.form-group.price-group label {
   margin-right: 5px;
 }
 
 .error {
   color: red;
-  font-size: 12px;
+  font-size: 0.875em;
   margin-top: 5px;
+  display: block;
 }
 
 .create-button-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 30px;
+  justify-content: space-between;
+  margin-top: 20px;
 }
 
-.create-spot-form-container button {
-  padding: 10px;
-  background-color: #007bff;
-  color: white;
+.create-button-container button {
+  padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 1em;
+  width: 45%;
+  box-sizing: border-box; 
 }
 
-.create-spot-form-container button:hover {
+.create-button-container button[type="submit"] {
+  background-color: #007bff;
+  color: white;
+  height: 40px; 
+}
+
+.create-button-container button[type="submit"]:hover {
   background-color: #0056b3;
+}
+
+.create-button-container .cancel-button {
+  background-color: #333;
+  color: white;
+  height: 38px; 
+  margin-top: 8px; 
+}
+
+.create-button-container .cancel-button:hover {
+  background-color: #000;
 }
 
 .black-text {
@@ -79,5 +102,5 @@
 }
 
 .blue-text {
-  color: rgb(28, 28, 129)
+  color: rgb(28, 28, 129);
 }

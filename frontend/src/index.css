@@ -52,6 +52,10 @@ h6 {
   font-size: 1rem;
 }
 
+.centered-text {
+  text-align: center;
+}
+
 /* Paragraphs */
 p {
   margin-bottom: 1rem;

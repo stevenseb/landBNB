@@ -103,9 +103,11 @@ const SpotDetails = () => {
       </div>
       <div className="details-container">
         <div className="host-description">
+        <hr />
           <div className="hosted-by">
             Hosted by {owner.firstName} {owner.lastName}
           </div>
+          <hr />
           <p className="description">{spot.description}</p>
         </div>
         <div className="callout-box">

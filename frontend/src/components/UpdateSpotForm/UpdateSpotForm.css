@@ -1,11 +1,24 @@
 .update-spot-form-container {
-  padding: 20px;
+  padding: 2% 20%;
   text-align: center;
 }
 
 .update-spot-form-container h1 {
   font-size: 2em;
   margin-bottom: 20px;
+}
+
+form {
+  border: 1px solid #ddd;
+  border-radius: 8px; 
+  padding: 20px; 
+  background-color: #f9f9f9;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid #ccc; /* Style for horizontal line */
+  margin: 20px 0; /* Spacing around hr */
 }
 
 .form-group {

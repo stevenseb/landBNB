@@ -2,7 +2,7 @@
 
 ## Database Schema Design
 
-![alt text](images/LandBnB.png)
+![alt text](images/LandBnBSchema.png)
 
 ## API Documentation
 

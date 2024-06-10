@@ -22,7 +22,7 @@ const CreateSpotForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = [];
-  
+
     // Validation logic
     if (!address) validationErrors.push('Address is required');
     if (!city) validationErrors.push('City is required');
@@ -32,16 +32,16 @@ const CreateSpotForm = () => {
     if (!price) validationErrors.push('Price per night is required');
     if (description.length < 30) validationErrors.push('Description needs 30 or more characters');
     if (!imageUrls[0]) validationErrors.push('Preview image is required');
-  
+
     const imageRegex = /\.(jpg|jpeg|png)$/;
     imageUrls.forEach((url, index) => {
       if (url && !imageRegex.test(url)) {
         validationErrors.push(`Image URL ${index + 1} must end in .png, .jpg, or .jpeg`);
       }
     });
-  
+
     setErrors(validationErrors);
-  
+
     if (validationErrors.length === 0) {
       const newSpot = {
         address,
@@ -54,7 +54,7 @@ const CreateSpotForm = () => {
         price,
         description,
       };
-  
+
       try {
         const createdSpot = await dispatch(createSpot(newSpot));
         if (createdSpot) {
@@ -70,7 +70,6 @@ const CreateSpotForm = () => {
       }
     }
   };
-  
 
   const handleImageUrlChange = (index, value) => {
     const newImageUrls = [...imageUrls];
@@ -121,20 +120,20 @@ const CreateSpotForm = () => {
             {errors.includes('Longitude is required') && <span className="error">Longitude is required</span>}
           </div>
         </div>
-        <hr ></hr>
-        <br></br>
+        <hr />
+        <br />
         <h5>Describe your place to guests</h5>
         <p className="black-text">Mention the best features of your space, any special amenities like fast wifi or parking, and what you love about the neighborhood.</p>
         <textarea placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} />
         {errors.includes('Description needs 30 or more characters') && <span className="error">Description needs 30 or more characters</span>}
-        <hr ></hr>
-        <br></br>
+        <hr />
+        <br />
         <h5>Create a title for your spot</h5>
         <p className="black-text">Catch guests&apos; attention with a spot title that highlights what makes your place special.</p>
         <input type="text" placeholder="Name of your spot" value={name} onChange={(e) => setName(e.target.value)} />
         {errors.includes('Name is required') && <span className="error">Name is required</span>}
-        <hr ></hr>
-        <br></br>
+        <hr />
+        <br />
         <h5>Set a base price for your spot</h5>
         <p className="black-text">Competitive pricing can help your listing stand out and rank higher in search results.</p>
         <div className="form-group price-group">
@@ -142,8 +141,8 @@ const CreateSpotForm = () => {
           <input type="text" placeholder="Price per night (USD)" value={price} onChange={(e) => setPrice(e.target.value)} />
         </div>
         {errors.includes('Price per night is required') && <span className="error">Price per night is required</span>}
-        <hr ></hr>
-        <br></br>
+        <hr />
+        <br />
         <p className="blue-text">***Image links must end with .png, .jpg, or .jpeg***</p>
         {imageUrls.map((url, index) => (
           <div key={index} className="form-group">
@@ -157,7 +156,7 @@ const CreateSpotForm = () => {
             {errors.includes(`Image URL ${index + 1} must end in .png, .jpg, or .jpeg`) && <span className="error">Image URL must end in .png, .jpg, or .jpeg</span>}
           </div>
         ))}
-        <hr ></hr>
+        <hr />
         <div className="create-button-container">
           <button type="submit">Create Spot</button>
         </div>

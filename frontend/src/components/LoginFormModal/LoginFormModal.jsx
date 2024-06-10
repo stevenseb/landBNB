@@ -43,7 +43,7 @@ function LoginFormModal() {
 
   return (
     <div className="login-box">
-      <h2>Log In</h2>
+      <h3 className="centered-text">Log In</h3>
       <form className="login-form" onSubmit={handleSubmit}>
         <label>
           Username or Email
