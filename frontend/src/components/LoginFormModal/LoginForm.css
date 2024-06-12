@@ -6,7 +6,7 @@
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   max-width: 290px;
-  width: 100%; /* Ensure login box takes full width */
+  width: 100%; 
 }
 
 /* Form styling */
@@ -14,25 +14,25 @@
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 20px;
-  width: 75%; /* Ensure form takes full width */
+  width: 75%; 
   background-color: #f9f9f9;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center-align form content */
+  align-items: center; 
   margin-left: 15px;
 }
 
 /* Label styling */
 label {
-  width: 100%; /* Ensure labels take full width */
+  width: 100%; 
   margin-bottom: 10px;
   font-weight: bold;
-  text-align: left; /* Left-align labels */
+  text-align: left; 
 }
 
 /* Input field styling */
 input {
-  width: 100%; /* Adjust width to 100% */
+  width: 100%; 
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;

@@ -276,15 +276,15 @@ body.dark-mode .user-icon {
 /* Media Query for mobile screens */
 @media (max-width: 740px) {
   .navbar-logo {
-    width: 60%; /* Adjust the logo on mobile */
+    width: 60%; 
     height: auto;
   }
 
   .profile-button {
-    margin-left: 0; /* Reset the margin for stacked icons */
+    margin-left: 0; 
   }
   
   .user-icon {
-    margin-left: -2px; /* Adjust this value as needed */
+    margin-left: -2px; 
   }
 }
