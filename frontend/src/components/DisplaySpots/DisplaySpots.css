@@ -48,9 +48,9 @@
 
 .spot-preview-img {
   width: 100%;
-  height: auto; /* Adjust height to auto to maintain aspect ratio */
+  height: auto; 
   border-radius: 5px;
-  object-fit: cover; /* Ensures image covers the area while maintaining aspect ratio */
+  object-fit: cover; 
 }
 
 .spot-details {
@@ -103,9 +103,9 @@
 
 /* Dark mode styling */
 body.dark-mode .spot-details .avg-rating .star-icon {
-  color: white; /* Change star color to white in dark mode */
+  color: white; /
 }
 
 body.dark-mode .spot-details .location {
-  color: white; /* Change location text color to white in dark mode */
+  color: white; 
 }

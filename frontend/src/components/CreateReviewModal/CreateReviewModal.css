@@ -95,16 +95,16 @@ textarea {
 
 .star {
   cursor: pointer;
-  color: white; /* Make the stars white */
-  border: 1px solid black; /* Add a black border */
+  color: white; 
+  border: 1px solid black; 
   font-size: 2rem;
   margin-right: 5px;
-  background-color: white; /* Ensure the background is white */
-  border-radius: 50%; /* Make them round */
-  padding: 5px; /* Add some padding */
+  background-color: white; 
+  border-radius: 50%; 
+  padding: 5px; 
 }
 
 .star.selected {
-  color: #ffd700; /* Make the selected stars yellow */
-  border-color: #ffd700; /* Match the border color with the star color */
+  color: #ffd700; 
+  border-color: #ffd700; 
 }
