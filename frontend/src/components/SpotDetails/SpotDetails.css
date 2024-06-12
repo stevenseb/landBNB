@@ -22,7 +22,7 @@
   display: flex;
   gap: 15px; 
   margin-bottom: 20px;
-  height: 400px; /* Set a fixed height for the images container */
+  height: 400px; 
 }
 
 .main-image {
@@ -34,9 +34,9 @@
 
 .large-img {
   width: 100%;
-  height: 100%; /* Ensure the preview image fills the height */
+  height: 100%; 
   border-radius: 10px;
-  object-fit: cover; /* Ensure the image covers the entire container */
+  object-fit: cover; 
 }
 
 .small-images {
@@ -44,21 +44,21 @@
   flex-direction: column;
   gap: 10px;
   flex: 1;
-  justify-content: space-between; /* Distribute space evenly */
+  justify-content: space-between; 
 }
 
 .small-img {
   width: 100%;
-  height: calc(100% / 3 - 10px); /* Adjust height to fit the space */
+  height: calc(100% / 3 - 10px); 
   border-radius: 10px;
-  object-fit: cover; /* Ensure images fill the container */
+  object-fit: cover; 
 }
 
 .details-container {
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
-  gap: 20px; /* Add spacing between host and callout box */
+  gap: 20px; 
 }
 
 .host-description {
@@ -78,7 +78,7 @@
   padding: 30px 50px;
   border-radius: 10px;
   text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add box shadow */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }
 
 .price-reviews {
@@ -200,13 +200,13 @@ body.dark-mode .spot-details-container .price {
 /* Mobile responsive styles */
 @media screen and (max-width: 1200px) {
   .spot-details-container {
-    padding: 50px 100px; /* Adjust padding for screens between 820px and 1200px */
-    text-align: left; /* Align text to left */
+    padding: 50px 100px;
+    text-align: left; 
   }
 
   .images-container {
-    flex-direction: column; /* Stack images vertically */
-    height: auto; /* Allow height to adjust */
+    flex-direction: column;
+    height: auto; 
   }
 
   .small-images {
@@ -216,17 +216,17 @@ body.dark-mode .spot-details-container .price {
   }
 
   .small-img {
-    width: calc(50% - 5px); /* Two columns */
-    height: auto; /* Remove fixed height */
+    width: calc(50% - 5px); 
+    height: auto; 
   }
 
   .details-container {
-    flex-direction: row; /* Stack details vertically */
+    flex-direction: row;
   }
 
   .host-description {
-    padding-right: 0; /* Remove padding */
-    margin-bottom: 20px; /* Add margin for spacing */
+    padding-right: 0; 
+    margin-bottom: 20px; 
   }
 
   .callout-box {
@@ -236,13 +236,13 @@ body.dark-mode .spot-details-container .price {
 
 @media screen and (max-width: 768px) {
   .spot-details-container {
-    padding: 20px; /* Adjust padding for mobile */
-    text-align: left; /* Align text to left */
+    padding: 20px; 
+    text-align: left; 
   }
 
   .images-container {
-    flex-direction: column; /* Stack images vertically */
-    height: auto; /* Allow height to adjust */
+    flex-direction: column; 
+    height: auto; 
   }
 
   .small-images {
@@ -252,20 +252,20 @@ body.dark-mode .spot-details-container .price {
   }
 
   .small-img {
-    width: calc(50% - 5px); /* Two columns */
-    height: auto; /* Remove fixed height */
+    width: calc(50% - 5px);
+    height: auto; 
   }
 
   .details-container {
-    flex-direction: column; /* Stack details vertically */
+    flex-direction: column; 
   }
 
   .host-description {
-    padding-right: 0; /* Remove padding */
-    margin-bottom: 20px; /* Add margin for spacing */
+    padding-right: 0;
+    margin-bottom: 20px;
   }
 
   .callout-box {
-    padding: 20px; /* Adjust padding */
+    padding: 20px;
   }
 }

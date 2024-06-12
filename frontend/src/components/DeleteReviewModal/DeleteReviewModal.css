@@ -5,8 +5,8 @@
   border-radius: 5px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   text-align: center;
-  width: 300px; /* Adjust width as needed */
-  margin: 0 auto; /* Center the modal */
+  width: 300px; 
+  margin: 0 auto; 
 }
 
 .delete-review-modal h2 {
