@@ -176,6 +176,8 @@ const UpdateSpotForm = () => {
         {errors.includes('Price per night is required') && <span className="error">Price per night is required</span>}
         <hr />
         <br />
+        <h5>Liven up your spot with photos</h5>
+        <p>Submit a link to at least one photo to publish your spot.</p>
         {imageUrls.map((url, index) => (
           <div key={index} className="form-group">
             <input

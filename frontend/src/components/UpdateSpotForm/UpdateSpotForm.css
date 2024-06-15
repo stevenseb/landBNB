@@ -65,6 +65,12 @@ hr {
   display: block;
 }
 
+p {
+  color: black;
+  font-size: 14px;
+  padding-top: 3px;
+}
+
 .update-button-container {
   display: flex;
   justify-content: space-between;

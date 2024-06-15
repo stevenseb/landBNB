@@ -136,7 +136,7 @@ input:checked + .slider:before {
   display: flex;
   align-items: center;
   background-color: #f8f5f6;
-  opacity: 0.8;
+  opacity: 0.92;
   border-radius: 18px;
   padding: 8px;
   border: 1px solid #ccc;
@@ -197,12 +197,15 @@ body.dark-mode .user-icon {
   position: absolute;
   top: 100%;
   right: 0;
-  background-color: #f4f3f3;
+  background-color: #f4f3f3; /* Fully opaque background */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
   overflow: hidden;
   z-index: 1000;
   white-space: nowrap;
+  backdrop-filter: none; /* Ensure no background blur */
+  opacity: 1; /* Ensure full opacity */
+  filter: none;
 }
 
 .profile-info {
@@ -219,10 +222,14 @@ body.dark-mode .user-icon {
   border: none;
   text-align: left;
   width: 100%;
+  opacity: 1; /* Ensure full opacity */
+  filter: none; /* Ensure no filter effects */
 }
 
 .profile-dropdown-item:hover {
   background-color: #fefbfb;
+  opacity: 1; /* Ensure full opacity */
+  filter: none; /* Ensure no filter effects */
 }
 
 .text-link {
@@ -238,14 +245,6 @@ body.dark-mode .user-icon {
 }
 
 .text-link:hover {
-  text-decoration: underline;
-}
-
-.logout {
-  cursor: pointer;
-}
-
-.logout:hover {
   text-decoration: underline;
 }
 
