@@ -26,8 +26,7 @@ const deleteReviewAction = (reviewId) => ({
 export const fetchReviews = (spotId) => async (dispatch) => {
   const response = await csrfFetch(`/api/spots/${spotId}/reviews`);
   if (response.ok) {
-    const { Reviews: reviews } = await response.json(); // Ensure the response is correctly formatted
-    console.log('Fetched Reviews:', reviews);
+    const { Reviews: reviews } = await response.json();
     dispatch(loadReviews(spotId, reviews));
   }
 };
