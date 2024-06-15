@@ -111,6 +111,11 @@ hr {
   color: rgb(146, 2, 2);
 }
 
+.underline {
+  text-decoration: underline;
+  color: rgb(39, 2, 2);
+}
+
 .blue-text {
   color: rgb(28, 28, 129);
 }

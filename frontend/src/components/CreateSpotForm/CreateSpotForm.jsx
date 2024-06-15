@@ -146,7 +146,7 @@ const CreateSpotForm = () => {
         <hr />
         <br />
         <h5>Liven up your spot with photos</h5>
-        <p className="black-text">Submit a link to at least one photo to publish your spot.</p>
+        <p className="black-text">Submit a link to <span className="underline">at least one photo</span> to publish your spot.</p>
         <p className="blue-text">***Image links must end with .png, .jpg, or .jpeg***</p>
         {imageUrls.map((url, index) => (
           <div key={index} className="form-group">
