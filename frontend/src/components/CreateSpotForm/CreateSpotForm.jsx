@@ -11,8 +11,8 @@ const CreateSpotForm = () => {
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
   const [country, setCountry] = useState('');
-  const [lat, setLat] = useState('');
-  const [lng, setLng] = useState('');
+  const [lat, setLat] = useState('0');
+  const [lng, setLng] = useState('0');
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [description, setDescription] = useState('');
@@ -111,11 +111,13 @@ const CreateSpotForm = () => {
         <div className="form-row">
           <div className="form-group">
             <label className="black-text">Latitude</label>
+            <p className="small-text">Leave default unless changing</p>
             <input type="text" value={lat} onChange={(e) => setLat(e.target.value)} />
             {errors.includes('Latitude is required') && <span className="error">Latitude is required</span>}
           </div>
           <div className="form-group">
             <label className="black-text">Longitude</label>
+            <p className="small-text">Leave default unless changing</p>
             <input type="text" value={lng} onChange={(e) => setLng(e.target.value)} />
             {errors.includes('Longitude is required') && <span className="error">Longitude is required</span>}
           </div>
@@ -143,6 +145,8 @@ const CreateSpotForm = () => {
         {errors.includes('Price per night is required') && <span className="error">Price per night is required</span>}
         <hr />
         <br />
+        <h5>Liven up your spot with photos</h5>
+        <p className="black-text">Submit a link to at least one photo to publish your spot.</p>
         <p className="blue-text">***Image links must end with .png, .jpg, or .jpeg***</p>
         {imageUrls.map((url, index) => (
           <div key={index} className="form-group">

@@ -77,20 +77,20 @@ const NavBar = ({ isLoaded }) => {
           <span className="toggle-label">MODE</span>
         </div>
         {!sessionUser && menuOpen && (
-          <div className="dropdown-menu" ref={menuRef}>
-            <ul>
-              <li className="profile-dropdown-item" onClick={() => setMenuOpen(false)}>
+          <div ref={menuRef}>
+            <ul className="profile-dropdown">
+              <li onClick={() => setMenuOpen(false)}>
                 <OpenModalButton
                   buttonText="Sign Up"
                   modalComponent={<SignupFormModal />}
-                  className="text-link"
+                  className="profile-dropdown-item"
                 />
               </li>
-              <li className="profile-dropdown-item" onClick={() => setMenuOpen(false)}>
+              <li onClick={() => setMenuOpen(false)}>
                 <OpenModalButton
                   buttonText="Log In"
                   modalComponent={<LoginFormModal />}
-                  className="text-link"
+                  className="profile-dropdown-item"
                 />
               </li>
               {isLoaded}

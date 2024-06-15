@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { FaUserCircle } from 'react-icons/fa';
 import hamburger from '../../../assets/PinkHamburger.png';
@@ -14,10 +14,16 @@ function ProfileButton({ user }) {
 
   const logout = (e) => {
     e.preventDefault();
-    dispatch(sessionActions.logout()).then(() => {
-      navigate('/');
-      setShowMenu(false);
-    });
+    console.log("Logout button clicked");
+    dispatch(sessionActions.logout())
+      .then(() => {
+        console.log("Logout successful");
+        navigate('/');
+        setShowMenu(false);
+      })
+      .catch((error) => {
+        console.error("Logout failed", error);
+      });
   };
 
   const toggleMenu = (e) => {
@@ -38,6 +44,11 @@ function ProfileButton({ user }) {
     };
   }, []);
 
+  const navigateTo = (path) => {
+    navigate(path);
+    setShowMenu(false);
+  };
+
   return (
     <div className="profile-button-container" ref={menuRef}>
       <button className="profile-button" onClick={toggleMenu}>
@@ -54,22 +65,22 @@ function ProfileButton({ user }) {
           </li>
           <hr />
           <li>
-            <NavLink to="/" className="profile-dropdown-item" onClick={() => setShowMenu(false)}>
+            <button onClick={() => navigateTo('/')} className="profile-dropdown-item">
               Home
-            </NavLink>
+            </button>
           </li>
           <li>
-            <NavLink to="/booking" className="profile-dropdown-item" onClick={() => setShowMenu(false)}>
+            <button onClick={() => navigateTo('/booking')} className="profile-dropdown-item">
               Bookings
-            </NavLink>
+            </button>
           </li>
           <li>
-            <NavLink to="/manage-spots" className="profile-dropdown-item" onClick={() => setShowMenu(false)}>
+            <button onClick={() => navigateTo('/manage-spots')} className="profile-dropdown-item">
               Manage Spots
-            </NavLink>
+            </button>
           </li>
           <li>
-            <button onClick={logout} className="profile-dropdown-item logout">Log Out</button>
+            <button onClick={logout} className="profile-dropdown-item">Log Out</button>
           </li>
         </ul>
       )}
