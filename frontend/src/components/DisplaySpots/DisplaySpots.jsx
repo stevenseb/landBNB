@@ -1,15 +1,15 @@
-import { useEffect, useRef, useState, useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
-import { fetchSpots } from '../../store/spots';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar } from '@fortawesome/free-solid-svg-icons';
-import './DisplaySpots.css';
-import placeholderImage from '../../../assets/coming-soon.jpg';
+import { useEffect, useRef, useState, useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
+import { fetchSpots } from "../../store/spots";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
+import "./DisplaySpots.css";
+import placeholderImage from "../../../assets/coming-soon.jpg";
 
 const DisplaySpots = () => {
   const dispatch = useDispatch();
-  const spots = useSelector(state => state.spots);
+  const spots = useSelector((state) => state.spots);
   const [currentPage, setCurrentPage] = useState(1);
   const [moreSpots, setMoreSpots] = useState(true); // for infinite scroll to flag when no more spots to fetch
   const observer = useRef();
@@ -30,18 +30,21 @@ const DisplaySpots = () => {
 
   const spotsArray = Object.values(spots);
 
-  const lastSpotElementRef = useCallback(node => {
-    if (observer.current) observer.current.disconnect();
-    observer.current = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting && moreSpots) {
-        setCurrentPage(prevPage => prevPage + 1);
-      }
-    });
-    if (node) observer.current.observe(node);
-  }, [moreSpots]);
+  const lastSpotElementRef = useCallback(
+    (node) => {
+      if (observer.current) observer.current.disconnect();
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && moreSpots) {
+          setCurrentPage((prevPage) => prevPage + 1);
+        }
+      });
+      if (node) observer.current.observe(node);
+    },
+    [moreSpots]
+  );
 
   const handleImageLoad = (id) => {
-    setImageLoadedState(prevState => ({
+    setImageLoadedState((prevState) => ({
       ...prevState,
       [id]: true,
     }));
@@ -50,10 +53,7 @@ const DisplaySpots = () => {
   return (
     <div className="spot-container">
       {spotsArray.map((spot, index) => {
-        if (!spot.id) return null; // don't render if spot is undefined
-        // when using back button from details page the placeholder is a bit wonky
-        // it tends to flash for a second before the preview image loads and sometimes the 
-        // preview image never reloads unless refreshing the page 
+        if (!spot.id) return null;
         const previewImage = spot.previewImage || placeholderImage;
         const imageLoaded = imageLoadedState[spot.id] || false;
 
@@ -62,21 +62,20 @@ const DisplaySpots = () => {
             <img
               src={previewImage}
               alt={spot.name}
-              className={`spot-preview-img ${!imageLoaded && 'placeholder'}`}
+              className={`spot-preview-img ${!imageLoaded && "placeholder"}`}
               onLoad={() => handleImageLoad(spot.id)}
               onError={(e) => {
                 e.target.src = placeholderImage;
-                e.target.classList.add('placeholder');
+                e.target.classList.add("placeholder");
               }}
             />
             <div className="spot-details">
               <div className="location-rating">
-                <div className="location">{spot.city}, {spot.state}</div>
+                <div className="location">
+                  {spot.city}, {spot.state}
+                </div>
                 <div className="avg-rating">
                   <FontAwesomeIcon icon={faStar} className="star-icon" />
-                  {/* ################# Having a big problem that the avgRating 
-                  renders momentarily and then the New text appears, I feel like
-                   it maybe something with state? */}
                   {spot.avgRating ? spot.avgRating : "New"}
                 </div>
               </div>
@@ -87,13 +86,22 @@ const DisplaySpots = () => {
 
         if (spotsArray.length === index + 1) {
           return (
-            <NavLink to={`/spots/${spot.id}`} key={spot.id} ref={lastSpotElementRef} className="spot-link">
+            <NavLink
+              to={`/spots/${spot.id}`}
+              key={spot.id}
+              ref={lastSpotElementRef}
+              className="spot-link"
+            >
               {spotTile}
             </NavLink>
           );
         } else {
           return (
-            <NavLink to={`/spots/${spot.id}`} key={spot.id} className="spot-link">
+            <NavLink
+              to={`/spots/${spot.id}`}
+              key={spot.id}
+              className="spot-link"
+            >
               {spotTile}
             </NavLink>
           );
