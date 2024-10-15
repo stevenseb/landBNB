@@ -10,7 +10,6 @@ const ADD_IMAGE = 'spots/addImage';
 const SET_USER_SPOTS = 'spots/setUserSpots';
 const REMOVE_SPOT = 'spots/removeSpot';
 const UPDATE_SPOT = 'spots/updateSpot';
-//const SET_REVIEWS = 'spots/setReviews';
 
 // Action creators
 const setSpots = (spots) => ({
@@ -218,14 +217,6 @@ const spotsReducer = (state = initialState, action) => {
     case UPDATE_SPOT: {
       return { ...state, [action.spot.id]: action.spot };
     }
-    // case SET_REVIEWS: {
-    //   const newState = { ...state };
-    //   newState[action.spotId] = {
-    //     ...newState[action.spotId],
-    //     reviews: action.reviews,
-    //   };
-    //   return newState;
-    // }
     default:
       return state;
   }

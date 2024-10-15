@@ -1,5 +1,5 @@
 // frontend/src/components/BookingForm/BookingForm.jsx
-import './BookingForm.css';
+import "./BookingForm.css";
 
 const BookingForm = () => {
   return (

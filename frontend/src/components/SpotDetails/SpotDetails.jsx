@@ -1,16 +1,18 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { fetchSpotDetails } from '../../store/spots';
-import { fetchReviews } from '../../store/reviews';
-import { deleteReview } from '../../store/reviews';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar } from '@fortawesome/free-solid-svg-icons';
-import { selectSpotById, selectReviewsBySpotId } from '../../store/selectors';
-import { useModal } from '../../context/Modal';
-import ReviewForm from '../CreateReviewModal/ReviewForm';
-import DeleteReviewModal from '../DeleteReviewModal/DeleteReviewModal';
-import './SpotDetails.css';
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchSpotDetails } from "../../store/spots";
+import { fetchReviews, deleteReview } from "../../store/reviews";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { selectSpotById, selectReviewsBySpotId } from "../../store/selectors";
+import { useModal } from "../../context/Modal";
+import ReviewForm from "../CreateReviewModal/ReviewForm";
+import DeleteReviewModal from "../DeleteReviewModal/DeleteReviewModal";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { createBooking } from "../../store/bookings";
+import "./SpotDetails.css";
 
 const SpotDetails = () => {
   const dispatch = useDispatch();
@@ -20,10 +22,15 @@ const SpotDetails = () => {
   const user = useSelector((state) => state.session.user);
   const [userHasReviewed, setUserHasReviewed] = useState(false);
   const { setModalContent, closeModal } = useModal();
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+  const [bookings, setBookings] = useState([]);
+  const [bookingError, setBookingError] = useState(null);
 
   useEffect(() => {
     dispatch(fetchSpotDetails(id));
     dispatch(fetchReviews(id));
+    fetchBookings();
   }, [dispatch, id]);
 
   useEffect(() => {
@@ -37,6 +44,20 @@ const SpotDetails = () => {
     }
   }, [user, reviews]);
 
+  const fetchBookings = async () => {
+    try {
+      const response = await fetch(`/api/spots/${id}/bookings`);
+      if (response.ok) {
+        const data = await response.json();
+        setBookings(data.Bookings);
+      } else {
+        throw new Error("Failed to fetch bookings");
+      }
+    } catch (err) {
+      console.error("Error fetching bookings:", err);
+    }
+  };
+
   const addNewReview = async () => {
     setUserHasReviewed(true);
     await dispatch(fetchReviews(id));
@@ -45,18 +66,52 @@ const SpotDetails = () => {
 
   if (!spot.id) return <div>Loading...</div>;
 
-  const previewImage = spot.spotImages ? spot.spotImages.find((image) => image.preview)?.url : '';
-  const otherImages = spot.spotImages ? spot.spotImages.filter((image) => !image.preview).slice(0, 4) : [];
+  const previewImage = spot.spotImages
+    ? spot.spotImages.find((image) => image.preview)?.url
+    : "";
+  const otherImages = spot.spotImages
+    ? spot.spotImages.filter((image) => !image.preview).slice(0, 4)
+    : [];
   const owner = spot.owner || {};
   const numReviews = reviews.length;
-  const avgRating = typeof spot.avgRating === 'string' ? parseFloat(spot.avgRating).toFixed(1) : 'New';
+  const avgRating =
+    typeof spot.avgRating === "string"
+      ? parseFloat(spot.avgRating).toFixed(1)
+      : "New";
 
-  const handleReserveClick = () => {
-    alert('Feature coming soon');
+  const handleReserveClick = async () => {
+    if (!user) {
+      setBookingError("You must be logged in to make a booking");
+      return;
+    }
+    if (!startDate || !endDate) {
+      setBookingError("Please select both start and end dates");
+      return;
+    }
+    const bookingData = {
+      startDate: startDate.toISOString().split("T")[0],
+      endDate: endDate.toISOString().split("T")[0],
+    };
+    try {
+      await dispatch(createBooking(id, bookingData));
+      setStartDate(null);
+      setEndDate(null);
+      setBookingError(null);
+      fetchBookings();
+      alert("Booking successful!");
+    } catch (err) {
+      setBookingError(err.message || "Failed to create booking");
+    }
   };
 
   const handleReviewClick = () => {
-    setModalContent(<ReviewForm spotId={spot.id} closeModal={closeModal} addNewReview={addNewReview} />);
+    setModalContent(
+      <ReviewForm
+        spotId={spot.id}
+        closeModal={closeModal}
+        addNewReview={addNewReview}
+      />
+    );
   };
 
   const handleDeleteClick = (reviewId) => {
@@ -79,31 +134,50 @@ const SpotDetails = () => {
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-    const options = { month: 'long', year: 'numeric' };
+    const options = { month: "long", year: "numeric" };
     return date.toLocaleDateString(undefined, options);
   };
 
-  const sortedReviews = [...reviews].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+  const sortedReviews = [...reviews].sort(
+    (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+  );
 
-  const shouldShowReviewButton = user && !userHasReviewed && user.id !== spot.ownerId;
+  const shouldShowReviewButton =
+    user && !userHasReviewed && user.id !== spot.ownerId;
+
+  const isDateBooked = (date) => {
+    return bookings.some(
+      (booking) =>
+        date >= new Date(booking.startDate) && date <= new Date(booking.endDate)
+    );
+  };
 
   return (
     <div className="spot-details-container">
       <h1>{spot.name}</h1>
-      <div className="location">{spot.city}, {spot.state}, {spot.country}</div>
+      <div className="location">
+        {spot.city}, {spot.state}, {spot.country}
+      </div>
       <div className="images-container">
         <div className="main-image">
-          {previewImage && <img src={previewImage} alt={spot.name} className="large-img" />}
+          {previewImage && (
+            <img src={previewImage} alt={spot.name} className="large-img" />
+          )}
         </div>
         <div className="small-images">
           {otherImages.map((image, index) => (
-            <img key={index} src={image.url} alt={`${spot.name} ${index + 1}`} className="small-img" />
+            <img
+              key={index}
+              src={image.url}
+              alt={`${spot.name} ${index + 1}`}
+              className="small-img"
+            />
           ))}
         </div>
       </div>
       <div className="details-container">
         <div className="host-description">
-        <hr />
+          <hr />
           <div className="hosted-by">
             Hosted by {owner.firstName} {owner.lastName}
           </div>
@@ -120,46 +194,142 @@ const SpotDetails = () => {
               {avgRating}
               {numReviews > 0 && (
                 <>
-                  <span className="dot">•</span> {numReviews} {numReviews === 1 ? 'Review' : 'Reviews'}
+                  <span className="dot">•</span> {numReviews}{" "}
+                  {numReviews === 1 ? "Review" : "Reviews"}
                 </>
               )}
             </div>
           </div>
-          <button className="reserve-button" onClick={handleReserveClick}>Reserve</button>
+          <div className="booking-section">
+            <DatePicker
+              selected={startDate}
+              onChange={(date) => setStartDate(date)}
+              selectsStart
+              startDate={startDate}
+              endDate={endDate}
+              minDate={new Date()}
+              placeholderText="Start Date"
+              excludeDates={bookings.map(
+                (booking) => new Date(booking.startDate)
+              )}
+              filterDate={(date) => !isDateBooked(date)}
+              renderCustomHeader={({
+                date,
+                decreaseMonth,
+                increaseMonth,
+                prevMonthButtonDisabled,
+                nextMonthButtonDisabled,
+              }) => (
+                <div className="custom-header">
+                  <button
+                    onClick={decreaseMonth}
+                    disabled={prevMonthButtonDisabled}
+                  >
+                    {"<"}
+                  </button>
+                  <span className="month-year">
+                    {date.toLocaleString("default", {
+                      month: "long",
+                      year: "numeric",
+                    })}
+                  </span>
+                  <button
+                    onClick={increaseMonth}
+                    disabled={nextMonthButtonDisabled}
+                  >
+                    {">"}
+                  </button>
+                </div>
+              )}
+            />
+            <DatePicker
+              selected={endDate}
+              onChange={(date) => setEndDate(date)}
+              selectsEnd
+              startDate={startDate}
+              endDate={endDate}
+              minDate={startDate}
+              placeholderText="End Date"
+              excludeDates={bookings.map(
+                (booking) => new Date(booking.endDate)
+              )}
+              filterDate={(date) => !isDateBooked(date)}
+              renderCustomHeader={({
+                date,
+                decreaseMonth,
+                increaseMonth,
+                prevMonthButtonDisabled,
+                nextMonthButtonDisabled,
+              }) => (
+                <div className="custom-header">
+                  <button
+                    onClick={decreaseMonth}
+                    disabled={prevMonthButtonDisabled}
+                  >
+                    {"<"}
+                  </button>
+                  <span className="month-year">
+                    {date.toLocaleString("default", {
+                      month: "long",
+                      year: "numeric",
+                    })}
+                  </span>
+                  <button
+                    onClick={increaseMonth}
+                    disabled={nextMonthButtonDisabled}
+                  >
+                    {">"}
+                  </button>
+                </div>
+              )}
+            />
+            {bookingError && <p className="error">{bookingError}</p>}
+          </div>
+          <button className="reserve-button" onClick={handleReserveClick}>
+            Reserve
+          </button>
         </div>
       </div>
-      <hr style={{ marginTop: '20px' }} />
+      <hr style={{ marginTop: "20px" }} />
       <div className="rating">
         <FontAwesomeIcon icon={faStar} className="star-icon" />
         {avgRating}
         {numReviews > 0 && (
           <>
-            <span className="dot">•</span> {numReviews} {numReviews === 1 ? 'Review' : 'Reviews'}
+            <span className="dot">•</span> {numReviews}{" "}
+            {numReviews === 1 ? "Review" : "Reviews"}
           </>
         )}
       </div>
       {shouldShowReviewButton && (
-        <button className="post-review-button" onClick={handleReviewClick}>Post Your Review</button>
+        <button className="post-review-button" onClick={handleReviewClick}>
+          Post Your Review
+        </button>
       )}
       <div className="reviews-section">
         <h2>Reviews</h2>
         {sortedReviews.length > 0 ? (
           sortedReviews.map((review) => (
             <div key={review.id} className="review">
-              <div className="review-author">{review.User?.firstName || 'Anonymous'}</div>
+              <div className="review-author">
+                {review.User?.firstName || "Anonymous"}
+              </div>
               <div className="review-date">{formatDate(review.createdAt)}</div>
               <div className="review-content">{review.review}</div>
               {user && user.id === review.userId && (
-                <button className="delete-review-button" onClick={() => handleDeleteClick(review.id)}>Delete</button>
+                <button
+                  className="delete-review-button"
+                  onClick={() => handleDeleteClick(review.id)}
+                >
+                  Delete
+                </button>
               )}
             </div>
           ))
+        ) : user && user.id !== spot.ownerId ? (
+          <p>Be the first to post a review!</p>
         ) : (
-          user && user.id !== spot.ownerId ? (
-            <p>Be the first to post a review!</p>
-          ) : (
-            <p>No reviews yet.</p>
-          )
+          <p>No reviews yet.</p>
         )}
       </div>
     </div>

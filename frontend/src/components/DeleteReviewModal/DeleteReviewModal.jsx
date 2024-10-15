@@ -1,5 +1,5 @@
 // frontend/src/components/DeleteReviewModal/DeleteReviewModal.jsx
-import './DeleteReviewModal.css';
+import "./DeleteReviewModal.css";
 
 const DeleteReviewModal = ({ onDelete, onCancel }) => {
   return (
@@ -7,8 +7,12 @@ const DeleteReviewModal = ({ onDelete, onCancel }) => {
       <h2>Confirm Delete</h2>
       <p>Are you sure you want to delete this review?</p>
       <div className="button-container">
-        <button className="delete-button" onClick={onDelete}>Yes (Delete Review)</button>
-        <button className="cancel-button" onClick={onCancel}>No (Keep Review)</button>
+        <button className="delete-button" onClick={onDelete}>
+          Yes (Delete Review)
+        </button>
+        <button className="cancel-button" onClick={onCancel}>
+          No (Keep Review)
+        </button>
       </div>
     </div>
   );
