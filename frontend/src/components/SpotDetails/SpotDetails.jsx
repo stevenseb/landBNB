@@ -49,7 +49,18 @@ const SpotDetails = () => {
       const response = await fetch(`/api/spots/${id}/bookings`);
       if (response.ok) {
         const data = await response.json();
-        setBookings(data.Bookings);
+        console.log("Fetched bookings:", data.Bookings); // For debugging
+        const adjustedBookings = data.Bookings.map((booking) => ({
+          ...booking,
+          startDate: new Date(booking.startDate + "T00:00:00Z")
+            .toISOString()
+            .split("T")[0],
+          endDate: new Date(booking.endDate + "T00:00:00Z")
+            .toISOString()
+            .split("T")[0],
+        }));
+        console.log("Adjusted bookings:", adjustedBookings); // For debugging
+        setBookings(adjustedBookings);
       } else {
         throw new Error("Failed to fetch bookings");
       }
@@ -60,8 +71,8 @@ const SpotDetails = () => {
 
   const addNewReview = async () => {
     setUserHasReviewed(true);
-    await dispatch(fetchReviews(id));
-    await dispatch(fetchSpotDetails(id));
+    dispatch(fetchReviews(id));
+    dispatch(fetchSpotDetails(id));
   };
 
   if (!spot.id) return <div>Loading...</div>;
@@ -93,7 +104,7 @@ const SpotDetails = () => {
       endDate: endDate.toISOString().split("T")[0],
     };
     try {
-      await dispatch(createBooking(id, bookingData));
+      dispatch(createBooking(id, bookingData));
       setStartDate(null);
       setEndDate(null);
       setBookingError(null);
@@ -146,10 +157,24 @@ const SpotDetails = () => {
     user && !userHasReviewed && user.id !== spot.ownerId;
 
   const isDateBooked = (date) => {
-    return bookings.some(
-      (booking) =>
-        date >= new Date(booking.startDate) && date <= new Date(booking.endDate)
-    );
+    return bookings.some((booking) => {
+      const bookingStart = new Date(booking.startDate);
+      const bookingEnd = new Date(booking.endDate);
+      return date >= bookingStart && date <= bookingEnd;
+    });
+  };
+
+  const getExcludedDates = () => {
+    return bookings.flatMap((booking) => {
+      const dates = [];
+      let currentDate = new Date(booking.startDate);
+      const endDate = new Date(booking.endDate);
+      while (currentDate <= endDate) {
+        dates.push(new Date(currentDate));
+        currentDate.setDate(currentDate.getDate() + 1);
+      }
+      return dates;
+    });
   };
 
   return (
@@ -209,9 +234,7 @@ const SpotDetails = () => {
               endDate={endDate}
               minDate={new Date()}
               placeholderText="Start Date"
-              excludeDates={bookings.map(
-                (booking) => new Date(booking.startDate)
-              )}
+              excludeDates={getExcludedDates()}
               filterDate={(date) => !isDateBooked(date)}
               renderCustomHeader={({
                 date,
@@ -250,9 +273,7 @@ const SpotDetails = () => {
               endDate={endDate}
               minDate={startDate}
               placeholderText="End Date"
-              excludeDates={bookings.map(
-                (booking) => new Date(booking.endDate)
-              )}
+              excludeDates={getExcludedDates()}
               filterDate={(date) => !isDateBooked(date)}
               renderCustomHeader={({
                 date,

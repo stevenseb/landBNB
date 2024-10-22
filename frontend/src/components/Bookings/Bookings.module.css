@@ -1,0 +1,104 @@
+/* Bookings.module.css */
+
+.container {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.item {
+  flex: 0 0 calc(50% - 10px);
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+a:hover {
+  text-decoration: none !important;
+}
+
+.item:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+}
+
+.dates {
+  background-color: #f8f8f8;
+  padding: 10px;
+  font-weight: bold;
+}
+
+.spotLink {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.spotDetails {
+  display: flex;
+  padding: 10px;
+}
+
+.previewImg {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.spotInfo {
+  flex: 1;
+}
+
+.spotInfo h3 {
+  margin: 0 0 5px 0;
+}
+
+.avgRating {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  color: #1a1a1a;
+}
+
+.starIcon {
+  margin-right: 5px;
+  color: #ffd700;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #f8f8f8;
+}
+
+.actions button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.actions button:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive design */
+@media screen and (max-width: 768px) {
+  .item {
+    flex: 0 0 100%;
+  }
+}
