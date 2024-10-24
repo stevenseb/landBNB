@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
-import { fetchUserBookings, deleteBooking } from "../../store/bookings"; // You'll need to create these actions
+import { fetchUserBookings, deleteBooking } from "../../store/bookings";
 import styles from "./Bookings.module.css";
 
 const Bookings = () => {
